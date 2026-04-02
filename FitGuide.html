@@ -15,24 +15,24 @@
   --blue-glow:   rgba(10,132,255,0.35);
   --blue-subtle: rgba(10,132,255,0.12);
   --blue-border: rgba(10,132,255,0.28);
-
+ 
   --bg:          #000000;
   --bg-1:        #0d0d0d;
   --bg-2:        #141414;
   --bg-3:        #1c1c1e;
   --bg-4:        #2c2c2e;
-
+ 
   --white:       #ffffff;
   --text-1:      #ffffff;
   --text-2:      rgba(255,255,255,0.65);
   --text-3:      rgba(255,255,255,0.35);
-
+ 
   --border:      rgba(255,255,255,0.08);
   --border-med:  rgba(255,255,255,0.13);
-
+ 
   --green:       #30D158;
   --nav-h:       64px;
-
+ 
   /* legacy aliases so existing JS still resolves colours */
   --blue-deep:   #0A84FF;
   --blue-mid:    #0A84FF;
@@ -44,10 +44,10 @@
   --gray-border: rgba(255,255,255,0.1);
   --text-dark:   #ffffff;
 }
-
+ 
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
-
+ 
 body {
   font-family:'DM Sans',sans-serif;
   background:var(--bg);
@@ -55,7 +55,7 @@ body {
   min-height:100vh;
   overflow-x:hidden;
 }
-
+ 
 /* ─── NAV ─── */
 nav {
   position:fixed; top:0; left:0; right:0; z-index:500;
@@ -69,7 +69,7 @@ nav {
   transition:background .3s;
 }
 nav.scrolled { background:rgba(0,0,0,0.88); }
-
+ 
 .nav-logo { display:flex; align-items:center; gap:10px; cursor:pointer; text-decoration:none; }
 .nav-logo-icon {
   width:32px; height:32px;
@@ -80,7 +80,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
 }
 .nav-logo-text { font-family:'Sora',sans-serif; font-weight:700; font-size:18px; color:var(--text-1); letter-spacing:-.4px; }
 .nav-logo-text span { color:var(--blue); }
-
+ 
 .nav-links { display:flex; align-items:center; gap:2px; }
 .nav-link {
   font-size:14px; font-weight:500; color:var(--text-2);
@@ -90,7 +90,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
 }
 .nav-link:hover { color:var(--text-1); background:rgba(255,255,255,0.07); }
 .nav-link.active { color:var(--blue); background:var(--blue-subtle); font-weight:600; }
-
+ 
 .nav-cta {
   background:var(--blue);
   color:white; border:none; padding:8px 18px; border-radius:9px;
@@ -99,10 +99,10 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
   box-shadow:0 0 18px var(--blue-glow);
 }
 .nav-cta:hover { background:var(--blue-bright); box-shadow:0 0 24px var(--blue-glow); }
-
+ 
 .nav-burger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
 .nav-burger span { display:block; width:22px; height:2px; background:var(--text-2); border-radius:2px; transition:all .25s; }
-
+ 
 .mobile-menu {
   display:none; position:fixed; top:var(--nav-h); left:0; right:0;
   background:rgba(13,13,13,0.97);
@@ -125,17 +125,17 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
   font-family:'Sora',sans-serif; font-size:14px; font-weight:700;
   cursor:pointer; text-align:center;
 }
-
+ 
 /* ─── PAGE SYSTEM ─── */
 .page { display:none; padding-top:var(--nav-h); min-height:100vh; }
 .page.active { display:block; animation:pgIn .4s cubic-bezier(.22,1,.36,1) both; }
 @keyframes pgIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
-
+ 
 /* ─── SHARED UTILITIES ─── */
 .section { padding:80px 24px; }
 .section-inner { max-width:1080px; margin:0 auto; }
 .section-sm { max-width:720px; margin:0 auto; }
-
+ 
 .pill-badge {
   display:inline-flex; align-items:center; gap:6px;
   background:var(--blue-subtle); color:var(--blue);
@@ -143,7 +143,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
   padding:5px 13px; border-radius:100px;
   border:1px solid var(--blue-border); margin-bottom:20px;
 }
-
+ 
 .section-title {
   font-family:'Sora',sans-serif;
   font-size:clamp(28px,3.5vw,44px);
@@ -156,7 +156,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
   -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
 }
 .section-sub { font-size:17px; color:var(--text-2); line-height:1.65; max-width:540px; }
-
+ 
 .btn-primary {
   display:inline-flex; align-items:center; gap:8px;
   background:var(--blue); color:white; border:none;
@@ -167,7 +167,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
 }
 .btn-primary:hover { background:var(--blue-bright); transform:translateY(-1px); box-shadow:0 0 32px var(--blue-glow); }
 .btn-primary:active { transform:translateY(0); }
-
+ 
 .btn-secondary {
   display:inline-flex; align-items:center; gap:8px;
   background:transparent; color:var(--text-1);
@@ -177,7 +177,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
   cursor:pointer; transition:all .18s;
 }
 .btn-secondary:hover { background:rgba(255,255,255,0.07); border-color:rgba(255,255,255,0.22); }
-
+ 
 /* ─── HOME PAGE ─── */
 .home-hero {
   padding:100px 24px 80px;
@@ -190,7 +190,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
   background:radial-gradient(ellipse at 50% 0%, rgba(10,132,255,0.18) 0%, transparent 70%);
   pointer-events:none;
 }
-
+ 
 .hero-h1 {
   font-family:'Sora',sans-serif;
   font-size:clamp(40px,6.5vw,76px);
@@ -209,11 +209,11 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
 }
 .hero-btns { display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; position:relative; }
 .hero-note { font-size:12px; color:var(--text-3); margin-top:14px; position:relative; }
-
+ 
 .social-proof { display:flex; align-items:center; justify-content:center; gap:24px; padding:20px 24px 0; flex-wrap:wrap; }
 .proof-item { display:flex; align-items:center; gap:7px; font-size:13px; color:var(--text-3); font-weight:500; }
 .proof-dot { width:4px; height:4px; background:var(--bg-4); border-radius:50%; }
-
+ 
 .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:64px; }
 .feature-card {
   background:var(--bg-2);
@@ -230,7 +230,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
 }
 .feature-card h3 { font-family:'Sora',sans-serif; font-size:15px; font-weight:700; color:var(--text-1); margin-bottom:8px; }
 .feature-card p { font-size:13.5px; color:var(--text-2); line-height:1.65; }
-
+ 
 .archetypes-row { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:48px; }
 .arch-preview {
   border-radius:18px; padding:24px 16px; text-align:center;
@@ -241,7 +241,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
 .arch-preview-icon { font-size:34px; margin-bottom:10px; display:block; }
 .arch-preview-name { font-family:'Sora',sans-serif; font-size:13px; font-weight:700; color:var(--text-1); margin-bottom:4px; }
 .arch-preview-desc { font-size:12px; color:var(--text-3); line-height:1.5; }
-
+ 
 .cta-band {
   background:var(--bg-2);
   border:1px solid var(--blue-border);
@@ -267,13 +267,13 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
   box-shadow:0 0 24px var(--blue-glow);
 }
 .btn-white:hover { background:var(--blue-bright); transform:translateY(-1px); }
-
+ 
 /* ─── HOW IT WORKS ─── */
 .hiw-hero {
   padding:72px 24px 48px; text-align:center;
   background:radial-gradient(ellipse 70% 50% at 50% 0%, rgba(10,132,255,0.12) 0%, transparent 70%);
 }
-
+ 
 .steps-timeline { display:flex; flex-direction:column; gap:0; margin-top:56px; position:relative; }
 .steps-timeline::before {
   content:''; position:absolute; left:39px; top:50px; bottom:50px; width:2px;
@@ -292,7 +292,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
 .step-body { flex:1; padding-top:16px; }
 .step-body h3 { font-family:'Sora',sans-serif; font-size:20px; font-weight:700; color:var(--text-1); margin-bottom:8px; }
 .step-body p { font-size:15px; color:var(--text-2); line-height:1.7; max-width:520px; }
-
+ 
 .science-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:48px; }
 .science-card {
   background:var(--bg-2); border:1px solid var(--border);
@@ -301,13 +301,13 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
 .science-card-icon { font-size:28px; margin-bottom:14px; display:block; }
 .science-card h4 { font-family:'Sora',sans-serif; font-size:15px; font-weight:700; color:var(--text-1); margin-bottom:7px; }
 .science-card p { font-size:13.5px; color:var(--text-2); line-height:1.65; }
-
+ 
 /* ─── ANALYZE PAGE ─── */
 .analyze-hero {
   padding:64px 24px 40px; text-align:center;
   background:radial-gradient(ellipse 70% 50% at 50% 0%, rgba(10,132,255,0.1) 0%, transparent 70%);
 }
-
+ 
 .survey-wrap { max-width:680px; margin:0 auto; padding:0 24px 48px; }
 .survey-card {
   background:var(--bg-2);
@@ -330,7 +330,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
 .survey-card-top h2 { font-family:'Sora',sans-serif; font-size:15px; font-weight:700; color:var(--text-1); }
 .survey-card-top p { font-size:12px; color:var(--text-3); margin-top:2px; }
 .survey-body { padding:24px 28px; }
-
+ 
 .survey-label {
   font-size:11px; font-weight:700; color:var(--blue);
   letter-spacing:1px; text-transform:uppercase;
@@ -341,7 +341,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
   text-transform:none; letter-spacing:0;
   background:var(--bg-3); padding:2px 9px; border-radius:100px;
 }
-
+ 
 .survey-textarea {
   width:100%; min-height:160px;
   border:1px solid var(--border); border-radius:13px;
@@ -352,7 +352,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
 }
 .survey-textarea:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(10,132,255,0.15); }
 .survey-textarea::placeholder { color:var(--text-3); }
-
+ 
 .hint-row { margin-top:12px; display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
 .hint-label { font-size:12px; color:var(--text-3); font-weight:500; white-space:nowrap; }
 .hint-chip {
@@ -362,7 +362,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
   padding:4px 11px; border-radius:100px; cursor:pointer; transition:all .18s;
 }
 .hint-chip:hover { background:var(--blue-subtle); transform:translateY(-1px); }
-
+ 
 .checklist { margin-top:18px; display:grid; grid-template-columns:1fr 1fr; gap:6px; }
 .check-item {
   display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--text-3);
@@ -376,7 +376,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
   font-size:9px; flex-shrink:0; transition:all .2s;
 }
 .check-item.checked .check-dot { background:var(--green); color:white; }
-
+ 
 .accuracy-row {
   margin-top:14px; padding:11px 14px;
   background:var(--bg-3); border-radius:11px; border:1px solid var(--blue-border);
@@ -386,7 +386,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
 .accuracy-bar-wrap { flex:1; height:5px; background:var(--bg-4); border-radius:100px; overflow:hidden; }
 .accuracy-bar { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--blue),var(--blue-bright)); transition:width .4s ease; width:0%; }
 .accuracy-pct { font-size:12px; font-weight:700; color:var(--blue); min-width:34px; text-align:right; }
-
+ 
 .survey-footer {
   padding:16px 28px 22px;
   border-top:1px solid var(--border);
@@ -395,7 +395,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
 }
 .footer-note { font-size:12px; color:var(--text-3); line-height:1.5; max-width:300px; }
 .footer-note strong { color:var(--text-2); }
-
+ 
 .analyze-btn {
   display:flex; align-items:center; gap:8px;
   background:var(--blue); color:white; border:none;
@@ -407,7 +407,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
 }
 .analyze-btn:hover { background:var(--blue-bright); box-shadow:0 0 28px var(--blue-glow); }
 .analyze-btn:disabled { opacity:.4; cursor:not-allowed; box-shadow:none; }
-
+ 
 /* ─── LOADING ─── */
 #loadingSection {
   display:none; max-width:680px; margin:0 auto; padding:0 24px 40px;
@@ -415,7 +415,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
 }
 #loadingSection.visible { display:block; animation:fadeUp .35s ease both; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
-
+ 
 .loading-ui { display:flex; flex-direction:column; align-items:center; gap:18px; padding:40px 24px; }
 .loading-icon {
   width:68px; height:68px; border-radius:18px;
@@ -433,11 +433,11 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
   box-shadow:0 0 8px var(--blue-glow);
 }
 .progress-pct { font-family:'Sora',sans-serif; font-size:13px; font-weight:700; color:var(--blue); margin-top:-8px; }
-
+ 
 /* ─── RESULTS ─── */
 #resultsSection { display:none; max-width:680px; margin:0 auto; padding:0 24px 80px; }
 #resultsSection.visible { display:block; animation:fadeUp .45s ease both; }
-
+ 
 .archetype-hero {
   background:var(--bg-2);
   border:1px solid var(--blue-border);
@@ -467,7 +467,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
   background:var(--blue-subtle); border:1px solid var(--blue-border);
   color:var(--blue); padding:4px 12px; border-radius:100px; font-size:11.5px; font-weight:600;
 }
-
+ 
 .result-card {
   background:var(--bg-2); border:1px solid var(--border);
   border-radius:18px; padding:24px 26px;
@@ -480,7 +480,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
   color:var(--blue); margin-bottom:18px;
   text-transform:uppercase; letter-spacing:1.2px;
 }
-
+ 
 .timeline { position:relative; }
 .timeline::before { content:''; position:absolute; left:18px; top:20px; bottom:18px; width:2px; background:linear-gradient(to bottom,var(--blue),rgba(10,132,255,0.05)); }
 .tl-item { display:flex; gap:16px; padding-bottom:20px; position:relative; animation:tlIn .4s ease both; }
@@ -495,7 +495,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
 .tl-body { flex:1; padding-top:6px; }
 .tl-period { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--blue); margin-bottom:3px; }
 .tl-text { font-size:13.5px; color:var(--text-2); line-height:1.65; }
-
+ 
 .metrics-list { display:flex; flex-direction:column; gap:9px; }
 .metric-row {
   display:flex; align-items:flex-start; gap:11px; padding:12px 13px;
@@ -517,7 +517,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
   white-space:nowrap; align-self:flex-start; margin-top:2px;
   background:rgba(48,209,88,0.12); color:var(--green); border:1px solid rgba(48,209,88,0.2);
 }
-
+ 
 .sport-grid { display:flex; flex-wrap:wrap; gap:8px; }
 .sport-chip {
   background:var(--bg-3); border:1px solid var(--border);
@@ -526,7 +526,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
   transition:all .18s;
 }
 .sport-chip:hover { border-color:var(--blue-border); color:var(--blue); }
-
+ 
 .reset-wrap { text-align:center; margin-top:24px; }
 .reset-btn {
   background:none; border:1px solid var(--border); color:var(--text-3);
@@ -535,13 +535,13 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
   cursor:pointer; transition:all .2s;
 }
 .reset-btn:hover { border-color:var(--blue-border); color:var(--blue); background:var(--blue-subtle); }
-
+ 
 .disclaimer {
   text-align:center; margin-top:18px; padding:13px 16px;
   background:var(--bg-3); border-radius:11px; border:1px solid var(--border);
   font-size:11.5px; color:var(--text-3); line-height:1.6;
 }
-
+ 
 /* ─── ABOUT ─── */
 .about-hero {
   padding:72px 24px 56px; text-align:center;
@@ -562,7 +562,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
 .about-stat-label { font-size:13px; color:var(--text-3); margin-top:2px; }
 .about-text h2 { font-family:'Sora',sans-serif; font-size:clamp(24px,3vw,34px); font-weight:800; color:var(--text-1); letter-spacing:-1px; line-height:1.15; margin-bottom:16px; }
 .about-text p { font-size:15px; color:var(--text-2); line-height:1.75; margin-bottom:16px; }
-
+ 
 .values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:48px; }
 .value-card {
   background:var(--bg-2); border:1px solid var(--border);
@@ -573,7 +573,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
 .value-icon { font-size:26px; margin-bottom:10px; display:block; }
 .value-card h4 { font-family:'Sora',sans-serif; font-size:13.5px; font-weight:700; color:var(--text-1); margin-bottom:6px; }
 .value-card p { font-size:12.5px; color:var(--text-2); line-height:1.55; }
-
+ 
 /* ─── CONTACT ─── */
 .contact-hero {
   padding:72px 24px 48px; text-align:center;
@@ -591,7 +591,7 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
 .contact-card-icon { font-size:20px; flex-shrink:0; margin-top:2px; }
 .contact-card h4 { font-family:'Sora',sans-serif; font-size:13.5px; font-weight:700; color:var(--text-1); margin-bottom:3px; }
 .contact-card p { font-size:12.5px; color:var(--text-3); line-height:1.5; }
-
+ 
 .contact-form {
   background:var(--bg-2); border:1px solid var(--border);
   border-radius:20px; padding:32px;
@@ -624,13 +624,13 @@ nav.scrolled { background:rgba(0,0,0,0.88); }
   box-shadow:0 0 20px var(--blue-glow);
 }
 .form-submit:hover { background:var(--blue-bright); box-shadow:0 0 28px var(--blue-glow); }
-
+ 
 .form-success { display:none; text-align:center; padding:32px 20px; }
 .form-success.show { display:block; animation:fadeUp .4s ease; }
 .form-success-icon { font-size:52px; margin-bottom:14px; }
 .form-success h4 { font-family:'Sora',sans-serif; font-size:20px; font-weight:700; color:var(--text-1); margin-bottom:8px; }
 .form-success p { font-size:14px; color:var(--text-2); }
-
+ 
 /* ─── FOOTER ─── */
 footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid var(--border); }
 .footer-inner { max-width:1080px; margin:0 auto; }
@@ -649,11 +649,172 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
 .footer-bottom-links { display:flex; gap:20px; }
 .footer-bottom-links a { font-size:12px; color:var(--text-3); cursor:pointer; text-decoration:none; transition:color .18s; }
 .footer-bottom-links a:hover { color:var(--text-2); }
-
-/* ─── SECTION VARIANTS ─── */
-.section-dark { background:var(--bg-1); }
-
-/* ─── RESPONSIVE ─── */
+ 
+/* ─── GOAL INPUT ─── */
+.goal-section {
+  margin-top:20px; padding:18px 16px;
+  background:var(--bg-3); border-radius:14px;
+  border:1px solid var(--blue-border);
+}
+.goal-label {
+  font-size:11px; font-weight:700; color:var(--blue);
+  letter-spacing:1px; text-transform:uppercase;
+  margin-bottom:10px; display:flex; align-items:center; gap:8px;
+}
+.goal-badge {
+  font-size:10px; font-weight:700; letter-spacing:.5px;
+  background:rgba(255,193,7,0.12); color:#FFD60A;
+  border:1px solid rgba(255,193,7,0.25);
+  padding:2px 8px; border-radius:100px; text-transform:none;
+}
+.goal-input {
+  width:100%; border:1px solid var(--border); border-radius:10px;
+  padding:11px 14px; font-size:14px;
+  font-family:'DM Sans',sans-serif; color:var(--text-1);
+  background:var(--bg-2); outline:none;
+  transition:border-color .2s, box-shadow .2s;
+}
+.goal-input:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(10,132,255,0.15); }
+.goal-input::placeholder { color:var(--text-3); }
+.goal-hint { font-size:11.5px; color:var(--text-3); margin-top:8px; line-height:1.5; }
+ 
+/* ─── PREMIUM BLUR CARD ─── */
+.premium-card {
+  margin-bottom:14px; border-radius:18px; overflow:hidden;
+  border:1px solid var(--blue-border);
+  background:var(--bg-2);
+  box-shadow:0 0 40px rgba(10,132,255,0.12);
+}
+.premium-blur-wrap { position:relative; }
+.premium-inner-blur {
+  padding:24px 26px;
+  filter:blur(5px);
+  pointer-events:none; user-select:none;
+}
+.goal-match-top { display:flex; align-items:center; gap:24px; margin-bottom:20px; }
+.goal-ring-wrap { flex-shrink:0; }
+.goal-ring-svg { width:110px; height:110px; transform:rotate(-90deg); }
+.ring-track { fill:none; stroke:var(--bg-4); stroke-width:10; }
+.ring-fill {
+  fill:none; stroke:var(--blue); stroke-width:10;
+  stroke-linecap:round;
+  transition:stroke-dashoffset 1s ease;
+}
+.ring-pct-text {
+  fill:var(--text-1); font-family:'Sora',sans-serif; font-weight:800;
+  font-size:22px; text-anchor:middle; dominant-baseline:middle;
+  transform:rotate(90deg) translate(0px,-120px);
+}
+.ring-label-text {
+  fill:var(--text-3); font-size:11px; text-anchor:middle; dominant-baseline:middle;
+  transform:rotate(90deg) translate(0px,-120px);
+}
+.goal-match-info { flex:1; }
+.goal-match-title { font-family:'Sora',sans-serif; font-size:16px; font-weight:700; color:var(--text-1); margin-bottom:6px; }
+.goal-match-desc { font-size:13px; color:var(--text-2); line-height:1.6; }
+.goal-tweaks { display:flex; flex-direction:column; gap:8px; }
+.tweak-item {
+  display:flex; align-items:flex-start; gap:10px;
+  padding:10px 12px; border-radius:10px; font-size:13px;
+}
+.tweak-item.tweak-add { background:rgba(48,209,88,0.08); color:rgba(255,255,255,0.8); }
+.tweak-item.tweak-remove { background:rgba(255,69,58,0.08); color:rgba(255,255,255,0.8); }
+.tweak-dot {
+  width:20px; height:20px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; font-weight:700; margin-top:1px;
+}
+.tweak-add .tweak-dot { background:rgba(48,209,88,0.2); color:var(--green); }
+.tweak-remove .tweak-dot { background:rgba(255,69,58,0.2); color:#FF453A; }
+ 
+.premium-lock-overlay {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:10px; padding:32px 24px; text-align:center;
+  background:rgba(0,0,0,0.15);
+  backdrop-filter:blur(2px);
+}
+.lock-icon { font-size:36px; }
+.lock-title { font-family:'Sora',sans-serif; font-size:18px; font-weight:800; color:var(--text-1); }
+.lock-desc { font-size:13.5px; color:var(--text-2); max-width:320px; line-height:1.6; }
+.lock-cta {
+  background:var(--blue); color:white; border:none;
+  padding:11px 24px; border-radius:10px;
+  font-family:'Sora',sans-serif; font-size:14px; font-weight:700;
+  cursor:pointer; transition:all .18s; margin-top:4px;
+  box-shadow:0 0 20px var(--blue-glow);
+}
+.lock-cta:hover { background:var(--blue-bright); transform:translateY(-1px); }
+ 
+/* ─── PRICING PAGE ─── */
+.pricing-wrap {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+  max-width:1040px; margin:0 auto; padding:0 24px 48px;
+  align-items:start;
+}
+.pricing-card {
+  background:var(--bg-2); border:1px solid var(--border);
+  border-radius:22px; padding:32px 28px;
+  display:flex; flex-direction:column; gap:0;
+  position:relative;
+  transition:border-color .2s;
+}
+.pricing-card:hover { border-color:var(--border-med); }
+.pricing-card-premium {
+  border-color:var(--blue-border);
+  box-shadow:0 0 48px rgba(10,132,255,0.18);
+}
+.pricing-popular-badge {
+  position:absolute; top:-13px; left:50%; transform:translateX(-50%);
+  background:var(--blue); color:white;
+  font-family:'Sora',sans-serif; font-size:11px; font-weight:700;
+  padding:4px 14px; border-radius:100px;
+  white-space:nowrap;
+}
+.pricing-tier-label {
+  font-family:'Sora',sans-serif; font-size:13px; font-weight:700;
+  color:var(--text-3); text-transform:uppercase; letter-spacing:1.5px;
+  margin-bottom:10px;
+}
+.pricing-price {
+  font-family:'Sora',sans-serif; font-size:42px; font-weight:800;
+  color:var(--text-1); letter-spacing:-1.5px; margin-bottom:8px;
+}
+.pricing-price span { font-size:16px; font-weight:500; color:var(--text-3); letter-spacing:0; }
+.pricing-desc { font-size:13.5px; color:var(--text-3); line-height:1.55; margin-bottom:24px; }
+.pricing-features { list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:28px; }
+.feat-item { display:flex; align-items:flex-start; gap:10px; font-size:13.5px; }
+.feat-item.included { color:var(--text-1); }
+.feat-item.excluded { color:var(--text-3); }
+.feat-icon {
+  width:20px; height:20px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:700; margin-top:1px;
+}
+.feat-item.included .feat-icon { background:rgba(48,209,88,0.15); color:var(--green); }
+.feat-item.excluded .feat-icon { background:var(--bg-3); color:var(--text-3); }
+.feat-icon.feat-blue { background:var(--blue-subtle); color:var(--blue); }
+.feat-item.included .feat-icon.feat-blue { background:var(--blue-subtle); color:var(--blue); }
+ 
+.pricing-btn-free {
+  width:100%; padding:13px; border-radius:12px;
+  background:var(--bg-3); border:1px solid var(--border-med); color:var(--text-1);
+  font-family:'Sora',sans-serif; font-size:14px; font-weight:700;
+  cursor:pointer; transition:all .18s; margin-top:auto;
+}
+.pricing-btn-free:hover { background:var(--bg-4); border-color:rgba(255,255,255,0.2); }
+.pricing-btn-premium {
+  width:100%; padding:13px; border-radius:12px;
+  background:var(--blue); border:none; color:white;
+  font-family:'Sora',sans-serif; font-size:14px; font-weight:700;
+  cursor:pointer; transition:all .18s; margin-top:auto;
+  box-shadow:0 0 20px var(--blue-glow);
+}
+.pricing-btn-premium:hover { background:var(--blue-bright); box-shadow:0 0 28px var(--blue-glow); }
+ 
+@media (max-width:900px) { .pricing-wrap { grid-template-columns:1fr; max-width:440px; } }
+</style>
+</head>
 @media (max-width:900px) {
   nav { padding:0 24px; }
   .nav-links, .nav-cta { display:none; }
@@ -687,7 +848,7 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
 </style>
 </head>
 <body>
-
+ 
 <!-- ═══════ NAV ═══════ -->
 <nav id="mainNav">
   <a class="nav-logo" onclick="showPage('home')">
@@ -700,27 +861,29 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
     <button class="nav-link"        id="nl-analyze"  onclick="showPage('analyze')">Analyze</button>
     <button class="nav-link"        id="nl-about"    onclick="showPage('about')">About</button>
     <button class="nav-link"        id="nl-contact"  onclick="showPage('contact')">Contact</button>
+    <button class="nav-link"        id="nl-premium"  onclick="showPage('premium')" style="color:var(--blue);">⚡ Premium</button>
   </div>
   <button class="nav-cta" onclick="showPage('analyze')">Try It Free →</button>
   <button class="nav-burger" id="navBurger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </button>
 </nav>
-
+ 
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-link active" id="ml-home"       onclick="showPage('home');toggleMenu()">Home</button>
   <button class="mobile-link"        id="ml-howitworks" onclick="showPage('howitworks');toggleMenu()">How It Works</button>
   <button class="mobile-link"        id="ml-analyze"    onclick="showPage('analyze');toggleMenu()">Analyze</button>
   <button class="mobile-link"        id="ml-about"      onclick="showPage('about');toggleMenu()">About</button>
   <button class="mobile-link"        id="ml-contact"    onclick="showPage('contact');toggleMenu()">Contact</button>
+  <button class="mobile-link"        id="ml-premium"    onclick="showPage('premium');toggleMenu()" style="color:var(--blue);">⚡ Premium</button>
   <button class="mobile-cta"         onclick="showPage('analyze');toggleMenu()">Try It Free →</button>
 </div>
-
+ 
 <!-- ═══════════════════════════════════════
      PAGE: HOME
 ═══════════════════════════════════════ -->
 <div class="page active" id="page-home">
-
+ 
   <div class="home-hero">
     <div class="pill-badge">🧬 Sports Science, Made Simple</div>
     <h1 class="hero-h1">Know exactly what your<br><em>training is building</em></h1>
@@ -731,7 +894,7 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
     </div>
     <p class="hero-note">Free to use · No account required · Results in under 30 seconds</p>
   </div>
-
+ 
   <div class="social-proof">
     <div class="proof-item">🏋️ Strength athletes</div>
     <div class="proof-dot"></div>
@@ -743,7 +906,7 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
     <div class="proof-dot"></div>
     <div class="proof-item">🏅 Sport-specific training</div>
   </div>
-
+ 
   <!-- Features -->
   <div class="section">
     <div class="section-inner">
@@ -788,7 +951,7 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
       </div>
     </div>
   </div>
-
+ 
   <!-- Archetypes showcase -->
   <div class="section" style="background:var(--bg-1); padding-top:72px; padding-bottom:72px;">
     <div class="section-inner">
@@ -823,7 +986,7 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
       </div>
     </div>
   </div>
-
+ 
   <!-- CTA Band -->
   <div class="section">
     <div class="section-inner">
@@ -834,20 +997,20 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
       </div>
     </div>
   </div>
-
+ 
 </div>
-
+ 
 <!-- ═══════════════════════════════════════
      PAGE: HOW IT WORKS
 ═══════════════════════════════════════ -->
 <div class="page" id="page-howitworks">
-
+ 
   <div class="hiw-hero">
     <div class="pill-badge">🔬 The Process</div>
     <h1 class="section-title">How FitGuide works</h1>
     <p class="section-sub" style="margin:0 auto;">From your workout description to a full sports science report — here's exactly what happens.</p>
   </div>
-
+ 
   <div class="section">
     <div class="section-inner section-sm">
       <div class="steps-timeline">
@@ -889,7 +1052,7 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
       </div>
     </div>
   </div>
-
+ 
   <!-- Science behind it -->
   <div class="section" style="background:var(--bg-1); padding-top:72px; padding-bottom:72px;">
     <div class="section-inner">
@@ -927,20 +1090,20 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
       </div>
     </div>
   </div>
-
+ 
 </div>
-
+ 
 <!-- ═══════════════════════════════════════
      PAGE: ANALYZE
 ═══════════════════════════════════════ -->
 <div class="page" id="page-analyze">
-
+ 
   <div class="analyze-hero">
     <div class="pill-badge">🧬 Sports Science Analysis</div>
     <h1 class="section-title">Analyze your routine</h1>
     <p class="section-sub" style="margin:0 auto;">Describe your workout below and get a full science-backed breakdown of what you're building.</p>
   </div>
-
+ 
   <div class="survey-wrap" id="inputSection">
     <div class="survey-card">
       <div class="survey-card-top">
@@ -964,6 +1127,21 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
           <span class="hint-chip" onclick="fillExample('powerlifting')">🏋️ Powerlifting</span>
           <span class="hint-chip" onclick="fillExample('general')">🏃 General Fitness</span>
         </div>
+ 
+        <!-- GOAL INPUT -->
+        <div class="goal-section">
+          <div class="goal-label">
+            🎯 <span>Your Goal</span>
+            <span class="goal-badge">⚡ Premium insight</span>
+          </div>
+          <input
+            class="goal-input"
+            id="goalInput"
+            type="text"
+            placeholder="e.g. play basketball, run a 5K, get bigger, compete in powerlifting..."
+          />
+          <p class="goal-hint">Tell us what you're working towards and we'll score how well your routine matches it.</p>
+        </div>
       </div>
       <div class="survey-footer">
         <p class="footer-note"><strong>More detail = more accurate results.</strong> But even a short description works.</p>
@@ -971,7 +1149,7 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
       </div>
     </div>
   </div>
-
+ 
   <!-- Loading -->
   <div id="loadingSection">
     <div class="loading-ui">
@@ -984,7 +1162,7 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
       <div class="progress-pct" id="progressPct">0%</div>
     </div>
   </div>
-
+ 
   <!-- Results -->
   <div id="resultsSection">
     <div class="archetype-hero">
@@ -996,6 +1174,40 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
         <div class="stat-pills" id="statPills"></div>
       </div>
     </div>
+ 
+    <!-- PREMIUM GOAL MATCH — blurred for non-members -->
+    <div class="premium-card" id="premiumGoalCard">
+      <div class="premium-blur-wrap">
+        <!-- Real content (blurred) -->
+        <div class="premium-inner-blur" id="goalMatchContent">
+          <div class="goal-match-top">
+            <div class="goal-ring-wrap">
+              <svg class="goal-ring-svg" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="50" class="ring-track"/>
+                <circle cx="60" cy="60" r="50" class="ring-fill" id="goalRingFill"
+                  stroke-dasharray="314"
+                  stroke-dashoffset="314"/>
+                <text x="60" y="55" class="ring-pct-text" id="goalRingPct">0%</text>
+                <text x="60" y="72" class="ring-label-text">Match</text>
+              </svg>
+            </div>
+            <div class="goal-match-info">
+              <div class="goal-match-title" id="goalMatchTitle">Goal Alignment Score</div>
+              <div class="goal-match-desc" id="goalMatchDesc">—</div>
+            </div>
+          </div>
+          <div class="goal-tweaks" id="goalTweaks"></div>
+        </div>
+        <!-- Lock overlay -->
+        <div class="premium-lock-overlay">
+          <div class="lock-icon">🔒</div>
+          <div class="lock-title">Premium Feature</div>
+          <div class="lock-desc">Unlock your Goal Match Score, efficiency rating, and personalised routine recommendations.</div>
+          <button class="lock-cta" onclick="showPage('premium')">Unlock with Premium →</button>
+        </div>
+      </div>
+    </div>
+ 
     <div class="result-card">
       <div class="card-title">📅 &nbsp;Projected Performance Timeline</div>
       <div class="timeline" id="timeline"></div>
@@ -1015,20 +1227,160 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
       <button class="reset-btn" onclick="resetForm()">← Analyze a different routine</button>
     </div>
   </div>
-
+ 
 </div>
-
+ 
+<!-- ═══════════════════════════════════════
+     PAGE: PREMIUM
+═══════════════════════════════════════ -->
+<div class="page" id="page-premium">
+ 
+  <div class="analyze-hero">
+    <div class="pill-badge">⚡ Membership Plans</div>
+    <h1 class="section-title">Choose your <em>plan</em></h1>
+    <p class="section-sub" style="margin:0 auto;">Start free, upgrade when you're ready. No hidden fees.</p>
+  </div>
+ 
+  <div class="pricing-wrap">
+ 
+    <!-- FREE TIER -->
+    <div class="pricing-card">
+      <div class="pricing-tier-label">Free</div>
+      <div class="pricing-price">$0<span>/month</span></div>
+      <div class="pricing-desc">Great for trying out FitGuide. No credit card needed.</div>
+      <ul class="pricing-features">
+        <li class="feat-item included">
+          <span class="feat-icon">✓</span>
+          <span>3 analyses per week</span>
+        </li>
+        <li class="feat-item included">
+          <span class="feat-icon">✓</span>
+          <span>Training archetype identification</span>
+        </li>
+        <li class="feat-item included">
+          <span class="feat-icon">✓</span>
+          <span>Week-by-week performance timeline</span>
+        </li>
+        <li class="feat-item included">
+          <span class="feat-icon">✓</span>
+          <span>Sport &amp; activity alignment</span>
+        </li>
+        <li class="feat-item excluded">
+          <span class="feat-icon">✗</span>
+          <span>Goal match score &amp; efficiency ring</span>
+        </li>
+        <li class="feat-item excluded">
+          <span class="feat-icon">✗</span>
+          <span>Personalised add/remove recommendations</span>
+        </li>
+        <li class="feat-item excluded">
+          <span class="feat-icon">✗</span>
+          <span>Physical adaptation metrics</span>
+        </li>
+        <li class="feat-item excluded">
+          <span class="feat-icon">✗</span>
+          <span>Unlimited analyses</span>
+        </li>
+      </ul>
+      <button class="pricing-btn-free" onclick="showPage('analyze')">Get Started Free</button>
+    </div>
+ 
+    <!-- PREMIUM TIER -->
+    <div class="pricing-card pricing-card-premium">
+      <div class="pricing-popular-badge">Most Popular</div>
+      <div class="pricing-tier-label" style="color:var(--blue);">Premium</div>
+      <div class="pricing-price" style="color:var(--blue);">$7.99<span>/month</span></div>
+      <div class="pricing-desc">Everything you need to train with full scientific insight.</div>
+      <ul class="pricing-features">
+        <li class="feat-item included">
+          <span class="feat-icon feat-blue">✓</span>
+          <span>Unlimited analyses</span>
+        </li>
+        <li class="feat-item included">
+          <span class="feat-icon feat-blue">✓</span>
+          <span>Training archetype identification</span>
+        </li>
+        <li class="feat-item included">
+          <span class="feat-icon feat-blue">✓</span>
+          <span>Week-by-week performance timeline</span>
+        </li>
+        <li class="feat-item included">
+          <span class="feat-icon feat-blue">✓</span>
+          <span>Sport &amp; activity alignment</span>
+        </li>
+        <li class="feat-item included">
+          <span class="feat-icon feat-blue">✓</span>
+          <span>Goal match score &amp; efficiency ring</span>
+        </li>
+        <li class="feat-item included">
+          <span class="feat-icon feat-blue">✓</span>
+          <span>Personalised add/remove recommendations</span>
+        </li>
+        <li class="feat-item included">
+          <span class="feat-icon feat-blue">✓</span>
+          <span>Physical adaptation metrics &amp; projections</span>
+        </li>
+        <li class="feat-item included">
+          <span class="feat-icon feat-blue">✓</span>
+          <span>Priority analysis speed</span>
+        </li>
+      </ul>
+      <button class="pricing-btn-premium">Get Premium — $7.99/mo</button>
+    </div>
+ 
+    <!-- ELITE TIER -->
+    <div class="pricing-card">
+      <div class="pricing-tier-label">Elite</div>
+      <div class="pricing-price">$19.99<span>/month</span></div>
+      <div class="pricing-desc">For serious athletes who want the full picture.</div>
+      <ul class="pricing-features">
+        <li class="feat-item included">
+          <span class="feat-icon feat-blue">✓</span>
+          <span>Everything in Premium</span>
+        </li>
+        <li class="feat-item included">
+          <span class="feat-icon feat-blue">✓</span>
+          <span>Multi-routine comparison</span>
+        </li>
+        <li class="feat-item included">
+          <span class="feat-icon feat-blue">✓</span>
+          <span>Progress tracking over time</span>
+        </li>
+        <li class="feat-item included">
+          <span class="feat-icon feat-blue">✓</span>
+          <span>Exportable PDF reports</span>
+        </li>
+        <li class="feat-item included">
+          <span class="feat-icon feat-blue">✓</span>
+          <span>Coach-level training recommendations</span>
+        </li>
+        <li class="feat-item included">
+          <span class="feat-icon feat-blue">✓</span>
+          <span>Priority email support</span>
+        </li>
+      </ul>
+      <button class="pricing-btn-free">Get Elite — $19.99/mo</button>
+    </div>
+ 
+  </div>
+ 
+  <div style="text-align:center; padding:0 24px 60px;">
+    <p style="font-size:13px; color:var(--text-3);">All plans include a 7-day free trial. Cancel anytime.</p>
+  </div>
+ 
+</div>
+ 
 <!-- ═══════════════════════════════════════
      PAGE: ABOUT
 ═══════════════════════════════════════ -->
 <div class="page" id="page-about">
-
+ 
   <div class="about-hero">
     <div class="pill-badge">👋 Our Mission</div>
     <h1 class="section-title">Making sports science<br><em>accessible to everyone</em></h1>
     <p class="section-sub" style="margin:0 auto;">FitGuide exists because most people train without understanding the science behind what they're doing. We're changing that.</p>
   </div>
-
+ 
   <div class="section">
     <div class="section-inner">
       <div class="about-content">
@@ -1053,7 +1405,7 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
           <p>Whether you're a beginner with a vague routine or an experienced athlete with a structured program, FitGuide gives you the insight to train with intention.</p>
         </div>
       </div>
-
+ 
       <div class="values-grid" style="margin-top:64px;">
         <div class="value-card">
           <span class="value-icon">🎓</span>
@@ -1088,7 +1440,7 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
       </div>
     </div>
   </div>
-
+ 
   <div class="section" style="background:var(--bg-1); padding-top:60px; padding-bottom:60px;">
     <div class="section-inner" style="text-align:center;">
       <h2 class="section-title">Ready to understand<br>your <em>training?</em></h2>
@@ -1096,24 +1448,24 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
       <button class="btn-primary" onclick="showPage('analyze')">Analyze My Routine →</button>
     </div>
   </div>
-
+ 
 </div>
-
+ 
 <!-- ═══════════════════════════════════════
      PAGE: CONTACT
 ═══════════════════════════════════════ -->
 <div class="page" id="page-contact">
-
+ 
   <div class="contact-hero">
     <div class="pill-badge">📬 Get In Touch</div>
     <h1 class="section-title">We'd love to<br><em>hear from you</em></h1>
     <p class="section-sub" style="margin:0 auto;">Questions, feedback, partnership ideas, or just want to say hi — reach out anytime.</p>
   </div>
-
+ 
   <div class="section">
     <div class="section-inner section-sm">
       <div class="contact-layout">
-
+ 
         <div class="contact-info">
           <div class="contact-card">
             <div class="contact-card-icon">💬</div>
@@ -1144,7 +1496,7 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
             </div>
           </div>
         </div>
-
+ 
         <div class="contact-form">
           <div id="contactFormContent">
             <h3>Send us a message</h3>
@@ -1185,13 +1537,13 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
             <p>Thanks for reaching out. We'll get back to you as soon as possible.</p>
           </div>
         </div>
-
+ 
       </div>
     </div>
   </div>
-
+ 
 </div>
-
+ 
 <!-- ═══════ FOOTER ═══════ -->
 <footer>
   <div class="footer-inner">
@@ -1226,11 +1578,11 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
     </div>
   </div>
 </footer>
-
+ 
 <script>
 /* ─── NAVIGATION ─── */
-const pages = ['home','howitworks','analyze','about','contact'];
-
+const pages = ['home','howitworks','analyze','about','contact','premium'];
+ 
 function showPage(name) {
   pages.forEach(p => {
     document.getElementById('page-'+p).classList.toggle('active', p === name);
@@ -1243,16 +1595,16 @@ function showPage(name) {
   // Close mobile menu
   document.getElementById('mobileMenu').classList.remove('open');
 }
-
+ 
 function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
 }
-
+ 
 // Sticky nav shadow
 window.addEventListener('scroll', () => {
   document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 10);
 });
-
+ 
 /* ─── CONTACT FORM ─── */
 function submitContact() {
   const name = document.getElementById('fName').value.trim();
@@ -1262,7 +1614,7 @@ function submitContact() {
   document.getElementById('contactFormContent').style.display = 'none';
   document.getElementById('formSuccess').classList.add('show');
 }
-
+ 
 /* ─── ANALYZER ─── */
 const examples = {
   plyometrics: "I train 4 days a week focused on explosiveness. Sessions include box jumps 4x8, depth jumps 3x6, broad jumps 3x8, and sprint drills — 10m, 20m, 40m — twice per week. I also do banded hip thrusts 3x10 and single-leg Romanian deadlifts 3x10 for strength support. Goal is to improve standing vertical jump and first-step acceleration for basketball.",
@@ -1270,18 +1622,18 @@ const examples = {
   powerlifting: "4 days a week on linear progression. Monday: squat 5x5, bench 5x5. Wednesday: deadlift 3x5, overhead press 3x5. Friday: squat lighter, bench variation. Saturday: deadlift accessories and rows. Goal is to maximize total on squat, bench, and deadlift.",
   general: "Gym 3 times a week. 20 minutes treadmill at moderate pace, chest press machine 3x12, lat pulldown 3x12, leg press 3x15, planks and crunches. No structured program, trying to lose weight and stay healthy."
 };
-
+ 
 function onInput(ta) {
   document.getElementById('analyzeBtn').disabled = ta.value.trim().length < 10;
 }
-
+ 
 function fillExample(type) {
   const ta = document.getElementById('routineInput');
   ta.value = examples[type];
   onInput(ta);
   ta.focus();
 }
-
+ 
 function resetForm() {
   document.getElementById('routineInput').value = '';
   document.getElementById('analyzeBtn').disabled = true;
@@ -1293,7 +1645,7 @@ function resetForm() {
   inpEl.style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
 }
-
+ 
 /* ═══════════════════════════════════════
    RULE-BASED ANALYSIS ENGINE
    Runs 100% in the browser — no API, no cost, instant
@@ -1399,24 +1751,24 @@ const DB = {
     sports: ['🏊 Swimming','🚴 Cycling','🧗 Rock Climbing','🎾 Tennis']
   }
 };
-
+ 
 function analyseRoutine(text) {
   const t = text.toLowerCase();
-
+ 
   // Score each archetype
   const scores = { explosive:0, strength:0, hypertrophy:0, endurance:0 };
-
+ 
   // Keyword scoring
   const explosiveWords = ['box jump','depth jump','broad jump','plyom','sprint','hurdle','jump squat','power clean','hang clean','snatch','medicine ball','bounding','reactive','vertical','acceleration','agility','first step'];
   const strengthWords  = ['squat','deadlift','bench press','overhead press','5x5','3x5','1rm','one rep max','powerlifting','heavy','linear progression','low rep'];
   const hypertrophyWords = ['hypertrophy','muscle','size','mass','bulk','ppl','push pull','isolation','curl','extension','fly','lateral raise','cable','pump','volume','bodybuilding','3x10','4x10','3x12','4x12'];
   const enduranceWords = ['cardio','run','treadmill','jog','cycling','bike','swim','zone 2','aerobic','vo2','marathon','5k','10k','endurance','stamina','hiit','circuit'];
-
+ 
   explosiveWords.forEach(w => { if(t.includes(w)) scores.explosive += 2; });
   strengthWords.forEach(w  => { if(t.includes(w)) scores.strength  += 2; });
   hypertrophyWords.forEach(w=>{ if(t.includes(w)) scores.hypertrophy+=2; });
   enduranceWords.forEach(w  => { if(t.includes(w)) scores.endurance  += 2; });
-
+ 
   // Rep range scoring
   const repMatch = t.match(/(\d+)\s*[x×]\s*(\d+)/g) || [];
   repMatch.forEach(r => {
@@ -1428,23 +1780,23 @@ function analyseRoutine(text) {
     if(reps >= 10) { scores.hypertrophy += 3; }
     if(reps >= 15) { scores.endurance   += 2; }
   });
-
+ 
   // Goal keyword scoring
   if(/faster|speed|jump|athletic|sport|basketball|soccer|football|explosive/.test(t)) scores.explosive += 4;
   if(/stronger|strength|powerl|total|1rm|max/.test(t)) scores.strength   += 4;
   if(/bigger|size|mass|bulk|aesthetic|physique|muscle/.test(t)) scores.hypertrophy += 4;
   if(/lose weight|cardio|health|fit|stamina|endurance|marathon|run/.test(t)) scores.endurance += 4;
-
+ 
   // Pick winner
   const winner = Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
   const archetype = DB[winner].keys
     ? (DB[winner].keys.test(text) || scores[winner] > 0 ? DB[winner] : DB.general)
     : DB[winner];
-
+ 
   // Build secondary sport tags based on runner-up
   const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
   const base = DB[sorted[0][0]];
-
+ 
   return {
     archetypeIcon:  base.icon,
     archetypeTitle: base.title,
@@ -1455,28 +1807,28 @@ function analyseRoutine(text) {
     sports:         base.sports
   };
 }
-
+ 
 async function runAnalysis() {
   const text = document.getElementById('routineInput').value.trim();
   if(!text || text.length < 10) return;
-
+ 
   document.getElementById('analyzeBtn').disabled = true;
-
+ 
   const loadEl = document.getElementById('loadingSection');
   const resEl  = document.getElementById('resultsSection');
   const inpEl  = document.getElementById('inputSection');
-
+ 
   inpEl.style.display = 'none';
   resEl.classList.remove('visible'); resEl.style.display = 'none';
   loadEl.style.display = 'block'; loadEl.classList.add('visible');
   loadEl.scrollIntoView({behavior:'smooth', block:'center'});
-
+ 
   const setProgress = (p, label) => {
     document.getElementById('progressFill').style.width = p + '%';
     document.getElementById('progressPct').textContent = Math.round(p) + '%';
     if(label) document.getElementById('loadingStatus').textContent = label;
   };
-
+ 
   // Animate progress bar while waiting for backend
   const steps = [
     [10, 'Reading your exercises…'],
@@ -1489,7 +1841,7 @@ async function runAnalysis() {
   const ticker = setInterval(() => {
     if(i < steps.length) { setProgress(steps[i][0], steps[i][1]); i++; }
   }, 600);
-
+ 
   try {
     // ── Call your local backend ──────────────────────
     const res = await fetch('/api/chat', {
@@ -1497,21 +1849,21 @@ async function runAnalysis() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: text })
     });
-
+ 
     clearInterval(ticker);
-
+ 
     if(!res.ok) throw new Error(`Server error ${res.status}`);
-
+ 
     const parsed = await res.json();
-
+ 
     setProgress(100, 'Done!');
     await new Promise(r => setTimeout(r, 300));
-
+ 
     renderResults(parsed);
     loadEl.classList.remove('visible'); loadEl.style.display = 'none';
     resEl.style.display = 'block'; resEl.classList.add('visible');
     resEl.scrollIntoView({behavior:'smooth', block:'start'});
-
+ 
   } catch(err) {
     clearInterval(ticker);
     console.error(err);
@@ -1519,15 +1871,15 @@ async function runAnalysis() {
     inpEl.style.display = 'block';
     alert('Could not reach the server. Make sure you opened the site at http://localhost:3000 — not by double-clicking the HTML file.');
   }
-
+ 
   document.getElementById('analyzeBtn').disabled = false;
 }
-
+ 
 function renderResults(d) {
   document.getElementById('archIcon').textContent  = d.archetypeIcon  || '💪';
   document.getElementById('archTitle').textContent = d.archetypeTitle || 'Fitness Athlete';
   document.getElementById('archDesc').textContent  = d.archetypeDesc  || '';
-
+ 
   const pillsEl = document.getElementById('statPills');
   pillsEl.innerHTML = '';
   (d.statPills||[]).forEach(p => {
@@ -1535,7 +1887,47 @@ function renderResults(d) {
     el.className = 'stat-pill'; el.textContent = p;
     pillsEl.appendChild(el);
   });
-
+ 
+  // Goal match section — compute a fake but plausible score from archetype vs goal text
+  const goal = document.getElementById('goalInput').value.trim();
+  const premCard = document.getElementById('premiumGoalCard');
+  if (goal) {
+    premCard.style.display = 'block';
+    // Score: compare goal keywords against archetype
+    const g = goal.toLowerCase();
+    const title = (d.archetypeTitle||'').toLowerCase();
+    const sports = (d.sports||[]).join(' ').toLowerCase();
+    let score = 42; // base
+    if (g.split(' ').some(w => w.length > 3 && title.includes(w))) score += 28;
+    if (g.split(' ').some(w => w.length > 3 && sports.includes(w))) score += 20;
+    score = Math.min(98, Math.max(22, score));
+    // Set ring
+    const circumference = 314;
+    const offset = circumference - (score / 100) * circumference;
+    document.getElementById('goalRingFill').style.strokeDashoffset = offset;
+    document.getElementById('goalRingPct').textContent = score + '%';
+    document.getElementById('goalMatchTitle').textContent = `${score}% match for "${goal}"`;
+    document.getElementById('goalMatchDesc').textContent = score >= 70
+      ? 'Your routine aligns well with your goal. See recommendations below to optimise further.'
+      : score >= 45
+      ? 'Your routine partially supports your goal. Several adjustments could significantly improve alignment.'
+      : 'Your current routine has limited alignment with your goal. Targeted changes are recommended.';
+    // Fake tweak suggestions
+    const tweaks = score >= 70
+      ? [{type:'add',text:'Add sport-specific drills twice per week to sharpen goal alignment.'},{type:'remove',text:'Reduce excessive volume on non-primary muscle groups to free recovery capacity.'},{type:'add',text:'Incorporate progressive overload tracking to ensure continued adaptation.'}]
+      : score >= 45
+      ? [{type:'add',text:'Add 2 sessions per week directly targeting your goal movement patterns.'},{type:'remove',text:'Remove or reduce exercises with low specificity to your stated goal.'},{type:'add',text:'Increase training frequency on your weakest physical quality.'},{type:'remove',text:'Cut rest periods to improve conditioning relevant to your goal.'}]
+      : [{type:'add',text:'Restructure your programme around the primary physical demands of your goal.'},{type:'remove',text:'Remove several exercises that conflict with the adaptations your goal requires.'},{type:'add',text:'Prioritise goal-specific training at the start of each session when freshest.'},{type:'remove',text:'Reduce training volume to allow better quality on goal-relevant work.'}];
+    const tweakEl = document.getElementById('goalTweaks');
+    tweakEl.innerHTML = tweaks.map(t => `
+      <div class="tweak-item tweak-${t.type}">
+        <span class="tweak-dot">${t.type === 'add' ? '+' : '−'}</span>
+        <span>${t.text}</span>
+      </div>`).join('');
+  } else {
+    premCard.style.display = 'none';
+  }
+ 
   const tl = document.getElementById('timeline');
   tl.innerHTML = '';
   (d.timeline||[]).forEach((item,i) => {
@@ -1544,7 +1936,7 @@ function renderResults(d) {
     el.innerHTML = `<div class="tl-node">${item.emoji||'●'}</div><div class="tl-body"><div class="tl-period">${item.period}</div><div class="tl-text">${item.description}</div></div>`;
     tl.appendChild(el);
   });
-
+ 
   const ml = document.getElementById('metricsList');
   ml.innerHTML = '';
   (d.metrics||[]).forEach((m,i) => {
@@ -1553,7 +1945,7 @@ function renderResults(d) {
     el.innerHTML = `<div class="metric-icon">${m.icon||'📊'}</div><div class="metric-body"><div class="metric-name">${m.name}</div><div class="metric-detail">${m.detail}</div></div><div class="metric-tag">${m.tag}</div>`;
     ml.appendChild(el);
   });
-
+ 
   const sg = document.getElementById('sportGrid');
   sg.innerHTML = '';
   (d.sports||[]).forEach(s => {
