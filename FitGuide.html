@@ -4,864 +4,389 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FitGuide — Know Your Training</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cal+Sans&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════
-   TOKENS — Dark / Electric Blue
-═══════════════════════════════════════ */
 :root {
   --blue:        #0A84FF;
   --blue-bright: #40A0FF;
-  --blue-glow:   rgba(10,132,255,0.35);
-  --blue-subtle: rgba(10,132,255,0.12);
-  --blue-border: rgba(10,132,255,0.28);
- 
-  --bg:          #000000;
-  --bg-1:        #0d0d0d;
-  --bg-2:        #141414;
-  --bg-3:        #1c1c1e;
-  --bg-4:        #2c2c2e;
- 
-  --white:       #ffffff;
-  --text-1:      #ffffff;
-  --text-2:      rgba(255,255,255,0.65);
-  --text-3:      rgba(255,255,255,0.35);
- 
-  --border:      rgba(255,255,255,0.08);
-  --border-med:  rgba(255,255,255,0.13);
- 
+  --blue-glow:   rgba(10,132,255,0.4);
+  --blue-subtle: rgba(10,132,255,0.1);
+  --blue-border: rgba(10,132,255,0.3);
+  --bg:          #080808;
+  --bg-1:        #0e0e0e;
+  --bg-2:        #161616;
+  --bg-3:        #1e1e1e;
+  --bg-4:        #2a2a2a;
+  --text-1:      #f0f0f0;
+  --text-2:      rgba(240,240,240,0.55);
+  --text-3:      rgba(240,240,240,0.28);
+  --border:      rgba(255,255,255,0.07);
+  --border-med:  rgba(255,255,255,0.12);
   --green:       #30D158;
-  --nav-h:       64px;
+  --red:         #FF453A;
+  --gold:        #FFD60A;
+  --nav-h:       62px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text-1);min-height:100vh;overflow-x:hidden;}
  
-  /* legacy aliases so existing JS still resolves colours */
-  --blue-deep:   #0A84FF;
-  --blue-mid:    #0A84FF;
-  --blue-light:  #40A0FF;
-  --blue-pale:   rgba(10,132,255,0.12);
-  --blue-ghost:  rgba(10,132,255,0.07);
-  --gray-soft:   #1c1c1e;
-  --gray-text:   rgba(255,255,255,0.55);
-  --gray-border: rgba(255,255,255,0.1);
-  --text-dark:   #ffffff;
-}
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(8,8,8,0.8);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border);transition:background .3s;}
+nav.scrolled{background:rgba(8,8,8,0.95);}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer;text-decoration:none;}
+.nav-logo-icon{width:30px;height:30px;background:var(--blue);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 0 16px var(--blue-glow);}
+.nav-logo-text{font-family:'Sora',sans-serif;font-weight:800;font-size:17px;color:var(--text-1);letter-spacing:-.4px;}
+.nav-logo-text span{color:var(--blue);}
+.nav-links{display:flex;align-items:center;gap:1px;}
+.nav-link{font-size:13.5px;font-weight:500;color:var(--text-2);padding:6px 13px;border-radius:7px;cursor:pointer;border:none;background:none;transition:all .15s;font-family:'DM Sans',sans-serif;}
+.nav-link:hover{color:var(--text-1);background:rgba(255,255,255,0.06);}
+.nav-link.active{color:var(--blue);background:var(--blue-subtle);font-weight:600;}
+.nav-link.nav-premium{color:var(--gold);}
+.nav-cta{background:var(--blue);color:white;border:none;padding:7px 16px;border-radius:8px;font-family:'Sora',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;margin-left:8px;box-shadow:0 0 16px var(--blue-glow);}
+.nav-cta:hover{background:var(--blue-bright);}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.nav-burger span{display:block;width:20px;height:1.5px;background:var(--text-2);border-radius:2px;transition:all .25s;}
+.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(10,10,10,0.98);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:12px 20px 20px;z-index:499;flex-direction:column;gap:2px;}
+.mobile-menu.open{display:flex;}
+.mobile-link{font-size:15px;font-weight:500;color:var(--text-2);padding:11px 13px;border-radius:9px;cursor:pointer;border:none;background:none;text-align:left;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.mobile-link:hover,.mobile-link.active{color:var(--blue);background:var(--blue-subtle);}
+.mobile-cta{margin-top:8px;background:var(--blue);color:white;border:none;padding:13px;border-radius:10px;font-family:'Sora',sans-serif;font-size:14px;font-weight:700;cursor:pointer;}
  
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
+/* ── PAGE SYSTEM ── */
+.page{display:none;padding-top:var(--nav-h);min-height:100vh;}
+.page.active{display:block;animation:pgIn .38s cubic-bezier(.22,1,.36,1) both;}
+@keyframes pgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
  
-body {
-  font-family:'DM Sans',sans-serif;
-  background:var(--bg);
-  color:var(--text-1);
-  min-height:100vh;
-  overflow-x:hidden;
-}
+/* ── SHARED ── */
+.section{padding:80px 24px;}
+.inner{max-width:1080px;margin:0 auto;}
+.inner-sm{max-width:680px;margin:0 auto;}
  
-/* ─── NAV ─── */
-nav {
-  position:fixed; top:0; left:0; right:0; z-index:500;
-  height:var(--nav-h);
-  display:flex; align-items:center; justify-content:space-between;
-  padding:0 48px;
-  background:rgba(0,0,0,0.75);
-  backdrop-filter:blur(20px) saturate(180%);
-  -webkit-backdrop-filter:blur(20px) saturate(180%);
-  border-bottom:1px solid var(--border);
-  transition:background .3s;
-}
-nav.scrolled { background:rgba(0,0,0,0.88); }
+.badge{display:inline-flex;align-items:center;gap:5px;background:var(--blue-subtle);color:var(--blue);font-size:11.5px;font-weight:600;padding:4px 12px;border-radius:100px;border:1px solid var(--blue-border);margin-bottom:18px;letter-spacing:.2px;}
+.h1{font-family:'Sora',sans-serif;font-size:clamp(36px,5.5vw,68px);font-weight:800;color:var(--text-1);line-height:1.05;letter-spacing:-2px;margin-bottom:18px;}
+.h1 em{font-style:normal;background:linear-gradient(135deg,var(--blue),var(--blue-bright));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.h2{font-family:'Sora',sans-serif;font-size:clamp(24px,3vw,40px);font-weight:800;color:var(--text-1);letter-spacing:-1px;line-height:1.1;margin-bottom:12px;}
+.h2 em{font-style:normal;background:linear-gradient(135deg,var(--blue),var(--blue-bright));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sub{font-size:16px;color:var(--text-2);line-height:1.7;max-width:520px;}
+.btn{display:inline-flex;align-items:center;gap:7px;background:var(--blue);color:white;border:none;padding:12px 24px;border-radius:10px;font-family:'Sora',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s;box-shadow:0 0 20px var(--blue-glow);}
+.btn:hover{background:var(--blue-bright);transform:translateY(-1px);box-shadow:0 0 28px var(--blue-glow);}
+.btn-ghost{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.06);color:var(--text-1);border:1px solid var(--border-med);padding:11px 22px;border-radius:10px;font-family:'Sora',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;}
+.btn-ghost:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);}
+.card{background:var(--bg-2);border:1px solid var(--border);border-radius:18px;transition:border-color .2s;}
+.card:hover{border-color:var(--border-med);}
  
-.nav-logo { display:flex; align-items:center; gap:10px; cursor:pointer; text-decoration:none; }
-.nav-logo-icon {
-  width:32px; height:32px;
-  background:var(--blue);
-  border-radius:8px;
-  display:flex; align-items:center; justify-content:center; font-size:16px;
-  box-shadow:0 0 14px var(--blue-glow);
-}
-.nav-logo-text { font-family:'Sora',sans-serif; font-weight:700; font-size:18px; color:var(--text-1); letter-spacing:-.4px; }
-.nav-logo-text span { color:var(--blue); }
+/* ══════════════════════════════════════
+   HOME
+══════════════════════════════════════ */
+.hero{padding:110px 24px 80px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(ellipse at 50% 0%,rgba(10,132,255,0.14) 0%,transparent 65%);pointer-events:none;}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black 30%,transparent 80%);}
+.hero-content{position:relative;}
+.hero-btns{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:32px;}
+.hero-note{font-size:11.5px;color:var(--text-3);margin-top:12px;}
+.proof-strip{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;padding:16px 24px 0;position:relative;}
+.proof-item{font-size:13px;color:var(--text-3);font-weight:500;}
+.proof-sep{width:1px;height:14px;background:var(--border-med);}
  
-.nav-links { display:flex; align-items:center; gap:2px; }
-.nav-link {
-  font-size:14px; font-weight:500; color:var(--text-2);
-  padding:7px 13px; border-radius:8px;
-  cursor:pointer; border:none; background:none;
-  transition:all .18s; font-family:'DM Sans',sans-serif;
-}
-.nav-link:hover { color:var(--text-1); background:rgba(255,255,255,0.07); }
-.nav-link.active { color:var(--blue); background:var(--blue-subtle); font-weight:600; }
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:20px;overflow:hidden;margin-top:56px;}
+.feat-cell{background:var(--bg-1);padding:32px 28px;transition:background .2s;}
+.feat-cell:hover{background:var(--bg-2);}
+.feat-num{font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--blue);letter-spacing:2px;margin-bottom:14px;}
+.feat-cell h3{font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--text-1);margin-bottom:7px;}
+.feat-cell p{font-size:13.5px;color:var(--text-2);line-height:1.65;}
  
-.nav-cta {
-  background:var(--blue);
-  color:white; border:none; padding:8px 18px; border-radius:9px;
-  font-family:'Sora',sans-serif; font-size:13px; font-weight:700;
-  cursor:pointer; transition:all .18s; margin-left:8px;
-  box-shadow:0 0 18px var(--blue-glow);
-}
-.nav-cta:hover { background:var(--blue-bright); box-shadow:0 0 24px var(--blue-glow); }
+.arch-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:44px;}
+.arch-tile{background:var(--bg-2);border:1px solid var(--border);border-radius:16px;padding:22px 16px;text-align:center;cursor:pointer;transition:all .2s;}
+.arch-tile:hover{border-color:var(--blue-border);background:var(--bg-3);box-shadow:0 0 20px rgba(10,132,255,0.08);}
+.arch-tile-icon{font-size:32px;display:block;margin-bottom:9px;}
+.arch-tile-name{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--text-1);margin-bottom:4px;}
+.arch-tile-desc{font-size:11.5px;color:var(--text-3);line-height:1.5;}
  
-.nav-burger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
-.nav-burger span { display:block; width:22px; height:2px; background:var(--text-2); border-radius:2px; transition:all .25s; }
+.cta-block{background:var(--bg-1);border:1px solid var(--blue-border);border-radius:22px;padding:60px 48px;text-align:center;margin:0 24px;position:relative;overflow:hidden;}
+.cta-block::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:500px;height:400px;background:radial-gradient(ellipse,rgba(10,132,255,0.1) 0%,transparent 70%);pointer-events:none;}
  
-.mobile-menu {
-  display:none; position:fixed; top:var(--nav-h); left:0; right:0;
-  background:rgba(13,13,13,0.97);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  padding:14px 20px 22px; z-index:499;
-  flex-direction:column; gap:3px;
-}
-.mobile-menu.open { display:flex; }
-.mobile-link {
-  font-size:15px; font-weight:500; color:var(--text-2);
-  padding:11px 13px; border-radius:10px;
-  cursor:pointer; border:none; background:none;
-  text-align:left; font-family:'DM Sans',sans-serif; transition:all .18s;
-}
-.mobile-link:hover, .mobile-link.active { color:var(--blue); background:var(--blue-subtle); }
-.mobile-cta {
-  margin-top:8px; background:var(--blue);
-  color:white; border:none; padding:13px 20px; border-radius:11px;
-  font-family:'Sora',sans-serif; font-size:14px; font-weight:700;
-  cursor:pointer; text-align:center;
-}
+/* ══════════════════════════════════════
+   HOW IT WORKS
+══════════════════════════════════════ */
+.hiw-hero{padding:72px 24px 48px;text-align:center;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(10,132,255,0.1) 0%,transparent 70%);}
+.steps{display:flex;flex-direction:column;gap:0;position:relative;}
+.steps::before{content:'';position:absolute;left:31px;top:48px;bottom:48px;width:1px;background:linear-gradient(to bottom,var(--blue),transparent);}
+.step{display:flex;gap:24px;padding-bottom:36px;}
+.step-n{width:64px;height:64px;flex-shrink:0;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:20px;font-weight:800;color:white;z-index:1;box-shadow:0 0 20px var(--blue-glow);}
+.step-body{flex:1;padding-top:14px;}
+.step-body h3{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;color:var(--text-1);margin-bottom:6px;}
+.step-body p{font-size:14.5px;color:var(--text-2);line-height:1.7;max-width:500px;}
+.sci-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:44px;}
+.sci-card{background:var(--bg-2);border:1px solid var(--border);border-radius:16px;padding:24px;}
+.sci-icon{font-size:26px;margin-bottom:12px;display:block;}
+.sci-card h4{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--text-1);margin-bottom:6px;}
+.sci-card p{font-size:13px;color:var(--text-2);line-height:1.65;}
  
-/* ─── PAGE SYSTEM ─── */
-.page { display:none; padding-top:var(--nav-h); min-height:100vh; }
-.page.active { display:block; animation:pgIn .4s cubic-bezier(.22,1,.36,1) both; }
-@keyframes pgIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+/* ══════════════════════════════════════
+   ANALYZE
+══════════════════════════════════════ */
+.analyze-hero{padding:60px 24px 36px;text-align:center;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(10,132,255,0.08) 0%,transparent 70%);}
+.survey-wrap{max-width:660px;margin:0 auto;padding:0 24px 56px;}
+.survey-card{background:var(--bg-2);border:1px solid var(--border-med);border-radius:20px;overflow:hidden;}
+.survey-top{padding:20px 26px;background:var(--bg-3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:13px;}
+.survey-top-icon{width:38px;height:38px;background:var(--blue-subtle);border:1px solid var(--blue-border);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.survey-top h2{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--text-1);}
+.survey-top p{font-size:11.5px;color:var(--text-3);margin-top:1px;}
+.survey-body{padding:22px 26px;}
+.field-label{font-size:10.5px;font-weight:700;color:var(--blue);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.field-badge{font-size:9.5px;font-weight:700;background:rgba(255,214,10,0.1);color:var(--gold);border:1px solid rgba(255,214,10,0.2);padding:2px 7px;border-radius:100px;text-transform:none;letter-spacing:0;}
+.survey-ta{width:100%;min-height:150px;border:1px solid var(--border);border-radius:12px;padding:13px 15px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text-1);background:var(--bg-3);resize:vertical;outline:none;line-height:1.65;transition:border-color .2s,box-shadow .2s;}
+.survey-ta:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(10,132,255,0.12);}
+.survey-ta::placeholder{color:var(--text-3);}
+.chips{margin-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.chip-label{font-size:11.5px;color:var(--text-3);font-weight:500;}
+.chip{background:var(--bg-3);color:var(--blue);border:1px solid var(--blue-border);font-size:11.5px;font-weight:500;padding:3px 10px;border-radius:100px;cursor:pointer;transition:all .15s;}
+.chip:hover{background:var(--blue-subtle);}
+.goal-box{margin-top:18px;padding:16px;background:var(--bg-3);border-radius:12px;border:1px solid var(--blue-border);}
+.goal-input{width:100%;border:1px solid var(--border);border-radius:9px;padding:10px 13px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text-1);background:var(--bg-2);outline:none;transition:border-color .2s,box-shadow .2s;margin-top:8px;}
+.goal-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(10,132,255,0.12);}
+.goal-input::placeholder{color:var(--text-3);}
+.goal-hint{font-size:11.5px;color:var(--text-3);margin-top:7px;line-height:1.5;}
+.survey-foot{padding:14px 26px 20px;border-top:1px solid var(--border);background:var(--bg-3);display:flex;align-items:center;justify-content:space-between;gap:14px;}
+.foot-note{font-size:11.5px;color:var(--text-3);line-height:1.5;max-width:300px;}
+.foot-note strong{color:var(--text-2);}
+.analyze-btn{display:flex;align-items:center;gap:7px;background:var(--blue);color:white;border:none;padding:11px 20px;border-radius:10px;font-family:'Sora',sans-serif;font-size:13.5px;font-weight:700;cursor:pointer;flex-shrink:0;box-shadow:0 0 18px var(--blue-glow);transition:all .15s;}
+.analyze-btn:hover{background:var(--blue-bright);}
+.analyze-btn:disabled{opacity:.35;cursor:not-allowed;box-shadow:none;}
  
-/* ─── SHARED UTILITIES ─── */
-.section { padding:80px 24px; }
-.section-inner { max-width:1080px; margin:0 auto; }
-.section-sm { max-width:720px; margin:0 auto; }
+/* LOADING */
+#loadingSection{display:none;max-width:660px;margin:0 auto;padding:0 24px 48px;text-align:center;}
+#loadingSection.visible{display:block;animation:fadeUp .3s ease both;}
+.load-ui{display:flex;flex-direction:column;align-items:center;gap:16px;padding:40px 24px;}
+.load-icon{width:64px;height:64px;border-radius:16px;background:var(--blue-subtle);border:1px solid var(--blue-border);display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 0 24px var(--blue-glow);}
+.load-title{font-family:'Sora',sans-serif;font-size:17px;font-weight:700;color:var(--text-1);}
+.load-sub{font-size:12.5px;color:var(--text-3);margin-top:-8px;}
+.prog-wrap{width:100%;max-width:360px;background:var(--bg-3);border-radius:100px;height:5px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:100px;width:0%;background:linear-gradient(90deg,var(--blue),var(--blue-bright));transition:width .5s ease;box-shadow:0 0 8px var(--blue-glow);}
+.prog-pct{font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:var(--blue);margin-top:-8px;}
  
-.pill-badge {
-  display:inline-flex; align-items:center; gap:6px;
-  background:var(--blue-subtle); color:var(--blue);
-  font-size:12px; font-weight:600;
-  padding:5px 13px; border-radius:100px;
-  border:1px solid var(--blue-border); margin-bottom:20px;
-}
+/* RESULTS */
+#resultsSection{display:none;max-width:660px;margin:0 auto;padding:0 24px 80px;}
+#resultsSection.visible{display:block;animation:fadeUp .4s ease both;}
  
-.section-title {
-  font-family:'Sora',sans-serif;
-  font-size:clamp(28px,3.5vw,44px);
-  font-weight:800; color:var(--text-1);
-  letter-spacing:-1.2px; line-height:1.08; margin-bottom:14px;
-}
-.section-title em {
-  font-style:normal;
-  background:linear-gradient(135deg,var(--blue),var(--blue-bright));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-}
-.section-sub { font-size:17px; color:var(--text-2); line-height:1.65; max-width:540px; }
+.arch-hero{background:var(--bg-2);border:1px solid var(--blue-border);border-radius:20px;padding:32px 36px;display:flex;align-items:center;gap:26px;margin-bottom:14px;position:relative;overflow:hidden;box-shadow:0 0 40px rgba(10,132,255,0.12);}
+.arch-hero::before{content:'';position:absolute;top:-60px;right:-40px;width:250px;height:250px;background:radial-gradient(circle,rgba(10,132,255,0.1) 0%,transparent 70%);pointer-events:none;}
+.arch-icon{width:88px;height:88px;border-radius:20px;background:var(--blue-subtle);border:1px solid var(--blue-border);display:flex;align-items:center;justify-content:center;font-size:44px;flex-shrink:0;position:relative;z-index:1;}
+.arch-info{flex:1;position:relative;z-index:1;}
+.arch-eye{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:6px;}
+.arch-name{font-family:'Sora',sans-serif;font-size:27px;font-weight:800;letter-spacing:-.8px;line-height:1;margin-bottom:10px;}
+.arch-desc{font-size:13.5px;line-height:1.7;color:var(--text-2);}
+.arch-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}
+.arch-pill{background:var(--blue-subtle);border:1px solid var(--blue-border);color:var(--blue);padding:3px 11px;border-radius:100px;font-size:11px;font-weight:600;}
  
-.btn-primary {
-  display:inline-flex; align-items:center; gap:8px;
-  background:var(--blue); color:white; border:none;
-  padding:13px 26px; border-radius:12px;
-  font-family:'Sora',sans-serif; font-size:15px; font-weight:700;
-  cursor:pointer; transition:all .18s;
-  box-shadow:0 0 24px var(--blue-glow);
-}
-.btn-primary:hover { background:var(--blue-bright); transform:translateY(-1px); box-shadow:0 0 32px var(--blue-glow); }
-.btn-primary:active { transform:translateY(0); }
+/* PREMIUM GOAL CARD */
+.prem-card{margin-bottom:14px;border-radius:20px;overflow:hidden;border:1px solid var(--blue-border);background:var(--bg-2);box-shadow:0 0 32px rgba(10,132,255,0.1);}
+.prem-blur-wrap{position:relative;}
+.prem-inner{padding:24px 26px;filter:blur(6px) brightness(0.7);pointer-events:none;user-select:none;}
+.ring-row{display:flex;align-items:center;gap:22px;margin-bottom:18px;}
+.ring-svg{width:100px;height:100px;}
+.ring-track{fill:none;stroke:var(--bg-4);stroke-width:9;}
+.ring-fill{fill:none;stroke:var(--blue);stroke-width:9;stroke-linecap:round;stroke-dasharray:283;stroke-dashoffset:283;transition:stroke-dashoffset 1s ease;}
+.ring-pct{font-family:'Sora',sans-serif;font-size:19px;font-weight:800;fill:var(--text-1);text-anchor:middle;dominant-baseline:central;}
+.ring-lbl{font-size:9px;fill:var(--text-3);text-anchor:middle;dominant-baseline:central;}
+.ring-info h4{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--text-1);margin-bottom:5px;}
+.ring-info p{font-size:12.5px;color:var(--text-2);line-height:1.6;}
+.tweaks{display:flex;flex-direction:column;gap:7px;}
+.tweak{display:flex;align-items:flex-start;gap:9px;padding:9px 11px;border-radius:9px;font-size:12.5px;}
+.tweak.add{background:rgba(48,209,88,0.07);color:var(--text-2);}
+.tweak.rem{background:rgba(255,69,58,0.07);color:var(--text-2);}
+.tweak-dot{width:18px;height:18px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-top:1px;}
+.tweak.add .tweak-dot{background:rgba(48,209,88,0.15);color:var(--green);}
+.tweak.rem .tweak-dot{background:rgba(255,69,58,0.15);color:var(--red);}
  
-.btn-secondary {
-  display:inline-flex; align-items:center; gap:8px;
-  background:transparent; color:var(--text-1);
-  border:1px solid var(--border-med);
-  padding:12px 24px; border-radius:12px;
-  font-family:'Sora',sans-serif; font-size:15px; font-weight:600;
-  cursor:pointer; transition:all .18s;
-}
-.btn-secondary:hover { background:rgba(255,255,255,0.07); border-color:rgba(255,255,255,0.22); }
+.prem-lock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:28px 24px;text-align:center;background:rgba(8,8,8,0.2);backdrop-filter:blur(2px);}
+.lock-emoji{font-size:32px;}
+.lock-title{font-family:'Sora',sans-serif;font-size:17px;font-weight:800;color:var(--text-1);}
+.lock-desc{font-size:12.5px;color:var(--text-2);max-width:300px;line-height:1.6;}
+.lock-btn{background:var(--blue);color:white;border:none;padding:10px 22px;border-radius:9px;font-family:'Sora',sans-serif;font-size:13.5px;font-weight:700;cursor:pointer;margin-top:4px;box-shadow:0 0 18px var(--blue-glow);transition:all .15s;}
+.lock-btn:hover{background:var(--blue-bright);}
  
-/* ─── HOME PAGE ─── */
-.home-hero {
-  padding:100px 24px 80px;
-  text-align:center; position:relative; overflow:hidden;
-}
-.home-hero::before {
-  content:'';
-  position:absolute; top:0; left:50%; transform:translateX(-50%);
-  width:800px; height:500px;
-  background:radial-gradient(ellipse at 50% 0%, rgba(10,132,255,0.18) 0%, transparent 70%);
-  pointer-events:none;
-}
+.res-card{background:var(--bg-2);border:1px solid var(--border);border-radius:18px;padding:22px 24px;margin-bottom:12px;transition:border-color .2s;}
+.res-card:hover{border-color:var(--border-med);}
+.res-title{font-family:'Sora',sans-serif;font-size:10px;font-weight:700;color:var(--blue);margin-bottom:16px;text-transform:uppercase;letter-spacing:1.2px;}
  
-.hero-h1 {
-  font-family:'Sora',sans-serif;
-  font-size:clamp(40px,6.5vw,76px);
-  font-weight:800; color:var(--text-1);
-  line-height:1.03; letter-spacing:-2.5px; margin-bottom:22px;
-  position:relative;
-}
-.hero-h1 em {
-  font-style:normal;
-  background:linear-gradient(135deg,var(--blue),var(--blue-bright));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-}
-.hero-sub {
-  font-size:18px; color:var(--text-2); line-height:1.7;
-  max-width:520px; margin:0 auto 36px; position:relative;
-}
-.hero-btns { display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; position:relative; }
-.hero-note { font-size:12px; color:var(--text-3); margin-top:14px; position:relative; }
+.tl{position:relative;}
+.tl::before{content:'';position:absolute;left:16px;top:18px;bottom:16px;width:1px;background:linear-gradient(to bottom,var(--blue),rgba(10,132,255,0.04));}
+.tl-item{display:flex;gap:14px;padding-bottom:18px;animation:fadeUp .35s ease both;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-dot{width:34px;height:34px;border-radius:50%;background:var(--bg-3);border:1px solid var(--blue-border);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;z-index:1;}
+.tl-body{flex:1;padding-top:5px;}
+.tl-per{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:3px;}
+.tl-txt{font-size:13px;color:var(--text-2);line-height:1.65;}
  
-.social-proof { display:flex; align-items:center; justify-content:center; gap:24px; padding:20px 24px 0; flex-wrap:wrap; }
-.proof-item { display:flex; align-items:center; gap:7px; font-size:13px; color:var(--text-3); font-weight:500; }
-.proof-dot { width:4px; height:4px; background:var(--bg-4); border-radius:50%; }
+.metrics{display:flex;flex-direction:column;gap:8px;}
+.met-row{display:flex;align-items:flex-start;gap:10px;padding:11px 12px;background:var(--bg-3);border-radius:11px;border:1px solid var(--border);animation:fadeUp .3s ease both;}
+.met-icon{width:32px;height:32px;background:var(--blue-subtle);border:1px solid var(--blue-border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.met-body{flex:1;}
+.met-name{font-size:12.5px;font-weight:600;color:var(--text-1);margin-bottom:2px;}
+.met-detail{font-size:11.5px;color:var(--text-2);line-height:1.55;}
+.met-tag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:100px;white-space:nowrap;align-self:flex-start;margin-top:2px;background:rgba(48,209,88,0.1);color:var(--green);border:1px solid rgba(48,209,88,0.18);}
  
-.features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:64px; }
-.feature-card {
-  background:var(--bg-2);
-  border:1px solid var(--border);
-  border-radius:20px; padding:28px 24px;
-  transition:transform .2s, border-color .2s, box-shadow .2s;
-}
-.feature-card:hover { transform:translateY(-3px); border-color:var(--blue-border); box-shadow:0 0 32px rgba(10,132,255,0.1); }
-.feature-icon {
-  width:46px; height:46px; border-radius:13px;
-  background:var(--blue-subtle); border:1px solid var(--blue-border);
-  display:flex; align-items:center; justify-content:center;
-  font-size:21px; margin-bottom:18px;
-}
-.feature-card h3 { font-family:'Sora',sans-serif; font-size:15px; font-weight:700; color:var(--text-1); margin-bottom:8px; }
-.feature-card p { font-size:13.5px; color:var(--text-2); line-height:1.65; }
+.sport-wrap{display:flex;flex-wrap:wrap;gap:7px;}
+.sport-tag{background:var(--bg-3);border:1px solid var(--border);color:var(--text-2);padding:7px 14px;border-radius:100px;font-size:13px;font-weight:500;transition:all .15s;}
+.sport-tag:hover{border-color:var(--blue-border);color:var(--blue);}
  
-.archetypes-row { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:48px; }
-.arch-preview {
-  border-radius:18px; padding:24px 16px; text-align:center;
-  border:1px solid var(--border);
-  background:var(--bg-2); transition:all .2s; cursor:pointer;
-}
-.arch-preview:hover { border-color:var(--blue-border); background:var(--bg-3); transform:translateY(-2px); box-shadow:0 0 24px rgba(10,132,255,0.1); }
-.arch-preview-icon { font-size:34px; margin-bottom:10px; display:block; }
-.arch-preview-name { font-family:'Sora',sans-serif; font-size:13px; font-weight:700; color:var(--text-1); margin-bottom:4px; }
-.arch-preview-desc { font-size:12px; color:var(--text-3); line-height:1.5; }
+.disclaimer{text-align:center;margin-top:16px;padding:12px 16px;background:var(--bg-2);border-radius:10px;border:1px solid var(--border);font-size:11px;color:var(--text-3);line-height:1.6;}
+.reset-row{text-align:center;margin-top:20px;}
+.reset-btn{background:none;border:1px solid var(--border);color:var(--text-3);padding:9px 22px;border-radius:9px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;}
+.reset-btn:hover{border-color:var(--blue-border);color:var(--blue);background:var(--blue-subtle);}
  
-.cta-band {
-  background:var(--bg-2);
-  border:1px solid var(--blue-border);
-  border-radius:24px; padding:56px 48px;
-  text-align:center; margin:0 24px;
-  position:relative; overflow:hidden;
-  box-shadow:0 0 60px rgba(10,132,255,0.1);
-}
-.cta-band::before {
-  content:''; position:absolute; top:-100px; left:50%; transform:translateX(-50%);
-  width:600px; height:400px;
-  background:radial-gradient(ellipse, rgba(10,132,255,0.12) 0%, transparent 70%);
-  pointer-events:none;
-}
-.cta-band h2 { font-family:'Sora',sans-serif; font-size:clamp(26px,3.5vw,40px); font-weight:800; color:var(--text-1); letter-spacing:-1px; margin-bottom:12px; }
-.cta-band p { font-size:16px; color:var(--text-2); margin-bottom:28px; }
-.btn-white {
-  display:inline-flex; align-items:center; gap:8px;
-  background:var(--blue); color:white;
-  border:none; padding:14px 28px; border-radius:12px;
-  font-family:'Sora',sans-serif; font-size:15px; font-weight:700;
-  cursor:pointer; transition:all .18s;
-  box-shadow:0 0 24px var(--blue-glow);
-}
-.btn-white:hover { background:var(--blue-bright); transform:translateY(-1px); }
+/* ══════════════════════════════════════
+   ABOUT
+══════════════════════════════════════ */
+.about-hero{padding:72px 24px 56px;text-align:center;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(10,132,255,0.08) 0%,transparent 70%);}
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:60px;}
+.about-stats{background:var(--bg-2);border:1px solid var(--blue-border);border-radius:20px;padding:32px 28px;display:flex;flex-direction:column;gap:12px;box-shadow:0 0 32px rgba(10,132,255,0.08);}
+.about-stat{background:var(--bg-3);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+.about-stat-n{font-family:'Sora',sans-serif;font-size:32px;font-weight:800;color:var(--blue);letter-spacing:-1px;}
+.about-stat-l{font-size:12.5px;color:var(--text-3);margin-top:2px;}
+.about-text h2{font-family:'Sora',sans-serif;font-size:clamp(22px,3vw,32px);font-weight:800;color:var(--text-1);letter-spacing:-.8px;line-height:1.15;margin-bottom:14px;}
+.about-text p{font-size:14.5px;color:var(--text-2);line-height:1.75;margin-bottom:14px;}
+.vals{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:48px;}
+.val{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;padding:20px 16px;text-align:center;transition:border-color .2s;}
+.val:hover{border-color:var(--blue-border);}
+.val-icon{font-size:24px;margin-bottom:9px;display:block;}
+.val h4{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--text-1);margin-bottom:5px;}
+.val p{font-size:12px;color:var(--text-2);line-height:1.55;}
  
-/* ─── HOW IT WORKS ─── */
-.hiw-hero {
-  padding:72px 24px 48px; text-align:center;
-  background:radial-gradient(ellipse 70% 50% at 50% 0%, rgba(10,132,255,0.12) 0%, transparent 70%);
-}
+/* ══════════════════════════════════════
+   CONTACT
+══════════════════════════════════════ */
+.contact-hero{padding:72px 24px 48px;text-align:center;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(10,132,255,0.08) 0%,transparent 70%);}
+.contact-layout{display:grid;grid-template-columns:1fr 1.5fr;gap:32px;margin-top:44px;align-items:start;}
+.contact-cards{display:flex;flex-direction:column;gap:10px;}
+.contact-card{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;padding:16px 18px;display:flex;align-items:flex-start;gap:12px;transition:border-color .2s;}
+.contact-card:hover{border-color:var(--blue-border);}
+.contact-card-icon{font-size:19px;flex-shrink:0;margin-top:2px;}
+.contact-card h4{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--text-1);margin-bottom:3px;}
+.contact-card p{font-size:12px;color:var(--text-3);line-height:1.5;}
+.contact-form{background:var(--bg-2);border:1px solid var(--border);border-radius:18px;padding:28px;}
+.contact-form h3{font-family:'Sora',sans-serif;font-size:17px;font-weight:700;color:var(--text-1);margin-bottom:20px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:11px;}
+.form-grp{display:flex;flex-direction:column;gap:5px;margin-bottom:11px;}
+.form-grp:last-of-type{margin-bottom:0;}
+.form-lbl{font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.8px;}
+.form-inp,.form-ta,.form-sel{border:1px solid var(--border);border-radius:9px;padding:10px 12px;font-size:13.5px;font-family:'DM Sans',sans-serif;color:var(--text-1);background:var(--bg-3);outline:none;transition:border-color .2s,box-shadow .2s;}
+.form-inp:focus,.form-ta:focus,.form-sel:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(10,132,255,0.12);}
+.form-inp::placeholder,.form-ta::placeholder{color:var(--text-3);}
+.form-ta{min-height:100px;resize:vertical;line-height:1.6;}
+.form-sel{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.3)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
+.form-sel option{background:var(--bg-3);color:var(--text-1);}
+.form-submit{width:100%;margin-top:16px;background:var(--blue);color:white;border:none;padding:12px;border-radius:10px;font-family:'Sora',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s;box-shadow:0 0 18px var(--blue-glow);}
+.form-submit:hover{background:var(--blue-bright);}
+.form-ok{display:none;text-align:center;padding:28px 20px;}
+.form-ok.show{display:block;animation:fadeUp .4s ease;}
+.form-ok-icon{font-size:44px;margin-bottom:12px;}
+.form-ok h4{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;color:var(--text-1);margin-bottom:6px;}
+.form-ok p{font-size:13.5px;color:var(--text-2);}
  
-.steps-timeline { display:flex; flex-direction:column; gap:0; margin-top:56px; position:relative; }
-.steps-timeline::before {
-  content:''; position:absolute; left:39px; top:50px; bottom:50px; width:2px;
-  background:linear-gradient(to bottom,var(--blue),rgba(10,132,255,0.05));
-}
-.step-row { display:flex; gap:28px; padding-bottom:40px; position:relative; animation:stepIn .4s ease both; }
-@keyframes stepIn { from{opacity:0;transform:translateX(-10px)} to{opacity:1;transform:translateX(0)} }
-.step-num {
-  width:80px; height:80px; border-radius:50%; flex-shrink:0;
-  background:var(--blue);
-  display:flex; align-items:center; justify-content:center;
-  font-family:'Sora',sans-serif; font-size:24px; font-weight:800;
-  color:white; position:relative; z-index:1;
-  box-shadow:0 0 24px var(--blue-glow);
-}
-.step-body { flex:1; padding-top:16px; }
-.step-body h3 { font-family:'Sora',sans-serif; font-size:20px; font-weight:700; color:var(--text-1); margin-bottom:8px; }
-.step-body p { font-size:15px; color:var(--text-2); line-height:1.7; max-width:520px; }
+/* ══════════════════════════════════════
+   PREMIUM / PRICING
+══════════════════════════════════════ */
+.pricing-hero{padding:72px 24px 48px;text-align:center;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(10,132,255,0.1) 0%,transparent 70%);}
+.pricing-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1000px;margin:0 auto;padding:0 24px 56px;align-items:start;}
+.price-card{background:var(--bg-2);border:1px solid var(--border);border-radius:20px;padding:28px 24px;display:flex;flex-direction:column;position:relative;transition:border-color .2s;}
+.price-card:hover{border-color:var(--border-med);}
+.price-card-pro{border-color:var(--blue-border);box-shadow:0 0 40px rgba(10,132,255,0.14);}
+.price-pop{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--blue);color:white;font-family:'Sora',sans-serif;font-size:10.5px;font-weight:700;padding:3px 12px;border-radius:100px;white-space:nowrap;}
+.price-tier{font-family:'Sora',sans-serif;font-size:11.5px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
+.price-tier-pro{color:var(--blue);}
+.price-amount{font-family:'Sora',sans-serif;font-size:40px;font-weight:800;color:var(--text-1);letter-spacing:-1.5px;margin-bottom:6px;}
+.price-amount-pro{color:var(--blue);}
+.price-amount span{font-size:15px;font-weight:500;color:var(--text-3);letter-spacing:0;}
+.price-desc{font-size:13px;color:var(--text-3);line-height:1.55;margin-bottom:22px;}
+.price-feats{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:24px;flex:1;}
+.pf{display:flex;align-items:flex-start;gap:9px;font-size:13px;}
+.pf.on{color:var(--text-1);}
+.pf.off{color:var(--text-3);}
+.pf-dot{width:18px;height:18px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:1px;}
+.pf.on .pf-dot{background:rgba(48,209,88,0.13);color:var(--green);}
+.pf.off .pf-dot{background:var(--bg-3);color:var(--text-3);}
+.pf-dot-blue{background:var(--blue-subtle)!important;color:var(--blue)!important;}
+.price-btn{width:100%;padding:12px;border-radius:10px;font-family:'Sora',sans-serif;font-size:13.5px;font-weight:700;cursor:pointer;transition:all .15s;margin-top:auto;}
+.price-btn-ghost{background:var(--bg-3);border:1px solid var(--border-med);color:var(--text-1);}
+.price-btn-ghost:hover{background:var(--bg-4);border-color:rgba(255,255,255,0.18);}
+.price-btn-blue{background:var(--blue);border:none;color:white;box-shadow:0 0 18px var(--blue-glow);}
+.price-btn-blue:hover{background:var(--blue-bright);box-shadow:0 0 24px var(--blue-glow);}
+.pricing-note{text-align:center;padding:0 24px 48px;font-size:12px;color:var(--text-3);}
  
-.science-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:48px; }
-.science-card {
-  background:var(--bg-2); border:1px solid var(--border);
-  border-radius:18px; padding:26px 28px;
-}
-.science-card-icon { font-size:28px; margin-bottom:14px; display:block; }
-.science-card h4 { font-family:'Sora',sans-serif; font-size:15px; font-weight:700; color:var(--text-1); margin-bottom:7px; }
-.science-card p { font-size:13.5px; color:var(--text-2); line-height:1.65; }
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer{background:var(--bg-1);border-top:1px solid var(--border);padding:44px 52px 28px;}
+.foot-inner{max-width:1080px;margin:0 auto;}
+.foot-top{display:flex;align-items:flex-start;justify-content:space-between;gap:40px;margin-bottom:36px;flex-wrap:wrap;}
+.foot-brand{max-width:260px;}
+.foot-logo{display:flex;align-items:center;gap:9px;margin-bottom:12px;}
+.foot-logo-icon{width:28px;height:28px;background:var(--blue);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.foot-logo-text{font-family:'Sora',sans-serif;font-weight:800;font-size:15px;color:var(--text-1);}
+.foot-brand p{font-size:12.5px;color:var(--text-3);line-height:1.65;}
+.foot-links{display:flex;gap:48px;flex-wrap:wrap;}
+.foot-col h5{font-family:'Sora',sans-serif;font-size:10.5px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;}
+.foot-col a{display:block;font-size:13px;color:var(--text-3);margin-bottom:8px;cursor:pointer;transition:color .15s;text-decoration:none;}
+.foot-col a:hover{color:var(--text-1);}
+.foot-bot{border-top:1px solid var(--border);padding-top:20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.foot-bot p{font-size:11.5px;color:var(--text-3);}
+.foot-bot-links{display:flex;gap:18px;}
+.foot-bot-links a{font-size:11.5px;color:var(--text-3);cursor:pointer;text-decoration:none;transition:color .15s;}
+.foot-bot-links a:hover{color:var(--text-2);}
  
-/* ─── ANALYZE PAGE ─── */
-.analyze-hero {
-  padding:64px 24px 40px; text-align:center;
-  background:radial-gradient(ellipse 70% 50% at 50% 0%, rgba(10,132,255,0.1) 0%, transparent 70%);
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:0 22px;}
+  .nav-links,.nav-cta{display:none;}
+  .nav-burger{display:flex;}
+  .feat-grid{grid-template-columns:1fr 1fr;}
+  .arch-grid{grid-template-columns:1fr 1fr;}
+  .about-layout{grid-template-columns:1fr;}
+  .contact-layout{grid-template-columns:1fr;}
+  .vals{grid-template-columns:1fr 1fr;}
+  .sci-grid{grid-template-columns:1fr;}
+  .foot-top{flex-direction:column;gap:24px;}
+  .pricing-wrap{grid-template-columns:1fr;max-width:420px;}
 }
- 
-.survey-wrap { max-width:680px; margin:0 auto; padding:0 24px 48px; }
-.survey-card {
-  background:var(--bg-2);
-  border:1px solid var(--border);
-  border-radius:22px;
-  overflow:hidden;
-  box-shadow:0 0 40px rgba(0,0,0,0.4);
-}
-.survey-card-top {
-  padding:22px 28px;
-  background:var(--bg-3);
-  border-bottom:1px solid var(--border);
-  display:flex; align-items:center; gap:14px;
-}
-.survey-card-top-icon {
-  width:42px; height:42px; background:var(--blue-subtle);
-  border-radius:11px; display:flex; align-items:center; justify-content:center;
-  font-size:20px; border:1px solid var(--blue-border); flex-shrink:0;
-}
-.survey-card-top h2 { font-family:'Sora',sans-serif; font-size:15px; font-weight:700; color:var(--text-1); }
-.survey-card-top p { font-size:12px; color:var(--text-3); margin-top:2px; }
-.survey-body { padding:24px 28px; }
- 
-.survey-label {
-  font-size:11px; font-weight:700; color:var(--blue);
-  letter-spacing:1px; text-transform:uppercase;
-  margin-bottom:10px; display:flex; align-items:center; gap:8px;
-}
-.survey-label-note {
-  font-size:11px; font-weight:500; color:var(--text-3);
-  text-transform:none; letter-spacing:0;
-  background:var(--bg-3); padding:2px 9px; border-radius:100px;
-}
- 
-.survey-textarea {
-  width:100%; min-height:160px;
-  border:1px solid var(--border); border-radius:13px;
-  padding:14px 16px; font-size:14.5px;
-  font-family:'DM Sans',sans-serif; color:var(--text-1);
-  background:var(--bg-3); resize:vertical; outline:none; line-height:1.65;
-  transition:border-color .2s, box-shadow .2s;
-}
-.survey-textarea:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(10,132,255,0.15); }
-.survey-textarea::placeholder { color:var(--text-3); }
- 
-.hint-row { margin-top:12px; display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
-.hint-label { font-size:12px; color:var(--text-3); font-weight:500; white-space:nowrap; }
-.hint-chip {
-  background:var(--bg-3); color:var(--blue);
-  border:1px solid var(--blue-border);
-  font-size:12px; font-weight:500;
-  padding:4px 11px; border-radius:100px; cursor:pointer; transition:all .18s;
-}
-.hint-chip:hover { background:var(--blue-subtle); transform:translateY(-1px); }
- 
-.checklist { margin-top:18px; display:grid; grid-template-columns:1fr 1fr; gap:6px; }
-.check-item {
-  display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--text-3);
-  padding:8px 11px; background:var(--bg-3); border-radius:9px;
-  border:1px solid transparent; transition:all .2s;
-}
-.check-item.checked { background:rgba(48,209,88,0.08); border-color:rgba(48,209,88,0.25); color:var(--green); }
-.check-dot {
-  width:17px; height:17px; border-radius:50%; background:var(--bg-4);
-  display:flex; align-items:center; justify-content:center;
-  font-size:9px; flex-shrink:0; transition:all .2s;
-}
-.check-item.checked .check-dot { background:var(--green); color:white; }
- 
-.accuracy-row {
-  margin-top:14px; padding:11px 14px;
-  background:var(--bg-3); border-radius:11px; border:1px solid var(--blue-border);
-  display:flex; align-items:center; gap:12px;
-}
-.accuracy-label { font-size:11.5px; font-weight:600; color:var(--text-2); white-space:nowrap; min-width:90px; }
-.accuracy-bar-wrap { flex:1; height:5px; background:var(--bg-4); border-radius:100px; overflow:hidden; }
-.accuracy-bar { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--blue),var(--blue-bright)); transition:width .4s ease; width:0%; }
-.accuracy-pct { font-size:12px; font-weight:700; color:var(--blue); min-width:34px; text-align:right; }
- 
-.survey-footer {
-  padding:16px 28px 22px;
-  border-top:1px solid var(--border);
-  background:var(--bg-3);
-  display:flex; align-items:center; justify-content:space-between; gap:16px;
-}
-.footer-note { font-size:12px; color:var(--text-3); line-height:1.5; max-width:300px; }
-.footer-note strong { color:var(--text-2); }
- 
-.analyze-btn {
-  display:flex; align-items:center; gap:8px;
-  background:var(--blue); color:white; border:none;
-  padding:12px 22px; border-radius:11px;
-  font-family:'Sora',sans-serif; font-size:14px; font-weight:700;
-  cursor:pointer; white-space:nowrap; flex-shrink:0;
-  box-shadow:0 0 20px var(--blue-glow);
-  transition:all .18s;
-}
-.analyze-btn:hover { background:var(--blue-bright); box-shadow:0 0 28px var(--blue-glow); }
-.analyze-btn:disabled { opacity:.4; cursor:not-allowed; box-shadow:none; }
- 
-/* ─── LOADING ─── */
-#loadingSection {
-  display:none; max-width:680px; margin:0 auto; padding:0 24px 40px;
-  text-align:center;
-}
-#loadingSection.visible { display:block; animation:fadeUp .35s ease both; }
-@keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
- 
-.loading-ui { display:flex; flex-direction:column; align-items:center; gap:18px; padding:40px 24px; }
-.loading-icon {
-  width:68px; height:68px; border-radius:18px;
-  background:var(--blue-subtle); border:1px solid var(--blue-border);
-  display:flex; align-items:center; justify-content:center; font-size:34px;
-  box-shadow:0 0 28px var(--blue-glow);
-}
-.loading-label { font-family:'Sora',sans-serif; font-size:18px; font-weight:700; color:var(--text-1); }
-.loading-sublabel { font-size:13px; color:var(--text-3); margin-top:-8px; }
-.progress-wrap { width:100%; max-width:380px; background:var(--bg-3); border-radius:100px; height:6px; overflow:hidden; border:1px solid var(--border); }
-.progress-fill {
-  height:100%; border-radius:100px; width:0%;
-  background:linear-gradient(90deg,var(--blue),var(--blue-bright));
-  transition:width .5s ease;
-  box-shadow:0 0 8px var(--blue-glow);
-}
-.progress-pct { font-family:'Sora',sans-serif; font-size:13px; font-weight:700; color:var(--blue); margin-top:-8px; }
- 
-/* ─── RESULTS ─── */
-#resultsSection { display:none; max-width:680px; margin:0 auto; padding:0 24px 80px; }
-#resultsSection.visible { display:block; animation:fadeUp .45s ease both; }
- 
-.archetype-hero {
-  background:var(--bg-2);
-  border:1px solid var(--blue-border);
-  border-radius:22px; padding:36px 40px; color:white;
-  display:flex; align-items:center; gap:28px;
-  margin-bottom:16px; position:relative; overflow:hidden;
-  box-shadow:0 0 48px rgba(10,132,255,0.15);
-}
-.archetype-hero::before {
-  content:''; position:absolute; top:-60px; right:-40px;
-  width:280px; height:280px;
-  background:radial-gradient(circle,rgba(10,132,255,0.12) 0%,transparent 70%);
-  pointer-events:none;
-}
-.arch-icon-wrap {
-  width:96px; height:96px; border-radius:22px;
-  background:var(--blue-subtle); border:1px solid var(--blue-border);
-  display:flex; align-items:center; justify-content:center;
-  font-size:50px; flex-shrink:0; position:relative; z-index:1;
-}
-.arch-info { flex:1; position:relative; z-index:1; }
-.arch-eyebrow { font-size:10.5px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--blue); margin-bottom:7px; }
-.arch-title { font-family:'Sora',sans-serif; font-size:30px; font-weight:800; letter-spacing:-.8px; line-height:1; margin-bottom:10px; }
-.arch-desc { font-size:14px; line-height:1.7; color:var(--text-2); }
-.stat-pills { display:flex; gap:7px; flex-wrap:wrap; margin-top:14px; }
-.stat-pill {
-  background:var(--blue-subtle); border:1px solid var(--blue-border);
-  color:var(--blue); padding:4px 12px; border-radius:100px; font-size:11.5px; font-weight:600;
-}
- 
-.result-card {
-  background:var(--bg-2); border:1px solid var(--border);
-  border-radius:18px; padding:24px 26px;
-  margin-bottom:14px;
-  transition:border-color .2s;
-}
-.result-card:hover { border-color:var(--blue-border); }
-.card-title {
-  font-family:'Sora',sans-serif; font-size:10.5px; font-weight:700;
-  color:var(--blue); margin-bottom:18px;
-  text-transform:uppercase; letter-spacing:1.2px;
-}
- 
-.timeline { position:relative; }
-.timeline::before { content:''; position:absolute; left:18px; top:20px; bottom:18px; width:2px; background:linear-gradient(to bottom,var(--blue),rgba(10,132,255,0.05)); }
-.tl-item { display:flex; gap:16px; padding-bottom:20px; position:relative; animation:tlIn .4s ease both; }
-.tl-item:last-child { padding-bottom:0; }
-@keyframes tlIn { from{opacity:0;transform:translateX(-8px)} to{opacity:1;transform:translateX(0)} }
-.tl-node {
-  width:38px; height:38px; border-radius:50%; background:var(--bg-3);
-  border:1px solid var(--blue-border);
-  display:flex; align-items:center; justify-content:center;
-  font-size:16px; flex-shrink:0; z-index:1;
-}
-.tl-body { flex:1; padding-top:6px; }
-.tl-period { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--blue); margin-bottom:3px; }
-.tl-text { font-size:13.5px; color:var(--text-2); line-height:1.65; }
- 
-.metrics-list { display:flex; flex-direction:column; gap:9px; }
-.metric-row {
-  display:flex; align-items:flex-start; gap:11px; padding:12px 13px;
-  background:var(--bg-3); border-radius:12px; border:1px solid var(--border);
-  animation:metricIn .35s ease both;
-}
-@keyframes metricIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
-.metric-icon {
-  width:34px; height:34px; background:var(--blue-subtle);
-  border:1px solid var(--blue-border);
-  border-radius:9px; display:flex; align-items:center; justify-content:center;
-  font-size:16px; flex-shrink:0;
-}
-.metric-body { flex:1; }
-.metric-name { font-size:13px; font-weight:600; color:var(--text-1); margin-bottom:2px; }
-.metric-detail { font-size:12px; color:var(--text-2); line-height:1.55; }
-.metric-tag {
-  font-size:10px; font-weight:700; padding:3px 8px; border-radius:100px;
-  white-space:nowrap; align-self:flex-start; margin-top:2px;
-  background:rgba(48,209,88,0.12); color:var(--green); border:1px solid rgba(48,209,88,0.2);
-}
- 
-.sport-grid { display:flex; flex-wrap:wrap; gap:8px; }
-.sport-chip {
-  background:var(--bg-3); border:1px solid var(--border);
-  color:var(--text-1); padding:7px 15px; border-radius:100px;
-  font-size:13px; font-weight:500;
-  transition:all .18s;
-}
-.sport-chip:hover { border-color:var(--blue-border); color:var(--blue); }
- 
-.reset-wrap { text-align:center; margin-top:24px; }
-.reset-btn {
-  background:none; border:1px solid var(--border); color:var(--text-3);
-  padding:10px 24px; border-radius:10px;
-  font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500;
-  cursor:pointer; transition:all .2s;
-}
-.reset-btn:hover { border-color:var(--blue-border); color:var(--blue); background:var(--blue-subtle); }
- 
-.disclaimer {
-  text-align:center; margin-top:18px; padding:13px 16px;
-  background:var(--bg-3); border-radius:11px; border:1px solid var(--border);
-  font-size:11.5px; color:var(--text-3); line-height:1.6;
-}
- 
-/* ─── ABOUT ─── */
-.about-hero {
-  padding:72px 24px 56px; text-align:center;
-  background:radial-gradient(ellipse 70% 50% at 50% 0%, rgba(10,132,255,0.1) 0%, transparent 70%);
-}
-.about-content { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; margin-top:64px; }
-.about-visual {
-  background:var(--bg-2); border:1px solid var(--blue-border);
-  border-radius:22px; padding:36px 30px;
-  display:flex; flex-direction:column; gap:14px;
-  box-shadow:0 0 40px rgba(10,132,255,0.1);
-}
-.about-stat {
-  background:var(--bg-3); border:1px solid var(--border);
-  border-radius:13px; padding:18px 20px;
-}
-.about-stat-num { font-family:'Sora',sans-serif; font-size:36px; font-weight:800; color:var(--blue); letter-spacing:-1px; }
-.about-stat-label { font-size:13px; color:var(--text-3); margin-top:2px; }
-.about-text h2 { font-family:'Sora',sans-serif; font-size:clamp(24px,3vw,34px); font-weight:800; color:var(--text-1); letter-spacing:-1px; line-height:1.15; margin-bottom:16px; }
-.about-text p { font-size:15px; color:var(--text-2); line-height:1.75; margin-bottom:16px; }
- 
-.values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:48px; }
-.value-card {
-  background:var(--bg-2); border:1px solid var(--border);
-  border-radius:16px; padding:22px 18px; text-align:center;
-  transition:border-color .2s;
-}
-.value-card:hover { border-color:var(--blue-border); }
-.value-icon { font-size:26px; margin-bottom:10px; display:block; }
-.value-card h4 { font-family:'Sora',sans-serif; font-size:13.5px; font-weight:700; color:var(--text-1); margin-bottom:6px; }
-.value-card p { font-size:12.5px; color:var(--text-2); line-height:1.55; }
- 
-/* ─── CONTACT ─── */
-.contact-hero {
-  padding:72px 24px 48px; text-align:center;
-  background:radial-gradient(ellipse 70% 50% at 50% 0%, rgba(10,132,255,0.1) 0%, transparent 70%);
-}
-.contact-layout { display:grid; grid-template-columns:1fr 1.6fr; gap:36px; margin-top:48px; align-items:start; }
-.contact-info { display:flex; flex-direction:column; gap:12px; }
-.contact-card {
-  background:var(--bg-2); border:1px solid var(--border);
-  border-radius:15px; padding:18px 20px;
-  display:flex; align-items:flex-start; gap:13px;
-  transition:border-color .2s;
-}
-.contact-card:hover { border-color:var(--blue-border); }
-.contact-card-icon { font-size:20px; flex-shrink:0; margin-top:2px; }
-.contact-card h4 { font-family:'Sora',sans-serif; font-size:13.5px; font-weight:700; color:var(--text-1); margin-bottom:3px; }
-.contact-card p { font-size:12.5px; color:var(--text-3); line-height:1.5; }
- 
-.contact-form {
-  background:var(--bg-2); border:1px solid var(--border);
-  border-radius:20px; padding:32px;
-}
-.contact-form h3 { font-family:'Sora',sans-serif; font-size:19px; font-weight:700; color:var(--text-1); margin-bottom:22px; }
-.form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
-.form-group { display:flex; flex-direction:column; gap:6px; margin-bottom:12px; }
-.form-group:last-of-type { margin-bottom:0; }
-.form-label { font-size:11px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:.8px; }
-.form-input, .form-textarea, .form-select {
-  border:1px solid var(--border); border-radius:10px;
-  padding:11px 13px; font-size:14px;
-  font-family:'DM Sans',sans-serif; color:var(--text-1);
-  background:var(--bg-3); outline:none;
-  transition:border-color .2s, box-shadow .2s;
-}
-.form-input:focus, .form-textarea:focus, .form-select:focus {
-  border-color:var(--blue); box-shadow:0 0 0 3px rgba(10,132,255,0.15);
-}
-.form-input::placeholder, .form-textarea::placeholder { color:var(--text-3); }
-.form-textarea { min-height:110px; resize:vertical; line-height:1.6; }
-.form-select { cursor:pointer; appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 13px center; padding-right:34px; }
-.form-select option { background:var(--bg-3); color:var(--text-1); }
-.form-submit {
-  width:100%; margin-top:18px;
-  background:var(--blue); color:white; border:none;
-  padding:13px 28px; border-radius:11px;
-  font-family:'Sora',sans-serif; font-size:14.5px; font-weight:700;
-  cursor:pointer; transition:all .18s;
-  box-shadow:0 0 20px var(--blue-glow);
-}
-.form-submit:hover { background:var(--blue-bright); box-shadow:0 0 28px var(--blue-glow); }
- 
-.form-success { display:none; text-align:center; padding:32px 20px; }
-.form-success.show { display:block; animation:fadeUp .4s ease; }
-.form-success-icon { font-size:52px; margin-bottom:14px; }
-.form-success h4 { font-family:'Sora',sans-serif; font-size:20px; font-weight:700; color:var(--text-1); margin-bottom:8px; }
-.form-success p { font-size:14px; color:var(--text-2); }
- 
-/* ─── FOOTER ─── */
-footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid var(--border); }
-.footer-inner { max-width:1080px; margin:0 auto; }
-.footer-top { display:flex; align-items:flex-start; justify-content:space-between; gap:40px; margin-bottom:40px; flex-wrap:wrap; }
-.footer-brand { max-width:280px; }
-.footer-logo { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
-.footer-logo-icon { width:30px; height:30px; background:var(--blue); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:15px; }
-.footer-logo-text { font-family:'Sora',sans-serif; font-weight:700; font-size:16px; color:var(--text-1); }
-.footer-brand p { font-size:13px; color:var(--text-3); line-height:1.65; }
-.footer-links { display:flex; gap:56px; flex-wrap:wrap; }
-.footer-col h5 { font-family:'Sora',sans-serif; font-size:11px; font-weight:700; color:var(--text-3); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:14px; }
-.footer-col a { display:block; font-size:13.5px; color:var(--text-3); margin-bottom:9px; cursor:pointer; transition:color .18s; text-decoration:none; }
-.footer-col a:hover { color:var(--text-1); }
-.footer-bottom { border-top:1px solid var(--border); padding-top:24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
-.footer-bottom p { font-size:12px; color:var(--text-3); }
-.footer-bottom-links { display:flex; gap:20px; }
-.footer-bottom-links a { font-size:12px; color:var(--text-3); cursor:pointer; text-decoration:none; transition:color .18s; }
-.footer-bottom-links a:hover { color:var(--text-2); }
- 
-/* ─── GOAL INPUT ─── */
-.goal-section {
-  margin-top:20px; padding:18px 16px;
-  background:var(--bg-3); border-radius:14px;
-  border:1px solid var(--blue-border);
-}
-.goal-label {
-  font-size:11px; font-weight:700; color:var(--blue);
-  letter-spacing:1px; text-transform:uppercase;
-  margin-bottom:10px; display:flex; align-items:center; gap:8px;
-}
-.goal-badge {
-  font-size:10px; font-weight:700; letter-spacing:.5px;
-  background:rgba(255,193,7,0.12); color:#FFD60A;
-  border:1px solid rgba(255,193,7,0.25);
-  padding:2px 8px; border-radius:100px; text-transform:none;
-}
-.goal-input {
-  width:100%; border:1px solid var(--border); border-radius:10px;
-  padding:11px 14px; font-size:14px;
-  font-family:'DM Sans',sans-serif; color:var(--text-1);
-  background:var(--bg-2); outline:none;
-  transition:border-color .2s, box-shadow .2s;
-}
-.goal-input:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(10,132,255,0.15); }
-.goal-input::placeholder { color:var(--text-3); }
-.goal-hint { font-size:11.5px; color:var(--text-3); margin-top:8px; line-height:1.5; }
- 
-/* ─── PREMIUM BLUR CARD ─── */
-.premium-card {
-  margin-bottom:14px; border-radius:18px; overflow:hidden;
-  border:1px solid var(--blue-border);
-  background:var(--bg-2);
-  box-shadow:0 0 40px rgba(10,132,255,0.12);
-}
-.premium-blur-wrap { position:relative; }
-.premium-inner-blur {
-  padding:24px 26px;
-  filter:blur(5px);
-  pointer-events:none; user-select:none;
-}
-.goal-match-top { display:flex; align-items:center; gap:24px; margin-bottom:20px; }
-.goal-ring-wrap { flex-shrink:0; }
-.goal-ring-svg { width:110px; height:110px; transform:rotate(-90deg); }
-.ring-track { fill:none; stroke:var(--bg-4); stroke-width:10; }
-.ring-fill {
-  fill:none; stroke:var(--blue); stroke-width:10;
-  stroke-linecap:round;
-  transition:stroke-dashoffset 1s ease;
-}
-.ring-pct-text {
-  fill:var(--text-1); font-family:'Sora',sans-serif; font-weight:800;
-  font-size:22px; text-anchor:middle; dominant-baseline:middle;
-  transform:rotate(90deg) translate(0px,-120px);
-}
-.ring-label-text {
-  fill:var(--text-3); font-size:11px; text-anchor:middle; dominant-baseline:middle;
-  transform:rotate(90deg) translate(0px,-120px);
-}
-.goal-match-info { flex:1; }
-.goal-match-title { font-family:'Sora',sans-serif; font-size:16px; font-weight:700; color:var(--text-1); margin-bottom:6px; }
-.goal-match-desc { font-size:13px; color:var(--text-2); line-height:1.6; }
-.goal-tweaks { display:flex; flex-direction:column; gap:8px; }
-.tweak-item {
-  display:flex; align-items:flex-start; gap:10px;
-  padding:10px 12px; border-radius:10px; font-size:13px;
-}
-.tweak-item.tweak-add { background:rgba(48,209,88,0.08); color:rgba(255,255,255,0.8); }
-.tweak-item.tweak-remove { background:rgba(255,69,58,0.08); color:rgba(255,255,255,0.8); }
-.tweak-dot {
-  width:20px; height:20px; border-radius:50%; flex-shrink:0;
-  display:flex; align-items:center; justify-content:center;
-  font-size:14px; font-weight:700; margin-top:1px;
-}
-.tweak-add .tweak-dot { background:rgba(48,209,88,0.2); color:var(--green); }
-.tweak-remove .tweak-dot { background:rgba(255,69,58,0.2); color:#FF453A; }
- 
-.premium-lock-overlay {
-  position:absolute; inset:0;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:10px; padding:32px 24px; text-align:center;
-  background:rgba(0,0,0,0.15);
-  backdrop-filter:blur(2px);
-}
-.lock-icon { font-size:36px; }
-.lock-title { font-family:'Sora',sans-serif; font-size:18px; font-weight:800; color:var(--text-1); }
-.lock-desc { font-size:13.5px; color:var(--text-2); max-width:320px; line-height:1.6; }
-.lock-cta {
-  background:var(--blue); color:white; border:none;
-  padding:11px 24px; border-radius:10px;
-  font-family:'Sora',sans-serif; font-size:14px; font-weight:700;
-  cursor:pointer; transition:all .18s; margin-top:4px;
-  box-shadow:0 0 20px var(--blue-glow);
-}
-.lock-cta:hover { background:var(--blue-bright); transform:translateY(-1px); }
- 
-/* ─── PRICING PAGE ─── */
-.pricing-wrap {
-  display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
-  max-width:1040px; margin:0 auto; padding:0 24px 48px;
-  align-items:start;
-}
-.pricing-card {
-  background:var(--bg-2); border:1px solid var(--border);
-  border-radius:22px; padding:32px 28px;
-  display:flex; flex-direction:column; gap:0;
-  position:relative;
-  transition:border-color .2s;
-}
-.pricing-card:hover { border-color:var(--border-med); }
-.pricing-card-premium {
-  border-color:var(--blue-border);
-  box-shadow:0 0 48px rgba(10,132,255,0.18);
-}
-.pricing-popular-badge {
-  position:absolute; top:-13px; left:50%; transform:translateX(-50%);
-  background:var(--blue); color:white;
-  font-family:'Sora',sans-serif; font-size:11px; font-weight:700;
-  padding:4px 14px; border-radius:100px;
-  white-space:nowrap;
-}
-.pricing-tier-label {
-  font-family:'Sora',sans-serif; font-size:13px; font-weight:700;
-  color:var(--text-3); text-transform:uppercase; letter-spacing:1.5px;
-  margin-bottom:10px;
-}
-.pricing-price {
-  font-family:'Sora',sans-serif; font-size:42px; font-weight:800;
-  color:var(--text-1); letter-spacing:-1.5px; margin-bottom:8px;
-}
-.pricing-price span { font-size:16px; font-weight:500; color:var(--text-3); letter-spacing:0; }
-.pricing-desc { font-size:13.5px; color:var(--text-3); line-height:1.55; margin-bottom:24px; }
-.pricing-features { list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:28px; }
-.feat-item { display:flex; align-items:flex-start; gap:10px; font-size:13.5px; }
-.feat-item.included { color:var(--text-1); }
-.feat-item.excluded { color:var(--text-3); }
-.feat-icon {
-  width:20px; height:20px; border-radius:50%; flex-shrink:0;
-  display:flex; align-items:center; justify-content:center;
-  font-size:11px; font-weight:700; margin-top:1px;
-}
-.feat-item.included .feat-icon { background:rgba(48,209,88,0.15); color:var(--green); }
-.feat-item.excluded .feat-icon { background:var(--bg-3); color:var(--text-3); }
-.feat-icon.feat-blue { background:var(--blue-subtle); color:var(--blue); }
-.feat-item.included .feat-icon.feat-blue { background:var(--blue-subtle); color:var(--blue); }
- 
-.pricing-btn-free {
-  width:100%; padding:13px; border-radius:12px;
-  background:var(--bg-3); border:1px solid var(--border-med); color:var(--text-1);
-  font-family:'Sora',sans-serif; font-size:14px; font-weight:700;
-  cursor:pointer; transition:all .18s; margin-top:auto;
-}
-.pricing-btn-free:hover { background:var(--bg-4); border-color:rgba(255,255,255,0.2); }
-.pricing-btn-premium {
-  width:100%; padding:13px; border-radius:12px;
-  background:var(--blue); border:none; color:white;
-  font-family:'Sora',sans-serif; font-size:14px; font-weight:700;
-  cursor:pointer; transition:all .18s; margin-top:auto;
-  box-shadow:0 0 20px var(--blue-glow);
-}
-.pricing-btn-premium:hover { background:var(--blue-bright); box-shadow:0 0 28px var(--blue-glow); }
- 
-@media (max-width:900px) { .pricing-wrap { grid-template-columns:1fr; max-width:440px; } }
-</style>
-</head>
-@media (max-width:900px) {
-  nav { padding:0 24px; }
-  .nav-links, .nav-cta { display:none; }
-  .nav-burger { display:flex; }
-  .features-grid { grid-template-columns:1fr 1fr; }
-  .archetypes-row { grid-template-columns:1fr 1fr; }
-  .about-content { grid-template-columns:1fr; }
-  .contact-layout { grid-template-columns:1fr; }
-  .values-grid { grid-template-columns:1fr 1fr; }
-  .science-grid { grid-template-columns:1fr; }
-  .footer-top { flex-direction:column; gap:28px; }
-}
-@media (max-width:600px) {
-  .features-grid { grid-template-columns:1fr; }
-  .archetypes-row { grid-template-columns:1fr 1fr; }
-  .values-grid { grid-template-columns:1fr; }
-  .survey-body { padding:20px 18px; }
-  .survey-footer { flex-direction:column; padding:14px 18px 18px; }
-  .analyze-btn { width:100%; justify-content:center; }
-  .survey-card-top { padding:18px; }
-  .archetype-hero { flex-direction:column; text-align:center; padding:28px 20px; }
-  .arch-icon-wrap { width:76px; height:76px; font-size:38px; }
-  .arch-title { font-size:24px; }
-  .form-row { grid-template-columns:1fr; }
-  .cta-band { padding:40px 22px; margin:0 16px; }
-  .contact-form { padding:22px 18px; }
-  footer { padding:36px 20px 24px; }
-  .footer-links { gap:28px; }
-  .section { padding:56px 24px; }
+@media(max-width:600px){
+  .feat-grid{grid-template-columns:1fr;}
+  .arch-grid{grid-template-columns:1fr 1fr;}
+  .vals{grid-template-columns:1fr;}
+  .survey-body{padding:18px 18px;}
+  .survey-foot{flex-direction:column;padding:13px 18px 17px;}
+  .analyze-btn{width:100%;justify-content:center;}
+  .survey-top{padding:16px 18px;}
+  .arch-hero{flex-direction:column;text-align:center;padding:24px 20px;}
+  .arch-icon{width:72px;height:72px;font-size:36px;}
+  .arch-name{font-size:22px;}
+  .form-row{grid-template-columns:1fr;}
+  .cta-block{padding:40px 22px;margin:0 16px;}
+  .contact-form{padding:20px 16px;}
+  footer{padding:36px 20px 22px;}
+  .foot-links{gap:24px;}
+  .section{padding:56px 24px;}
 }
 </style>
 </head>
 <body>
  
-<!-- ═══════ NAV ═══════ -->
 <nav id="mainNav">
   <a class="nav-logo" onclick="showPage('home')">
     <div class="nav-logo-icon">💪</div>
     <span class="nav-logo-text">Fit<span>Guide</span></span>
   </a>
   <div class="nav-links">
-    <button class="nav-link active" id="nl-home"     onclick="showPage('home')">Home</button>
-    <button class="nav-link"        id="nl-howitworks" onclick="showPage('howitworks')">How It Works</button>
-    <button class="nav-link"        id="nl-analyze"  onclick="showPage('analyze')">Analyze</button>
-    <button class="nav-link"        id="nl-about"    onclick="showPage('about')">About</button>
-    <button class="nav-link"        id="nl-contact"  onclick="showPage('contact')">Contact</button>
-    <button class="nav-link"        id="nl-premium"  onclick="showPage('premium')" style="color:var(--blue);">⚡ Premium</button>
+    <button class="nav-link active" id="nl-home"        onclick="showPage('home')">Home</button>
+    <button class="nav-link"        id="nl-howitworks"  onclick="showPage('howitworks')">How It Works</button>
+    <button class="nav-link"        id="nl-analyze"     onclick="showPage('analyze')">Analyze</button>
+    <button class="nav-link"        id="nl-about"       onclick="showPage('about')">About</button>
+    <button class="nav-link"        id="nl-contact"     onclick="showPage('contact')">Contact</button>
+    <button class="nav-link nav-premium" id="nl-premium" onclick="showPage('premium')">⚡ Premium</button>
   </div>
   <button class="nav-cta" onclick="showPage('analyze')">Try It Free →</button>
   <button class="nav-burger" id="navBurger" onclick="toggleMenu()">
@@ -875,1084 +400,495 @@ footer { background:var(--bg-1); padding:48px 52px 32px; border-top:1px solid va
   <button class="mobile-link"        id="ml-analyze"    onclick="showPage('analyze');toggleMenu()">Analyze</button>
   <button class="mobile-link"        id="ml-about"      onclick="showPage('about');toggleMenu()">About</button>
   <button class="mobile-link"        id="ml-contact"    onclick="showPage('contact');toggleMenu()">Contact</button>
-  <button class="mobile-link"        id="ml-premium"    onclick="showPage('premium');toggleMenu()" style="color:var(--blue);">⚡ Premium</button>
+  <button class="mobile-link"        id="ml-premium"    onclick="showPage('premium');toggleMenu()" style="color:var(--gold)">⚡ Premium</button>
   <button class="mobile-cta"         onclick="showPage('analyze');toggleMenu()">Try It Free →</button>
 </div>
  
-<!-- ═══════════════════════════════════════
-     PAGE: HOME
-═══════════════════════════════════════ -->
+<!-- ════ HOME ════ -->
 <div class="page active" id="page-home">
- 
-  <div class="home-hero">
-    <div class="pill-badge">🧬 Sports Science, Made Simple</div>
-    <h1 class="hero-h1">Know exactly what your<br><em>training is building</em></h1>
-    <p class="hero-sub">Describe your workout routine and get a science-backed breakdown of the athlete you're becoming — with a week-by-week performance projection.</p>
-    <div class="hero-btns">
-      <button class="btn-primary" onclick="showPage('analyze')">Analyze My Routine →</button>
-      <button class="btn-secondary" onclick="showPage('howitworks')">See How It Works</button>
+  <div class="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-content">
+      <div class="badge">🧬 Sports Science Analysis</div>
+      <h1 class="h1">Know exactly what your<br><em>training is building</em></h1>
+      <p class="sub" style="margin:0 auto;">Describe your workout and get a clinical breakdown of the athlete you're becoming — week by week, metric by metric.</p>
+      <div class="hero-btns">
+        <button class="btn" onclick="showPage('analyze')">Analyze My Routine →</button>
+        <button class="btn-ghost" onclick="showPage('howitworks')">See How It Works</button>
+      </div>
+      <p class="hero-note">Free to use · No account required · Results in seconds</p>
     </div>
-    <p class="hero-note">Free to use · No account required · Results in under 30 seconds</p>
   </div>
  
-  <div class="social-proof">
-    <div class="proof-item">🏋️ Strength athletes</div>
-    <div class="proof-dot"></div>
-    <div class="proof-item">⚡ Explosive athletes</div>
-    <div class="proof-dot"></div>
-    <div class="proof-item">🏃 General fitness</div>
-    <div class="proof-dot"></div>
-    <div class="proof-item">💪 Bodybuilders</div>
-    <div class="proof-dot"></div>
-    <div class="proof-item">🏅 Sport-specific training</div>
+  <div class="proof-strip">
+    <span class="proof-item">🏋️ Strength athletes</span>
+    <span class="proof-sep"></span>
+    <span class="proof-item">⚡ Explosive athletes</span>
+    <span class="proof-sep"></span>
+    <span class="proof-item">🏃 General fitness</span>
+    <span class="proof-sep"></span>
+    <span class="proof-item">💪 Bodybuilders</span>
+    <span class="proof-sep"></span>
+    <span class="proof-item">🏅 Sport-specific training</span>
   </div>
  
-  <!-- Features -->
   <div class="section">
-    <div class="section-inner">
-      <div style="text-align:center; margin-bottom:8px;">
-        <div class="pill-badge">Why FitGuide</div>
+    <div class="inner">
+      <div style="text-align:center;margin-bottom:44px;">
+        <div class="badge">Why FitGuide</div>
+        <h2 class="h2">Training science, without<br>the <em>textbooks</em></h2>
+        <p class="sub" style="margin:0 auto;">Most people train hard but don't understand the science behind what they're doing. FitGuide closes that gap.</p>
       </div>
-      <div style="text-align:center;">
-        <h2 class="section-title">Training science, without<br>the <em>textbooks</em></h2>
-        <p class="section-sub" style="margin:0 auto;">Most people train hard but don't understand the science behind what they're doing. FitGuide closes that gap.</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🎯</div>
-          <h3>Archetype Identification</h3>
-          <p>We analyse your training and tell you exactly which athletic profile you're developing — from explosive power athlete to hypertrophy specialist.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📅</div>
-          <h3>Week-by-Week Timeline</h3>
-          <p>See what physiological changes are happening at each stage — from the first neurological adaptations to long-term structural transformation.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📈</div>
-          <h3>Measurable Projections</h3>
-          <p>Get specific, clinical estimates — like a 3–6 cm vertical jump increase or a 5–10% improvement in sprint speed — tied to your actual routine.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🏆</div>
-          <h3>Sport Alignment</h3>
-          <p>Find out which sports and activities your training naturally prepares you for, so you can double down on what matters most.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🧬</div>
-          <h3>Real Sports Science</h3>
-          <p>Every insight is grounded in peer-reviewed exercise science literature — not generic advice or marketing fluff.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h3>Instant Results</h3>
-          <p>Describe your routine in plain language — sets, reps, exercises, goals — and get a full analysis in under 30 seconds. No account needed.</p>
-        </div>
+      <div class="feat-grid">
+        <div class="feat-cell"><div class="feat-num">01</div><h3>Archetype ID</h3><p>We identify exactly which athletic profile you're building — explosive athlete, strength specialist, hypertrophy-focused, or endurance-based.</p></div>
+        <div class="feat-cell"><div class="feat-num">02</div><h3>Week-by-Week Timeline</h3><p>See the precise physiological changes happening at each stage, from early neural adaptations to long-term structural transformation.</p></div>
+        <div class="feat-cell"><div class="feat-num">03</div><h3>Measurable Projections</h3><p>Get specific clinical estimates — vertical jump in centimetres, sprint speed in percentages — tied to your actual routine.</p></div>
+        <div class="feat-cell"><div class="feat-num">04</div><h3>Goal Match Score</h3><p>Enter your goal and get an efficiency ring showing how well your current routine aligns with what you're actually trying to achieve.</p></div>
+        <div class="feat-cell"><div class="feat-num">05</div><h3>Sport Alignment</h3><p>Find out which sports and activities your training naturally prepares you for so you can double down on what matters most.</p></div>
+        <div class="feat-cell"><div class="feat-num">06</div><h3>Instant Results</h3><p>Describe your routine in plain language and get a full sports science analysis in seconds. No account, no setup.</p></div>
       </div>
     </div>
   </div>
  
-  <!-- Archetypes showcase -->
-  <div class="section" style="background:var(--bg-1); padding-top:72px; padding-bottom:72px;">
-    <div class="section-inner">
-      <div style="text-align:center; margin-bottom:8px;">
-        <div class="pill-badge">Training Archetypes</div>
+  <div class="section" style="background:var(--bg-1);padding-top:72px;padding-bottom:72px;">
+    <div class="inner">
+      <div style="text-align:center;margin-bottom:44px;">
+        <div class="badge">Training Archetypes</div>
+        <h2 class="h2">Which athlete are<br>you <em>becoming?</em></h2>
       </div>
-      <div style="text-align:center; margin-bottom:0;">
-        <h2 class="section-title">Which athlete are<br>you <em>becoming?</em></h2>
-        <p class="section-sub" style="margin:0 auto 0;">Your training has a direction. FitGuide identifies it.</p>
-      </div>
-      <div class="archetypes-row">
-        <div class="arch-preview" onclick="showPage('analyze')">
-          <span class="arch-preview-icon">⚡</span>
-          <div class="arch-preview-name">The Explosive Athlete</div>
-          <div class="arch-preview-desc">Plyometrics, sprints, reactive power training</div>
-        </div>
-        <div class="arch-preview" onclick="showPage('analyze')">
-          <span class="arch-preview-icon">🏋️</span>
-          <div class="arch-preview-name">The Strength Athlete</div>
-          <div class="arch-preview-desc">Heavy compound lifts, maximal force production</div>
-        </div>
-        <div class="arch-preview" onclick="showPage('analyze')">
-          <span class="arch-preview-icon">💪</span>
-          <div class="arch-preview-name">The Hypertrophy Specialist</div>
-          <div class="arch-preview-desc">Volume-based training, muscle mass accumulation</div>
-        </div>
-        <div class="arch-preview" onclick="showPage('analyze')">
-          <span class="arch-preview-icon">🏃</span>
-          <div class="arch-preview-name">The General Athlete</div>
-          <div class="arch-preview-desc">Mixed modalities, health & performance balance</div>
-        </div>
+      <div class="arch-grid">
+        <div class="arch-tile" onclick="showPage('analyze')"><span class="arch-tile-icon">⚡</span><div class="arch-tile-name">The Explosive Athlete</div><div class="arch-tile-desc">Plyometrics, sprints, reactive power</div></div>
+        <div class="arch-tile" onclick="showPage('analyze')"><span class="arch-tile-icon">🏋️</span><div class="arch-tile-name">The Strength Athlete</div><div class="arch-tile-desc">Heavy compounds, maximal force</div></div>
+        <div class="arch-tile" onclick="showPage('analyze')"><span class="arch-tile-icon">💪</span><div class="arch-tile-name">The Hypertrophy Specialist</div><div class="arch-tile-desc">Volume-based, muscle mass focus</div></div>
+        <div class="arch-tile" onclick="showPage('analyze')"><span class="arch-tile-icon">🏃</span><div class="arch-tile-name">The General Athlete</div><div class="arch-tile-desc">Mixed modalities, health balance</div></div>
       </div>
     </div>
   </div>
  
-  <!-- CTA Band -->
   <div class="section">
-    <div class="section-inner">
-      <div class="cta-band">
-        <h2>Ready to understand<br>your training?</h2>
-        <p>Describe your routine and get your full athletic profile in under 30 seconds.</p>
-        <button class="btn-white" onclick="showPage('analyze')">Analyze My Routine →</button>
+    <div class="inner">
+      <div class="cta-block">
+        <div class="badge" style="margin-bottom:14px;">Get started</div>
+        <h2 class="h2" style="margin-bottom:10px;">Ready to understand<br>your <em>training?</em></h2>
+        <p style="font-size:15px;color:var(--text-2);margin-bottom:26px;">Describe your routine and get your full athletic profile in seconds.</p>
+        <button class="btn" onclick="showPage('analyze')">Analyze My Routine →</button>
       </div>
     </div>
   </div>
- 
 </div>
  
-<!-- ═══════════════════════════════════════
-     PAGE: HOW IT WORKS
-═══════════════════════════════════════ -->
+<!-- ════ HOW IT WORKS ════ -->
 <div class="page" id="page-howitworks">
- 
   <div class="hiw-hero">
-    <div class="pill-badge">🔬 The Process</div>
-    <h1 class="section-title">How FitGuide works</h1>
-    <p class="section-sub" style="margin:0 auto;">From your workout description to a full sports science report — here's exactly what happens.</p>
+    <div class="badge">🔬 The Process</div>
+    <h1 class="h1" style="font-size:clamp(32px,4vw,52px);">How FitGuide works</h1>
+    <p class="sub" style="margin:0 auto;">From your workout description to a full sports science report.</p>
   </div>
- 
   <div class="section">
-    <div class="section-inner section-sm">
-      <div class="steps-timeline">
-        <div class="step-row" style="animation-delay:.0s">
-          <div class="step-num">1</div>
-          <div class="step-body">
-            <h3>Describe your routine</h3>
-            <p>Type your workout in plain language — exercises, sets, reps, how many days per week, your split, and your goals. You don't need to be precise; even a partial description works. The more detail you give, the more accurate your analysis will be.</p>
-          </div>
-        </div>
-        <div class="step-row" style="animation-delay:.1s">
-          <div class="step-num">2</div>
-          <div class="step-body">
-            <h3>AI-powered sports science analysis</h3>
-            <p>FitGuide's AI — trained on exercise science principles — reads your routine and evaluates the training variables: exercise selection, volume, intensity, frequency, and mechanical load. It cross-references this with established physiological adaptation pathways.</p>
-          </div>
-        </div>
-        <div class="step-row" style="animation-delay:.2s">
-          <div class="step-num">3</div>
-          <div class="step-body">
-            <h3>Your archetype is identified</h3>
-            <p>Based on your training profile, you're matched to a specific athletic archetype — like "The Explosive Athlete" or "The Hypertrophy Specialist." This tells you exactly what kind of athlete your current program is conditioning you to become.</p>
-          </div>
-        </div>
-        <div class="step-row" style="animation-delay:.3s">
-          <div class="step-num">4</div>
-          <div class="step-body">
-            <h3>Receive your performance timeline</h3>
-            <p>You'll see a week-by-week breakdown of what physiological changes are expected — from early neurological adaptations in weeks 1–2, to measurable structural changes at month 4+. Projections are specific and clinical, not generic.</p>
-          </div>
-        </div>
-        <div class="step-row" style="animation-delay:.4s">
-          <div class="step-num">5</div>
-          <div class="step-body">
-            <h3>Understand your physical adaptations</h3>
-            <p>Get a list of specific, measurable performance metrics you can expect to improve — like vertical jump height in centimetres, sprint time in seconds, or maximal strength benchmarks — all tied to the mechanism behind the adaptation.</p>
-          </div>
-        </div>
+    <div class="inner inner-sm">
+      <div class="steps">
+        <div class="step"><div class="step-n">1</div><div class="step-body"><h3>Describe your routine</h3><p>Type your workout in plain language — exercises, sets, reps, days per week, split, goals. Even partial info works. More detail means higher accuracy.</p></div></div>
+        <div class="step"><div class="step-n">2</div><div class="step-body"><h3>AI-powered analysis</h3><p>FitGuide evaluates training variables: exercise selection, volume, intensity, frequency, and mechanical load — cross-referencing with established physiological adaptation pathways.</p></div></div>
+        <div class="step"><div class="step-n">3</div><div class="step-body"><h3>Archetype identified</h3><p>You're matched to a specific athletic archetype — like "The Explosive Athlete" or "The Hypertrophy Specialist" — telling you exactly what your training is conditioning you to become.</p></div></div>
+        <div class="step"><div class="step-n">4</div><div class="step-body"><h3>Performance timeline</h3><p>A week-by-week breakdown of expected physiological changes — from early neural adaptations in weeks 1–2 to structural transformation at month 4+.</p></div></div>
+        <div class="step"><div class="step-n">5</div><div class="step-body"><h3>Goal match score <span style="font-size:11px;background:rgba(255,214,10,0.1);color:var(--gold);border:1px solid rgba(255,214,10,0.2);padding:2px 7px;border-radius:100px;font-weight:700;">Premium</span></h3><p>Enter your goal and get an efficiency ring showing how aligned your routine is with what you're trying to achieve, plus specific add/remove recommendations.</p></div></div>
       </div>
     </div>
   </div>
- 
-  <!-- Science behind it -->
-  <div class="section" style="background:var(--bg-1); padding-top:72px; padding-bottom:72px;">
-    <div class="section-inner">
-      <div style="text-align:center; margin-bottom:8px;">
-        <div class="pill-badge">The Science</div>
+  <div class="section" style="background:var(--bg-1);padding-top:64px;padding-bottom:64px;">
+    <div class="inner">
+      <div style="text-align:center;margin-bottom:36px;"><div class="badge">The Science</div><h2 class="h2">What we analyse</h2></div>
+      <div class="sci-grid">
+        <div class="sci-card"><span class="sci-icon">📐</span><h4>Volume & Intensity</h4><p>Total training volume (sets × reps × load) and relative intensity determine whether training drives hypertrophy, strength, or power adaptations.</p></div>
+        <div class="sci-card"><span class="sci-icon">🔁</span><h4>Training Frequency</h4><p>How often you train each movement pattern directly impacts the rate and type of physiological adaptation you can achieve per week.</p></div>
+        <div class="sci-card"><span class="sci-icon">⚡</span><h4>Exercise Selection</h4><p>Whether you're doing plyometrics, Olympic lifts, or isolation work determines the neuromuscular demand and specificity of adaptation.</p></div>
+        <div class="sci-card"><span class="sci-icon">🧬</span><h4>Adaptation Pathways</h4><p>Different stimuli activate different mechanisms — from fast-twitch fibre recruitment to tendon stiffness changes and mitochondrial density.</p></div>
       </div>
-      <div style="text-align:center; margin-bottom:40px;">
-        <h2 class="section-title">What we analyse</h2>
-        <p class="section-sub" style="margin:0 auto;">FitGuide evaluates the key training variables that determine your physiological outcomes.</p>
-      </div>
-      <div class="science-grid">
-        <div class="science-card">
-          <span class="science-card-icon">📐</span>
-          <h4>Volume & Intensity</h4>
-          <p>Total training volume (sets × reps × load) and relative intensity determine whether your training drives hypertrophy, strength, or power adaptations.</p>
-        </div>
-        <div class="science-card">
-          <span class="science-card-icon">🔁</span>
-          <h4>Training Frequency</h4>
-          <p>How often you train each muscle group or movement pattern directly impacts the rate and type of physiological adaptation you can achieve per week.</p>
-        </div>
-        <div class="science-card">
-          <span class="science-card-icon">⚡</span>
-          <h4>Exercise Selection</h4>
-          <p>Whether you're doing plyometrics, Olympic lifts, or machine-based isolation determines the neuromuscular demand and specificity of your adaptation.</p>
-        </div>
-        <div class="science-card">
-          <span class="science-card-icon">🧬</span>
-          <h4>Physiological Adaptation Pathways</h4>
-          <p>Different training stimuli activate different adaptation mechanisms — from fast-twitch fibre recruitment to tendon stiffness changes and mitochondrial density.</p>
-        </div>
-      </div>
-      <div style="text-align:center; margin-top:40px;">
-        <button class="btn-primary" onclick="showPage('analyze')">Try It Now →</button>
-      </div>
+      <div style="text-align:center;margin-top:36px;"><button class="btn" onclick="showPage('analyze')">Try It Now →</button></div>
     </div>
   </div>
- 
 </div>
  
-<!-- ═══════════════════════════════════════
-     PAGE: ANALYZE
-═══════════════════════════════════════ -->
+<!-- ════ ANALYZE ════ -->
 <div class="page" id="page-analyze">
- 
   <div class="analyze-hero">
-    <div class="pill-badge">🧬 Sports Science Analysis</div>
-    <h1 class="section-title">Analyze your routine</h1>
-    <p class="section-sub" style="margin:0 auto;">Describe your workout below and get a full science-backed breakdown of what you're building.</p>
+    <div class="badge">🧬 Sports Science Analysis</div>
+    <h1 class="h1" style="font-size:clamp(30px,4vw,48px);">Analyze your routine</h1>
+    <p class="sub" style="margin:0 auto;">Describe your training and get a full science-backed breakdown instantly.</p>
   </div>
  
   <div class="survey-wrap" id="inputSection">
     <div class="survey-card">
-      <div class="survey-card-top">
-        <div class="survey-card-top-icon">💬</div>
-        <div>
-          <h2>Describe Your Routine</h2>
-          <p>Type anything — exercises, sets, reps, goals, split, frequency</p>
-        </div>
+      <div class="survey-top">
+        <div class="survey-top-icon">💬</div>
+        <div><h2>Describe Your Routine</h2><p>Exercises, sets, reps, frequency, split — anything helps</p></div>
       </div>
       <div class="survey-body">
-        <textarea
-          class="survey-textarea"
-          id="routineInput"
-          placeholder="e.g. I do box jumps, squats and sprints 4 days a week, 3 sets of 10. Goal is to get faster for basketball..."
-          oninput="onInput(this)"
-        ></textarea>
-        <div class="hint-row">
-          <span class="hint-label">Try an example:</span>
-          <span class="hint-chip" onclick="fillExample('plyometrics')">⚡ Plyometrics</span>
-          <span class="hint-chip" onclick="fillExample('bodybuilding')">💪 Bodybuilding</span>
-          <span class="hint-chip" onclick="fillExample('powerlifting')">🏋️ Powerlifting</span>
-          <span class="hint-chip" onclick="fillExample('general')">🏃 General Fitness</span>
+        <div class="field-label">Your Workout Routine</div>
+        <textarea class="survey-ta" id="routineInput" oninput="onInput(this)" placeholder="e.g. I do box jumps and sprints 4 days a week, 3 sets of 10. Goal is to get faster for basketball..."></textarea>
+        <div class="chips">
+          <span class="chip-label">Examples:</span>
+          <span class="chip" onclick="fillExample('plyometrics')">⚡ Plyometrics</span>
+          <span class="chip" onclick="fillExample('bodybuilding')">💪 Bodybuilding</span>
+          <span class="chip" onclick="fillExample('powerlifting')">🏋️ Powerlifting</span>
+          <span class="chip" onclick="fillExample('general')">🏃 General Fitness</span>
         </div>
- 
-        <!-- GOAL INPUT -->
-        <div class="goal-section">
-          <div class="goal-label">
-            🎯 <span>Your Goal</span>
-            <span class="goal-badge">⚡ Premium insight</span>
-          </div>
-          <input
-            class="goal-input"
-            id="goalInput"
-            type="text"
-            placeholder="e.g. play basketball, run a 5K, get bigger, compete in powerlifting..."
-          />
+        <div class="goal-box">
+          <div class="field-label">Your Goal <span class="field-badge">⚡ Unlocks Premium Insight</span></div>
+          <input class="goal-input" id="goalInput" type="text" placeholder="e.g. play basketball, run a 5K, get bigger, compete in powerlifting..."/>
           <p class="goal-hint">Tell us what you're working towards and we'll score how well your routine matches it.</p>
         </div>
       </div>
-      <div class="survey-footer">
-        <p class="footer-note"><strong>More detail = more accurate results.</strong> But even a short description works.</p>
+      <div class="survey-foot">
+        <p class="foot-note"><strong>More detail = more accuracy.</strong> Even a short description works.</p>
         <button class="analyze-btn" id="analyzeBtn" onclick="runAnalysis()" disabled>Analyze →</button>
       </div>
     </div>
   </div>
  
-  <!-- Loading -->
   <div id="loadingSection">
-    <div class="loading-ui">
-      <div class="loading-icon">🔬</div>
-      <div class="loading-label">Analyzing your routine…</div>
-      <div class="loading-sublabel" id="loadingStatus">Reading your exercises</div>
-      <div class="progress-wrap">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-      <div class="progress-pct" id="progressPct">0%</div>
+    <div class="load-ui">
+      <div class="load-icon">🔬</div>
+      <div class="load-title">Analyzing your routine…</div>
+      <div class="load-sub" id="loadingStatus">Reading your exercises</div>
+      <div class="prog-wrap"><div class="prog-fill" id="progressFill"></div></div>
+      <div class="prog-pct" id="progressPct">0%</div>
     </div>
   </div>
  
-  <!-- Results -->
   <div id="resultsSection">
-    <div class="archetype-hero">
-      <div class="arch-icon-wrap" id="archIcon">💪</div>
+    <div class="arch-hero">
+      <div class="arch-icon" id="archIcon">💪</div>
       <div class="arch-info">
-        <div class="arch-eyebrow">Training Archetype</div>
-        <div class="arch-title" id="archTitle">—</div>
+        <div class="arch-eye">Training Archetype</div>
+        <div class="arch-name" id="archTitle">—</div>
         <div class="arch-desc" id="archDesc">—</div>
-        <div class="stat-pills" id="statPills"></div>
+        <div class="arch-pills" id="statPills"></div>
       </div>
     </div>
  
-    <!-- PREMIUM GOAL MATCH — blurred for non-members -->
-    <div class="premium-card" id="premiumGoalCard">
-      <div class="premium-blur-wrap">
-        <!-- Real content (blurred) -->
-        <div class="premium-inner-blur" id="goalMatchContent">
-          <div class="goal-match-top">
-            <div class="goal-ring-wrap">
-              <svg class="goal-ring-svg" viewBox="0 0 120 120">
-                <circle cx="60" cy="60" r="50" class="ring-track"/>
-                <circle cx="60" cy="60" r="50" class="ring-fill" id="goalRingFill"
-                  stroke-dasharray="314"
-                  stroke-dashoffset="314"/>
-                <text x="60" y="55" class="ring-pct-text" id="goalRingPct">0%</text>
-                <text x="60" y="72" class="ring-label-text">Match</text>
-              </svg>
-            </div>
-            <div class="goal-match-info">
-              <div class="goal-match-title" id="goalMatchTitle">Goal Alignment Score</div>
-              <div class="goal-match-desc" id="goalMatchDesc">—</div>
+    <!-- PREMIUM GOAL CARD -->
+    <div class="prem-card" id="premiumGoalCard" style="display:none;">
+      <div class="prem-blur-wrap">
+        <div class="prem-inner">
+          <div class="ring-row">
+            <svg class="ring-svg" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="45" class="ring-track"/>
+              <circle cx="50" cy="50" r="45" class="ring-fill" id="goalRingFill"
+                transform="rotate(-90 50 50)"/>
+              <text x="50" y="46" class="ring-pct" id="goalRingPct">0%</text>
+              <text x="50" y="60" class="ring-lbl">Match</text>
+            </svg>
+            <div class="ring-info">
+              <h4 id="goalMatchTitle">Goal Alignment Score</h4>
+              <p id="goalMatchDesc">—</p>
             </div>
           </div>
-          <div class="goal-tweaks" id="goalTweaks"></div>
+          <div class="tweaks" id="goalTweaks"></div>
         </div>
-        <!-- Lock overlay -->
-        <div class="premium-lock-overlay">
-          <div class="lock-icon">🔒</div>
+        <div class="prem-lock">
+          <div class="lock-emoji">🔒</div>
           <div class="lock-title">Premium Feature</div>
-          <div class="lock-desc">Unlock your Goal Match Score, efficiency rating, and personalised routine recommendations.</div>
-          <button class="lock-cta" onclick="showPage('premium')">Unlock with Premium →</button>
+          <div class="lock-desc">Unlock your Goal Match Score, efficiency ring, and personalised routine recommendations.</div>
+          <button class="lock-btn" onclick="showPage('premium')">Unlock with Premium →</button>
         </div>
       </div>
     </div>
  
-    <div class="result-card">
-      <div class="card-title">📅 &nbsp;Projected Performance Timeline</div>
-      <div class="timeline" id="timeline"></div>
+    <div class="res-card">
+      <div class="res-title">📅 &nbsp;Projected Performance Timeline</div>
+      <div class="tl" id="timeline"></div>
     </div>
-    <div class="result-card">
-      <div class="card-title">📈 &nbsp;Expected Physical Adaptations</div>
-      <div class="metrics-list" id="metricsList"></div>
+    <div class="res-card">
+      <div class="res-title">📈 &nbsp;Expected Physical Adaptations</div>
+      <div class="metrics" id="metricsList"></div>
     </div>
-    <div class="result-card">
-      <div class="card-title">🏆 &nbsp;Optimal Sport &amp; Activity Alignment</div>
-      <div class="sport-grid" id="sportGrid"></div>
+    <div class="res-card">
+      <div class="res-title">🏆 &nbsp;Optimal Sport & Activity Alignment</div>
+      <div class="sport-wrap" id="sportGrid"></div>
     </div>
-    <div class="disclaimer">
-      <strong>Note:</strong> Projections are based on peer-reviewed exercise science literature and assume consistent adherence, adequate nutrition, and sufficient recovery. Individual results will vary. This tool is for educational purposes and does not replace guidance from a certified strength &amp; conditioning coach or sports medicine professional.
-    </div>
-    <div class="reset-wrap">
-      <button class="reset-btn" onclick="resetForm()">← Analyze a different routine</button>
-    </div>
+    <div class="disclaimer"><strong>Note:</strong> Projections are based on peer-reviewed exercise science literature and assume consistent adherence, adequate nutrition, and sufficient recovery. Individual results will vary.</div>
+    <div class="reset-row"><button class="reset-btn" onclick="resetForm()">← Analyze a different routine</button></div>
   </div>
- 
 </div>
  
-<!-- ═══════════════════════════════════════
-     PAGE: PREMIUM
-═══════════════════════════════════════ -->
-<div class="page" id="page-premium">
- 
-  <div class="analyze-hero">
-    <div class="pill-badge">⚡ Membership Plans</div>
-    <h1 class="section-title">Choose your <em>plan</em></h1>
-    <p class="section-sub" style="margin:0 auto;">Start free, upgrade when you're ready. No hidden fees.</p>
-  </div>
- 
-  <div class="pricing-wrap">
- 
-    <!-- FREE TIER -->
-    <div class="pricing-card">
-      <div class="pricing-tier-label">Free</div>
-      <div class="pricing-price">$0<span>/month</span></div>
-      <div class="pricing-desc">Great for trying out FitGuide. No credit card needed.</div>
-      <ul class="pricing-features">
-        <li class="feat-item included">
-          <span class="feat-icon">✓</span>
-          <span>3 analyses per week</span>
-        </li>
-        <li class="feat-item included">
-          <span class="feat-icon">✓</span>
-          <span>Training archetype identification</span>
-        </li>
-        <li class="feat-item included">
-          <span class="feat-icon">✓</span>
-          <span>Week-by-week performance timeline</span>
-        </li>
-        <li class="feat-item included">
-          <span class="feat-icon">✓</span>
-          <span>Sport &amp; activity alignment</span>
-        </li>
-        <li class="feat-item excluded">
-          <span class="feat-icon">✗</span>
-          <span>Goal match score &amp; efficiency ring</span>
-        </li>
-        <li class="feat-item excluded">
-          <span class="feat-icon">✗</span>
-          <span>Personalised add/remove recommendations</span>
-        </li>
-        <li class="feat-item excluded">
-          <span class="feat-icon">✗</span>
-          <span>Physical adaptation metrics</span>
-        </li>
-        <li class="feat-item excluded">
-          <span class="feat-icon">✗</span>
-          <span>Unlimited analyses</span>
-        </li>
-      </ul>
-      <button class="pricing-btn-free" onclick="showPage('analyze')">Get Started Free</button>
-    </div>
- 
-    <!-- PREMIUM TIER -->
-    <div class="pricing-card pricing-card-premium">
-      <div class="pricing-popular-badge">Most Popular</div>
-      <div class="pricing-tier-label" style="color:var(--blue);">Premium</div>
-      <div class="pricing-price" style="color:var(--blue);">$7.99<span>/month</span></div>
-      <div class="pricing-desc">Everything you need to train with full scientific insight.</div>
-      <ul class="pricing-features">
-        <li class="feat-item included">
-          <span class="feat-icon feat-blue">✓</span>
-          <span>Unlimited analyses</span>
-        </li>
-        <li class="feat-item included">
-          <span class="feat-icon feat-blue">✓</span>
-          <span>Training archetype identification</span>
-        </li>
-        <li class="feat-item included">
-          <span class="feat-icon feat-blue">✓</span>
-          <span>Week-by-week performance timeline</span>
-        </li>
-        <li class="feat-item included">
-          <span class="feat-icon feat-blue">✓</span>
-          <span>Sport &amp; activity alignment</span>
-        </li>
-        <li class="feat-item included">
-          <span class="feat-icon feat-blue">✓</span>
-          <span>Goal match score &amp; efficiency ring</span>
-        </li>
-        <li class="feat-item included">
-          <span class="feat-icon feat-blue">✓</span>
-          <span>Personalised add/remove recommendations</span>
-        </li>
-        <li class="feat-item included">
-          <span class="feat-icon feat-blue">✓</span>
-          <span>Physical adaptation metrics &amp; projections</span>
-        </li>
-        <li class="feat-item included">
-          <span class="feat-icon feat-blue">✓</span>
-          <span>Priority analysis speed</span>
-        </li>
-      </ul>
-      <button class="pricing-btn-premium">Get Premium — $7.99/mo</button>
-    </div>
- 
-    <!-- ELITE TIER -->
-    <div class="pricing-card">
-      <div class="pricing-tier-label">Elite</div>
-      <div class="pricing-price">$19.99<span>/month</span></div>
-      <div class="pricing-desc">For serious athletes who want the full picture.</div>
-      <ul class="pricing-features">
-        <li class="feat-item included">
-          <span class="feat-icon feat-blue">✓</span>
-          <span>Everything in Premium</span>
-        </li>
-        <li class="feat-item included">
-          <span class="feat-icon feat-blue">✓</span>
-          <span>Multi-routine comparison</span>
-        </li>
-        <li class="feat-item included">
-          <span class="feat-icon feat-blue">✓</span>
-          <span>Progress tracking over time</span>
-        </li>
-        <li class="feat-item included">
-          <span class="feat-icon feat-blue">✓</span>
-          <span>Exportable PDF reports</span>
-        </li>
-        <li class="feat-item included">
-          <span class="feat-icon feat-blue">✓</span>
-          <span>Coach-level training recommendations</span>
-        </li>
-        <li class="feat-item included">
-          <span class="feat-icon feat-blue">✓</span>
-          <span>Priority email support</span>
-        </li>
-      </ul>
-      <button class="pricing-btn-free">Get Elite — $19.99/mo</button>
-    </div>
- 
-  </div>
- 
-  <div style="text-align:center; padding:0 24px 60px;">
-    <p style="font-size:13px; color:var(--text-3);">All plans include a 7-day free trial. Cancel anytime.</p>
-  </div>
- 
-</div>
- 
-<!-- ═══════════════════════════════════════
-     PAGE: ABOUT
-═══════════════════════════════════════ -->
+<!-- ════ ABOUT ════ -->
 <div class="page" id="page-about">
- 
   <div class="about-hero">
-    <div class="pill-badge">👋 Our Mission</div>
-    <h1 class="section-title">Making sports science<br><em>accessible to everyone</em></h1>
-    <p class="section-sub" style="margin:0 auto;">FitGuide exists because most people train without understanding the science behind what they're doing. We're changing that.</p>
+    <div class="badge">👋 Our Mission</div>
+    <h1 class="h1" style="font-size:clamp(32px,4vw,52px);">Making sports science<br><em>accessible to everyone</em></h1>
+    <p class="sub" style="margin:0 auto;">FitGuide exists because most people train without understanding the science behind what they're doing.</p>
   </div>
- 
   <div class="section">
-    <div class="section-inner">
-      <div class="about-content">
-        <div class="about-visual">
-          <div class="about-stat">
-            <div class="about-stat-num">5</div>
-            <div class="about-stat-label">Training archetypes identified</div>
-          </div>
-          <div class="about-stat">
-            <div class="about-stat-num">30s</div>
-            <div class="about-stat-label">Average time to full analysis</div>
-          </div>
-          <div class="about-stat">
-            <div class="about-stat-num">100%</div>
-            <div class="about-stat-label">Free to use, no account required</div>
-          </div>
+    <div class="inner">
+      <div class="about-layout">
+        <div class="about-stats">
+          <div class="about-stat"><div class="about-stat-n">5</div><div class="about-stat-l">Training archetypes identified</div></div>
+          <div class="about-stat"><div class="about-stat-n">30s</div><div class="about-stat-l">Average time to full analysis</div></div>
+          <div class="about-stat"><div class="about-stat-n">100%</div><div class="about-stat-l">Free base tier — no account needed</div></div>
         </div>
         <div class="about-text">
           <h2>We believe everyone deserves to understand their training</h2>
-          <p>Exercise science is well-established, but it's locked behind dense academic papers, expensive coaches, and industry jargon. Most people train hard but have no idea whether they're building explosive power, muscle mass, or cardiovascular endurance — or what to expect and when.</p>
-          <p>FitGuide translates your real-world workout into the language of sports science. You describe what you do in plain English, and we give you back a clinical analysis of what your body is adapting to — week by week, metric by metric.</p>
+          <p>Exercise science is well-established, but it's locked behind dense academic papers, expensive coaches, and industry jargon. Most people train hard but have no idea whether they're building explosive power, muscle mass, or endurance — or what to expect and when.</p>
+          <p>FitGuide translates your real-world workout into the language of sports science. Describe what you do in plain English, get back a clinical analysis of what your body is adapting to — week by week, metric by metric.</p>
           <p>Whether you're a beginner with a vague routine or an experienced athlete with a structured program, FitGuide gives you the insight to train with intention.</p>
         </div>
       </div>
- 
-      <div class="values-grid" style="margin-top:64px;">
-        <div class="value-card">
-          <span class="value-icon">🎓</span>
-          <h4>Science-First</h4>
-          <p>Every insight is grounded in peer-reviewed exercise science, not generic advice or marketing language.</p>
-        </div>
-        <div class="value-card">
-          <span class="value-icon">🔓</span>
-          <h4>Accessible</h4>
-          <p>No account, no cost, no complexity. Just describe your routine and get your analysis.</p>
-        </div>
-        <div class="value-card">
-          <span class="value-icon">🎯</span>
-          <h4>Specific</h4>
-          <p>We give you exact projections — centimetres, percentages, named mechanisms — not vague encouragement.</p>
-        </div>
-        <div class="value-card">
-          <span class="value-icon">🤝</span>
-          <h4>Honest</h4>
-          <p>We tell you what to realistically expect based on your actual routine, not idealised conditions.</p>
-        </div>
-        <div class="value-card">
-          <span class="value-icon">⚡</span>
-          <h4>Fast</h4>
-          <p>Results in under 30 seconds. No waiting, no forms, no back-and-forth.</p>
-        </div>
-        <div class="value-card">
-          <span class="value-icon">🌱</span>
-          <h4>Educational</h4>
-          <p>We want you to leave knowing more about your body and training than when you arrived.</p>
-        </div>
+      <div class="vals" style="margin-top:56px;">
+        <div class="val"><span class="val-icon">🎓</span><h4>Science-First</h4><p>Every insight grounded in peer-reviewed exercise science, not generic advice.</p></div>
+        <div class="val"><span class="val-icon">🔓</span><h4>Accessible</h4><p>No account, no cost to start. Just describe your routine and get your analysis.</p></div>
+        <div class="val"><span class="val-icon">🎯</span><h4>Specific</h4><p>Real numbers — centimetres, percentages, named mechanisms. Not vague encouragement.</p></div>
+        <div class="val"><span class="val-icon">🤝</span><h4>Honest</h4><p>We tell you what to realistically expect based on your actual routine.</p></div>
+        <div class="val"><span class="val-icon">⚡</span><h4>Fast</h4><p>Results in seconds. No waiting, no forms, no back-and-forth.</p></div>
+        <div class="val"><span class="val-icon">🌱</span><h4>Educational</h4><p>Leave knowing more about your body and training than when you arrived.</p></div>
       </div>
     </div>
   </div>
- 
-  <div class="section" style="background:var(--bg-1); padding-top:60px; padding-bottom:60px;">
-    <div class="section-inner" style="text-align:center;">
-      <h2 class="section-title">Ready to understand<br>your <em>training?</em></h2>
-      <p class="section-sub" style="margin:0 auto 28px;">It takes less than a minute to get your full athletic profile.</p>
-      <button class="btn-primary" onclick="showPage('analyze')">Analyze My Routine →</button>
+  <div class="section" style="background:var(--bg-1);padding-top:60px;padding-bottom:60px;">
+    <div class="inner" style="text-align:center;">
+      <h2 class="h2">Ready to understand<br>your <em>training?</em></h2>
+      <p style="font-size:15px;color:var(--text-2);margin-bottom:24px;margin-top:10px;">Takes less than a minute to get your full athletic profile.</p>
+      <button class="btn" onclick="showPage('analyze')">Analyze My Routine →</button>
     </div>
   </div>
- 
 </div>
  
-<!-- ═══════════════════════════════════════
-     PAGE: CONTACT
-═══════════════════════════════════════ -->
+<!-- ════ CONTACT ════ -->
 <div class="page" id="page-contact">
- 
   <div class="contact-hero">
-    <div class="pill-badge">📬 Get In Touch</div>
-    <h1 class="section-title">We'd love to<br><em>hear from you</em></h1>
-    <p class="section-sub" style="margin:0 auto;">Questions, feedback, partnership ideas, or just want to say hi — reach out anytime.</p>
+    <div class="badge">📬 Get In Touch</div>
+    <h1 class="h1" style="font-size:clamp(32px,4vw,52px);">We'd love to<br><em>hear from you</em></h1>
+    <p class="sub" style="margin:0 auto;">Questions, feedback, or partnership ideas — reach out anytime.</p>
   </div>
- 
   <div class="section">
-    <div class="section-inner section-sm">
+    <div class="inner inner-sm">
       <div class="contact-layout">
- 
-        <div class="contact-info">
-          <div class="contact-card">
-            <div class="contact-card-icon">💬</div>
-            <div>
-              <h4>General Enquiries</h4>
-              <p>Questions about FitGuide, how it works, or anything else — we're happy to help.</p>
-            </div>
-          </div>
-          <div class="contact-card">
-            <div class="contact-card-icon">🐛</div>
-            <div>
-              <h4>Bug Reports</h4>
-              <p>Found something that doesn't look right? Let us know and we'll investigate promptly.</p>
-            </div>
-          </div>
-          <div class="contact-card">
-            <div class="contact-card-icon">💡</div>
-            <div>
-              <h4>Feature Suggestions</h4>
-              <p>Have an idea that would make FitGuide more useful? We'd love to hear it.</p>
-            </div>
-          </div>
-          <div class="contact-card">
-            <div class="contact-card-icon">🤝</div>
-            <div>
-              <h4>Partnerships</h4>
-              <p>Interested in working with FitGuide? Reach out and tell us about your idea.</p>
-            </div>
-          </div>
+        <div class="contact-cards">
+          <div class="contact-card"><div class="contact-card-icon">💬</div><div><h4>General Enquiries</h4><p>Questions about FitGuide or how it works.</p></div></div>
+          <div class="contact-card"><div class="contact-card-icon">🐛</div><div><h4>Bug Reports</h4><p>Found something wrong? Let us know.</p></div></div>
+          <div class="contact-card"><div class="contact-card-icon">💡</div><div><h4>Feature Ideas</h4><p>Have a suggestion? We'd love to hear it.</p></div></div>
+          <div class="contact-card"><div class="contact-card-icon">🤝</div><div><h4>Partnerships</h4><p>Interested in working with FitGuide?</p></div></div>
         </div>
- 
         <div class="contact-form">
           <div id="contactFormContent">
             <h3>Send us a message</h3>
             <div class="form-row">
-              <div class="form-group">
-                <label class="form-label">First Name</label>
-                <input class="form-input" type="text" placeholder="Alex" id="fName">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Last Name</label>
-                <input class="form-input" type="text" placeholder="Johnson" id="fLast">
-              </div>
+              <div class="form-grp"><label class="form-lbl">First Name</label><input class="form-inp" type="text" placeholder="Alex" id="fName"></div>
+              <div class="form-grp"><label class="form-lbl">Last Name</label><input class="form-inp" type="text" placeholder="Johnson" id="fLast"></div>
             </div>
-            <div class="form-group">
-              <label class="form-label">Email Address</label>
-              <input class="form-input" type="email" placeholder="alex@example.com" id="fEmail">
+            <div class="form-grp"><label class="form-lbl">Email</label><input class="form-inp" type="email" placeholder="alex@example.com" id="fEmail"></div>
+            <div class="form-grp"><label class="form-lbl">Subject</label>
+              <select class="form-sel" id="fSubject"><option value="" disabled selected>Select a topic…</option><option>General Enquiry</option><option>Bug Report</option><option>Feature Suggestion</option><option>Partnership</option><option>Other</option></select>
             </div>
-            <div class="form-group">
-              <label class="form-label">Subject</label>
-              <select class="form-select" id="fSubject">
-                <option value="" disabled selected>Select a topic…</option>
-                <option>General Enquiry</option>
-                <option>Bug Report</option>
-                <option>Feature Suggestion</option>
-                <option>Partnership</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Message</label>
-              <textarea class="form-textarea" id="fMessage" placeholder="Tell us what's on your mind…"></textarea>
-            </div>
+            <div class="form-grp"><label class="form-lbl">Message</label><textarea class="form-ta" id="fMessage" placeholder="Tell us what's on your mind…"></textarea></div>
             <button class="form-submit" onclick="submitContact()">Send Message →</button>
           </div>
-          <div class="form-success" id="formSuccess">
-            <div class="form-success-icon">✅</div>
+          <div class="form-ok" id="formSuccess">
+            <div class="form-ok-icon">✅</div>
             <h4>Message sent!</h4>
             <p>Thanks for reaching out. We'll get back to you as soon as possible.</p>
           </div>
         </div>
- 
       </div>
     </div>
   </div>
- 
 </div>
  
-<!-- ═══════ FOOTER ═══════ -->
+<!-- ════ PREMIUM ════ -->
+<div class="page" id="page-premium">
+  <div class="pricing-hero">
+    <div class="badge">⚡ Membership Plans</div>
+    <h1 class="h1" style="font-size:clamp(32px,4vw,56px);">Choose your <em>plan</em></h1>
+    <p class="sub" style="margin:0 auto;">Start free, upgrade when you're ready. No hidden fees.</p>
+  </div>
+  <div class="pricing-wrap">
+    <!-- FREE -->
+    <div class="price-card">
+      <div class="price-tier">Free</div>
+      <div class="price-amount">$0<span>/mo</span></div>
+      <div class="price-desc">Great for trying FitGuide. No card needed.</div>
+      <ul class="price-feats">
+        <li class="pf on"><span class="pf-dot">✓</span><span>3 analyses per week</span></li>
+        <li class="pf on"><span class="pf-dot">✓</span><span>Training archetype identification</span></li>
+        <li class="pf on"><span class="pf-dot">✓</span><span>Week-by-week performance timeline</span></li>
+        <li class="pf on"><span class="pf-dot">✓</span><span>Sport & activity alignment</span></li>
+        <li class="pf off"><span class="pf-dot">✗</span><span>Goal match score & efficiency ring</span></li>
+        <li class="pf off"><span class="pf-dot">✗</span><span>Add / remove recommendations</span></li>
+        <li class="pf off"><span class="pf-dot">✗</span><span>Physical adaptation metrics</span></li>
+        <li class="pf off"><span class="pf-dot">✗</span><span>Unlimited analyses</span></li>
+      </ul>
+      <button class="price-btn price-btn-ghost" onclick="showPage('analyze')">Get Started Free</button>
+    </div>
+    <!-- PREMIUM -->
+    <div class="price-card price-card-pro">
+      <div class="price-pop">Most Popular</div>
+      <div class="price-tier price-tier-pro">Premium</div>
+      <div class="price-amount price-amount-pro">$7.99<span>/mo</span></div>
+      <div class="price-desc">Everything you need to train with full scientific insight.</div>
+      <ul class="price-feats">
+        <li class="pf on"><span class="pf-dot pf-dot-blue">✓</span><span>Unlimited analyses</span></li>
+        <li class="pf on"><span class="pf-dot pf-dot-blue">✓</span><span>Training archetype identification</span></li>
+        <li class="pf on"><span class="pf-dot pf-dot-blue">✓</span><span>Week-by-week performance timeline</span></li>
+        <li class="pf on"><span class="pf-dot pf-dot-blue">✓</span><span>Sport & activity alignment</span></li>
+        <li class="pf on"><span class="pf-dot pf-dot-blue">✓</span><span>Goal match score & efficiency ring</span></li>
+        <li class="pf on"><span class="pf-dot pf-dot-blue">✓</span><span>Add / remove recommendations</span></li>
+        <li class="pf on"><span class="pf-dot pf-dot-blue">✓</span><span>Physical adaptation metrics</span></li>
+        <li class="pf on"><span class="pf-dot pf-dot-blue">✓</span><span>Priority analysis speed</span></li>
+      </ul>
+      <button class="price-btn price-btn-blue">Get Premium — $7.99/mo</button>
+    </div>
+    <!-- ELITE -->
+    <div class="price-card">
+      <div class="price-tier">Elite</div>
+      <div class="price-amount">$19.99<span>/mo</span></div>
+      <div class="price-desc">For serious athletes who want the full picture.</div>
+      <ul class="price-feats">
+        <li class="pf on"><span class="pf-dot pf-dot-blue">✓</span><span>Everything in Premium</span></li>
+        <li class="pf on"><span class="pf-dot pf-dot-blue">✓</span><span>Multi-routine comparison</span></li>
+        <li class="pf on"><span class="pf-dot pf-dot-blue">✓</span><span>Progress tracking over time</span></li>
+        <li class="pf on"><span class="pf-dot pf-dot-blue">✓</span><span>Exportable PDF reports</span></li>
+        <li class="pf on"><span class="pf-dot pf-dot-blue">✓</span><span>Coach-level training recommendations</span></li>
+        <li class="pf on"><span class="pf-dot pf-dot-blue">✓</span><span>Priority email support</span></li>
+      </ul>
+      <button class="price-btn price-btn-ghost">Get Elite — $19.99/mo</button>
+    </div>
+  </div>
+  <div class="pricing-note">All plans include a 7-day free trial. Cancel anytime. No hidden fees.</div>
+</div>
+ 
 <footer>
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <div class="footer-logo-icon">💪</div>
-          <span class="footer-logo-text">FitGuide</span>
-        </div>
-        <p>Making sports science accessible to everyone. Understand your training, know your adaptations, become the athlete you're training to be.</p>
+  <div class="foot-inner">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="foot-logo"><div class="foot-logo-icon">💪</div><span class="foot-logo-text">FitGuide</span></div>
+        <p>Making sports science accessible to everyone. Train with intention.</p>
       </div>
-      <div class="footer-links">
-        <div class="footer-col">
-          <h5>Product</h5>
-          <a onclick="showPage('home')">Home</a>
-          <a onclick="showPage('analyze')">Analyze My Routine</a>
-          <a onclick="showPage('howitworks')">How It Works</a>
-        </div>
-        <div class="footer-col">
-          <h5>Company</h5>
-          <a onclick="showPage('about')">About</a>
-          <a onclick="showPage('contact')">Contact</a>
-        </div>
+      <div class="foot-links">
+        <div class="foot-col"><h5>Product</h5><a onclick="showPage('home')">Home</a><a onclick="showPage('analyze')">Analyze</a><a onclick="showPage('howitworks')">How It Works</a><a onclick="showPage('premium')">Premium</a></div>
+        <div class="foot-col"><h5>Company</h5><a onclick="showPage('about')">About</a><a onclick="showPage('contact')">Contact</a></div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2025 FitGuide. Built for athletes, beginners, and everyone in between.</p>
-      <div class="footer-bottom-links">
-        <a>Privacy</a>
-        <a>Terms</a>
-      </div>
+    <div class="foot-bot">
+      <p>© 2025 FitGuide. Built for athletes and beginners alike.</p>
+      <div class="foot-bot-links"><a>Privacy</a><a>Terms</a></div>
     </div>
   </div>
 </footer>
  
 <script>
-/* ─── NAVIGATION ─── */
 const pages = ['home','howitworks','analyze','about','contact','premium'];
- 
 function showPage(name) {
   pages.forEach(p => {
-    document.getElementById('page-'+p).classList.toggle('active', p === name);
-    const nl = document.getElementById('nl-'+p);
-    const ml = document.getElementById('ml-'+p);
-    if(nl) nl.classList.toggle('active', p === name);
-    if(ml) ml.classList.toggle('active', p === name);
+    document.getElementById('page-'+p).classList.toggle('active', p===name);
+    const nl=document.getElementById('nl-'+p); if(nl) nl.classList.toggle('active',p===name);
+    const ml=document.getElementById('ml-'+p); if(ml) ml.classList.toggle('active',p===name);
   });
-  window.scrollTo({top:0, behavior:'smooth'});
-  // Close mobile menu
+  window.scrollTo({top:0,behavior:'smooth'});
   document.getElementById('mobileMenu').classList.remove('open');
 }
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>10);});
  
-function toggleMenu() {
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
- 
-// Sticky nav shadow
-window.addEventListener('scroll', () => {
-  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 10);
-});
- 
-/* ─── CONTACT FORM ─── */
-function submitContact() {
-  const name = document.getElementById('fName').value.trim();
-  const email = document.getElementById('fEmail').value.trim();
-  const msg = document.getElementById('fMessage').value.trim();
-  if(!name || !email || !msg) { alert('Please fill in your name, email, and message.'); return; }
-  document.getElementById('contactFormContent').style.display = 'none';
+function submitContact(){
+  const name=document.getElementById('fName').value.trim();
+  const email=document.getElementById('fEmail').value.trim();
+  const msg=document.getElementById('fMessage').value.trim();
+  if(!name||!email||!msg){alert('Please fill in your name, email, and message.');return;}
+  document.getElementById('contactFormContent').style.display='none';
   document.getElementById('formSuccess').classList.add('show');
 }
  
-/* ─── ANALYZER ─── */
 const examples = {
-  plyometrics: "I train 4 days a week focused on explosiveness. Sessions include box jumps 4x8, depth jumps 3x6, broad jumps 3x8, and sprint drills — 10m, 20m, 40m — twice per week. I also do banded hip thrusts 3x10 and single-leg Romanian deadlifts 3x10 for strength support. Goal is to improve standing vertical jump and first-step acceleration for basketball.",
-  bodybuilding: "PPL split 6 days a week. Push: bench press 4x8, incline dumbbell press 3x10, lateral raises 4x15, overhead press 3x10, tricep pushdowns 4x12. Pull: barbell rows 4x8, lat pulldowns 3x10, cable rows 3x12, face pulls 3x15, bicep curls 4x12. Legs: squats 4x8, Romanian deadlifts 3x10, leg press 4x12, leg curls 3x12, calf raises 5x15. Rest Sunday. Goal is muscle mass.",
-  powerlifting: "4 days a week on linear progression. Monday: squat 5x5, bench 5x5. Wednesday: deadlift 3x5, overhead press 3x5. Friday: squat lighter, bench variation. Saturday: deadlift accessories and rows. Goal is to maximize total on squat, bench, and deadlift.",
-  general: "Gym 3 times a week. 20 minutes treadmill at moderate pace, chest press machine 3x12, lat pulldown 3x12, leg press 3x15, planks and crunches. No structured program, trying to lose weight and stay healthy."
+  plyometrics:"I train 4 days a week focused on explosiveness. Sessions include box jumps 4x8, depth jumps 3x6, broad jumps 3x8, and sprint drills — 10m, 20m, 40m — twice per week. I also do banded hip thrusts 3x10 and single-leg Romanian deadlifts 3x10 for strength support. Goal is to improve standing vertical jump and first-step acceleration for basketball.",
+  bodybuilding:"PPL split 6 days a week. Push: bench press 4x8, incline dumbbell press 3x10, lateral raises 4x15, overhead press 3x10, tricep pushdowns 4x12. Pull: barbell rows 4x8, lat pulldowns 3x10, cable rows 3x12, face pulls 3x15, bicep curls 4x12. Legs: squats 4x8, Romanian deadlifts 3x10, leg press 4x12, leg curls 3x12, calf raises 5x15. Rest Sunday. Goal is muscle mass.",
+  powerlifting:"4 days a week on linear progression. Monday: squat 5x5, bench 5x5. Wednesday: deadlift 3x5, overhead press 3x5. Friday: squat lighter, bench variation. Saturday: deadlift accessories and rows. Goal is to maximize total on squat, bench, and deadlift.",
+  general:"Gym 3 times a week. 20 minutes treadmill at moderate pace, chest press machine 3x12, lat pulldown 3x12, leg press 3x15, planks and crunches. No structured program, trying to lose weight and stay healthy."
 };
+function onInput(ta){document.getElementById('analyzeBtn').disabled=ta.value.trim().length<10;}
+function fillExample(type){const ta=document.getElementById('routineInput');ta.value=examples[type];onInput(ta);ta.focus();}
  
-function onInput(ta) {
-  document.getElementById('analyzeBtn').disabled = ta.value.trim().length < 10;
+function resetForm(){
+  document.getElementById('routineInput').value='';
+  document.getElementById('goalInput').value='';
+  document.getElementById('analyzeBtn').disabled=true;
+  const l=document.getElementById('loadingSection'),r=document.getElementById('resultsSection'),i=document.getElementById('inputSection');
+  l.classList.remove('visible');l.style.display='none';
+  r.classList.remove('visible');r.style.display='none';
+  i.style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
 }
  
-function fillExample(type) {
-  const ta = document.getElementById('routineInput');
-  ta.value = examples[type];
-  onInput(ta);
-  ta.focus();
-}
- 
-function resetForm() {
-  document.getElementById('routineInput').value = '';
-  document.getElementById('analyzeBtn').disabled = true;
-  const loadEl = document.getElementById('loadingSection');
-  const resEl  = document.getElementById('resultsSection');
-  const inpEl  = document.getElementById('inputSection');
-  loadEl.classList.remove('visible'); loadEl.style.display = 'none';
-  resEl.classList.remove('visible');  resEl.style.display  = 'none';
-  inpEl.style.display = 'block';
-  window.scrollTo({top:0, behavior:'smooth'});
-}
- 
-/* ═══════════════════════════════════════
-   RULE-BASED ANALYSIS ENGINE
-   Runs 100% in the browser — no API, no cost, instant
-═══════════════════════════════════════ */
-const DB = {
-  explosive: {
-    keys: /box jump|depth jump|broad jump|plyom|sprint|hurdle|jump squat|power clean|hang clean|snatch|medicine ball|bounding|reactive|first.?step|vertical|acceleration|agility|ladder|cone drill/i,
-    icon: '⚡', title: 'The Explosive Athlete',
-    desc: 'Your training is primarily developing the neuromuscular system for rapid force production and elastic energy utilisation. The high-velocity, plyometric-dominant stimulus drives adaptation in fast-twitch (Type IIx) muscle fibres, Achilles tendon stiffness, and reactive strength index.',
-    pills: ['Reactive Strength Focus','Anaerobic Power','Neuromuscular Demand'],
-    timeline: [
-      { period:'Weeks 1–2', emoji:'🧠', description:'Rapid neuromuscular coordination improvements occur as motor unit recruitment efficiency increases. Expect reduced ground contact times and improved movement pattern fluency. Minimal structural change at this stage.' },
-      { period:'Weeks 3–4', emoji:'⚡', description:'Measurable gains in rate of force development (RFD). Achilles tendon stiffness begins to adapt, improving elastic energy return during jumps and sprints. Subjective feeling of "springiness" becomes noticeable.' },
-      { period:'Weeks 6–8', emoji:'🦵', description:'Estimated 3–5 cm improvement in standing vertical jump height via enhanced stretch-shortening cycle efficiency. 20m sprint time projected to decrease by 3–6%. Fast-twitch fibre cross-sectional area begins to increase.' },
-      { period:'Weeks 10–14', emoji:'🏃', description:'Reactive strength index improves significantly. Horizontal power output (broad jump, acceleration) increases 8–12%. Ground contact time during sprinting decreases, indicating improved stiffness regulation.' },
-      { period:'Month 4+', emoji:'🏅', description:'Sustained adaptation produces an estimated 5–9 cm increase in standing vertical jump and 8–12% improvement in 20m sprint time. Tendon structural remodelling is largely complete, underpinning long-term performance gains.' }
-    ],
-    metrics: [
-      { icon:'📏', name:'Standing Vertical Jump', detail:'Estimated 5–9 cm increase via improved reactive strength index and Achilles tendon stiffness adaptation over 16 weeks.', tag:'+Explosive Power' },
-      { icon:'🏃', name:'20m Sprint Time', detail:'Projected 6–10% reduction through increased rate of force development and enhanced stride mechanics.', tag:'+Speed' },
-      { icon:'💪', name:'Rate of Force Development', detail:'RFD (force produced in first 100ms) estimated to improve 15–25%, directly translating to first-step quickness.', tag:'+Athleticism' },
-      { icon:'🦵', name:'Reactive Strength Index', detail:'RSI (jump height / contact time) projected to improve 20–35%, reflecting superior tendon stiffness and neural drive.', tag:'+Spring Mechanics' }
-    ],
-    sports: ['🏀 Basketball','⚽ Soccer','🏈 Football','🏐 Volleyball']
-  },
-  strength: {
-    keys: /squat|deadlift|bench press|overhead press|barbell|powerlifting|5x5|3x5|1rm|one rep max|max strength|linear progression|strong|heavy|compound|low rep/i,
-    icon: '🏋️', title: 'The Strength Athlete',
-    desc: 'Your training is structured around maximal force production through heavy compound movements at low repetition ranges. This stimulus primarily drives myofibrillar hypertrophy, neural drive improvements, and connective tissue reinforcement rather than metabolic adaptations.',
-    pills: ['High Mechanical Load','Myofibrillar Stimulus','CNS Intensive'],
-    timeline: [
-      { period:'Weeks 1–2', emoji:'🧠', description:'Central nervous system adaptations dominate early gains. Improved inter-muscular coordination and motor unit synchronisation result in strength increases without significant muscle mass change.' },
-      { period:'Weeks 3–4', emoji:'💪', description:'Neuromuscular efficiency continues to improve. Expect 5–10% strength increases on primary lifts (squat, bench, deadlift) driven by enhanced neural drive rather than structural changes.' },
-      { period:'Weeks 6–8', emoji:'🦴', description:'Connective tissue (tendons, ligaments) begins structural remodelling to tolerate heavier loads. Myofibrillar protein synthesis elevates, contributing to denser, stronger muscle fibres.' },
-      { period:'Weeks 10–14', emoji:'📈', description:'Primary lifts projected to increase 10–20% from baseline. Cross-sectional area of Type II muscle fibres measurably increases. Bone mineral density begins to improve in loaded segments.' },
-      { period:'Month 4+', emoji:'🏆', description:'Sustained linear progression produces a 25–40% increase in maximal strength across compound movements. Neural adaptations plateau; further gains driven by structural hypertrophy and technical refinement.' }
-    ],
-    metrics: [
-      { icon:'🏋️', name:'Maximal Squat Strength', detail:'Projected 20–35% increase in 1RM squat over 16 weeks via myofibrillar hypertrophy and improved neural drive.', tag:'+Max Strength' },
-      { icon:'📐', name:'Deadlift 1RM', detail:'Estimated 25–40% increase in maximal deadlift, driven by posterior chain development and connective tissue adaptation.', tag:'+Posterior Chain' },
-      { icon:'💪', name:'Bench Press 1RM', detail:'Projected 15–25% upper body pressing strength increase via pectoral, deltoid, and tricep myofibrillar development.', tag:'+Upper Body Power' },
-      { icon:'🦴', name:'Bone Mineral Density', detail:'Axial and appendicular bone density estimated to improve 2–4% over 6 months, reducing long-term injury risk.', tag:'+Structural Integrity' }
-    ],
-    sports: ['🏋️ Powerlifting','🤼 Wrestling','🏈 Football','🥊 Combat Sports']
-  },
-  hypertrophy: {
-    keys: /hypertrophy|muscle|size|mass|bulk|ppl|push.pull|3x10|4x10|3x12|4x12|isolation|curl|extension|fly|lateral raise|cable|machine|pump|volume|bodybuilding/i,
-    icon: '💪', title: 'The Hypertrophy Specialist',
-    desc: 'Your high-volume, moderate-intensity training protocol is the optimal stimulus for sarcoplasmic and myofibrillar hypertrophy. The elevated time-under-tension and metabolic stress across multiple sets drives significant increases in muscle cross-sectional area over time.',
-    pills: ['High Training Volume','Metabolic Stress','Hypertrophy Optimised'],
-    timeline: [
-      { period:'Weeks 1–2', emoji:'🔥', description:'Metabolic adaptations begin — increased glycogen storage capacity in trained muscles and improved lactate clearance. DOMS peaks in week 1 then diminishes as repeated bout effect takes hold.' },
-      { period:'Weeks 3–4', emoji:'💧', description:'Sarcoplasmic hypertrophy becomes measurable — increased intramuscular fluid, glycogen, and metabolic enzyme content. Visible pump during training intensifies. Scale weight may increase 1–2 kg.' },
-      { period:'Weeks 6–8', emoji:'💪', description:'Myofibrillar protein accretion accelerates. Cross-sectional area of trained muscles estimated to increase 3–5%. Strength on isolation movements improves 10–15% as neural and structural adaptations compound.' },
-      { period:'Weeks 10–14', emoji:'📏', description:'Significant visible changes in muscle size and definition. Estimated 4–7% increase in lean muscle mass. Lagging muscle groups respond to accumulated volume stimulus with delayed but measurable hypertrophy.' },
-      { period:'Month 4+', emoji:'🏆', description:'Total lean mass estimated to increase 3–6 kg under adequate nutritional support. Muscular symmetry and proportion improve. Basal metabolic rate increases proportionally with lean mass gained.' }
-    ],
-    metrics: [
-      { icon:'📏', name:'Lean Muscle Mass', detail:'Estimated 3–6 kg lean mass gain over 4–6 months under consistent training and caloric surplus conditions.', tag:'+Hypertrophy' },
-      { icon:'💪', name:'Muscle Cross-Sectional Area', detail:'Targeted muscle groups projected to increase 6–10% in cross-sectional area, particularly in primary movers.', tag:'+Size' },
-      { icon:'🔥', name:'Basal Metabolic Rate', detail:'BMR estimated to increase 80–150 kcal/day per kg of lean mass gained, improving body composition maintenance.', tag:'+Metabolism' },
-      { icon:'📐', name:'Strength Endurance', detail:'Working weight on hypertrophy rep ranges (8–12 reps) projected to increase 15–25% across primary compound movements.', tag:'+Working Strength' }
-    ],
-    sports: ['🏊 Swimming','🚣 Rowing','🤸 Gymnastics','🏊 Water Polo']
-  },
-  endurance: {
-    keys: /cardio|run|treadmill|jog|cycling|bike|swim|row|zone 2|aerobic|vo2|marathon|5k|10k|long distance|stamina|endurance|hiit|circuit|crossfit|wod/i,
-    icon: '🫀', title: 'The Endurance Athlete',
-    desc: 'Your training primarily targets the oxidative energy system, driving cardiovascular and mitochondrial adaptations. Sustained aerobic work increases stroke volume, mitochondrial density, and fat oxidation capacity, building a robust aerobic base.',
-    pills: ['Aerobic Development','Mitochondrial Growth','Cardiovascular Adaptation'],
-    timeline: [
-      { period:'Weeks 1–2', emoji:'❤️', description:'Cardiovascular adaptations begin — plasma volume expands by 5–10%, improving oxygen delivery. Resting heart rate begins to decrease. Perceived exertion at submaximal intensities reduces noticeably.' },
-      { period:'Weeks 3–4', emoji:'🫀', description:'Cardiac stroke volume measurably increases. Mitochondrial biogenesis is stimulated in slow-twitch fibres. Fat oxidation capacity at moderate intensities begins to improve, sparing glycogen.' },
-      { period:'Weeks 6–8', emoji:'🏃', description:'VO2max estimated to improve 5–8%. Running economy improves as movement efficiency increases. Lactate threshold shifts rightward — you can sustain higher intensities before accumulating fatigue.' },
-      { period:'Weeks 10–14', emoji:'💨', description:'Estimated 8–12% VO2max improvement from baseline. Capillary density in trained muscles increases, enhancing oxygen extraction. Long-duration performance significantly improves.' },
-      { period:'Month 4+', emoji:'🏅', description:'Robust aerobic base established. VO2max projected to improve 10–18% total. Resting heart rate may decrease 5–12 bpm. Fat oxidation at moderate intensities increases substantially, improving body composition.' }
-    ],
-    metrics: [
-      { icon:'🫀', name:'VO2max', detail:'Estimated 10–18% improvement in maximal oxygen uptake over 4–6 months, directly translating to aerobic performance capacity.', tag:'+Aerobic Capacity' },
-      { icon:'❤️', name:'Resting Heart Rate', detail:'Projected 5–12 bpm reduction in resting heart rate via increased cardiac stroke volume and parasympathetic tone.', tag:'+Cardiovascular Health' },
-      { icon:'🏃', name:'Lactate Threshold', detail:'Lactate threshold pace estimated to improve 8–15%, allowing you to sustain higher intensities for longer durations.', tag:'+Endurance' },
-      { icon:'⚡', name:'Running Economy', detail:'Oxygen cost at a given pace projected to decrease 4–7% through improved neuromuscular efficiency and movement mechanics.', tag:'+Efficiency' }
-    ],
-    sports: ['🏃 Distance Running','🚴 Cycling','🏊 Triathlon','⛷️ Cross-Country Skiing']
-  },
-  general: {
-    icon: '🏃', title: 'The General Fitness Athlete',
-    desc: 'Your balanced, multi-modal training program develops broad physical capacity across strength, endurance, and mobility domains. This approach optimises overall health markers, functional movement quality, and general athletic preparedness without specialising in a single adaptation.',
-    pills: ['Balanced Training','Health Optimised','Multi-Modal'],
-    timeline: [
-      { period:'Weeks 1–2', emoji:'🌱', description:'Foundational neuromuscular adaptations occur across all trained movement patterns. Improved motor control and movement efficiency reduce injury risk and perceived exertion during sessions.' },
-      { period:'Weeks 3–4', emoji:'💪', description:'Concurrent strength and cardiovascular adaptations compound. Baseline strength on primary movements increases 5–8% while aerobic capacity begins measurable improvement.' },
-      { period:'Weeks 6–8', emoji:'📈', description:'Body composition begins to shift — modest lean mass increases alongside fat mass reduction. Energy levels, sleep quality, and recovery capacity all show measurable improvement.' },
-      { period:'Weeks 10–14', emoji:'🏅', description:'Well-rounded fitness improvements across all domains. Functional movement quality significantly enhanced. Estimated 10–15% improvement in both strength benchmarks and aerobic performance measures.' },
-      { period:'Month 4+', emoji:'🌟', description:'Comprehensive fitness transformation. Estimated 3–5 kg improvement in body composition, 10–20% strength increase on compound movements, and 8–12% VO2max improvement.' }
-    ],
-    metrics: [
-      { icon:'⚖️', name:'Body Composition', detail:'Estimated 3–5 kg favourable body composition shift (lean mass increase / fat mass reduction) over 4–6 months.', tag:'+Composition' },
-      { icon:'💪', name:'Functional Strength', detail:'Primary movement pattern strength projected to increase 10–20% across upper and lower body exercises.', tag:'+Strength' },
-      { icon:'🫀', name:'Cardiovascular Fitness', detail:'VO2max estimated to improve 8–12%, reducing cardiovascular disease risk markers and improving daily energy levels.', tag:'+Cardio Health' },
-      { icon:'🧘', name:'Movement Quality', detail:'Functional movement screen scores projected to improve significantly, reducing injury risk and enhancing athletic longevity.', tag:'+Mobility' }
-    ],
-    sports: ['🏊 Swimming','🚴 Cycling','🧗 Rock Climbing','🎾 Tennis']
-  }
-};
- 
-function analyseRoutine(text) {
-  const t = text.toLowerCase();
- 
-  // Score each archetype
-  const scores = { explosive:0, strength:0, hypertrophy:0, endurance:0 };
- 
-  // Keyword scoring
-  const explosiveWords = ['box jump','depth jump','broad jump','plyom','sprint','hurdle','jump squat','power clean','hang clean','snatch','medicine ball','bounding','reactive','vertical','acceleration','agility','first step'];
-  const strengthWords  = ['squat','deadlift','bench press','overhead press','5x5','3x5','1rm','one rep max','powerlifting','heavy','linear progression','low rep'];
-  const hypertrophyWords = ['hypertrophy','muscle','size','mass','bulk','ppl','push pull','isolation','curl','extension','fly','lateral raise','cable','pump','volume','bodybuilding','3x10','4x10','3x12','4x12'];
-  const enduranceWords = ['cardio','run','treadmill','jog','cycling','bike','swim','zone 2','aerobic','vo2','marathon','5k','10k','endurance','stamina','hiit','circuit'];
- 
-  explosiveWords.forEach(w => { if(t.includes(w)) scores.explosive += 2; });
-  strengthWords.forEach(w  => { if(t.includes(w)) scores.strength  += 2; });
-  hypertrophyWords.forEach(w=>{ if(t.includes(w)) scores.hypertrophy+=2; });
-  enduranceWords.forEach(w  => { if(t.includes(w)) scores.endurance  += 2; });
- 
-  // Rep range scoring
-  const repMatch = t.match(/(\d+)\s*[x×]\s*(\d+)/g) || [];
-  repMatch.forEach(r => {
-    const parts = r.match(/(\d+)\s*[x×]\s*(\d+)/);
-    if(!parts) return;
-    const reps = parseInt(parts[2]);
-    if(reps <= 5)  { scores.strength    += 3; }
-    if(reps >= 6 && reps <= 10) { scores.hypertrophy += 2; scores.strength += 1; }
-    if(reps >= 10) { scores.hypertrophy += 3; }
-    if(reps >= 15) { scores.endurance   += 2; }
-  });
- 
-  // Goal keyword scoring
-  if(/faster|speed|jump|athletic|sport|basketball|soccer|football|explosive/.test(t)) scores.explosive += 4;
-  if(/stronger|strength|powerl|total|1rm|max/.test(t)) scores.strength   += 4;
-  if(/bigger|size|mass|bulk|aesthetic|physique|muscle/.test(t)) scores.hypertrophy += 4;
-  if(/lose weight|cardio|health|fit|stamina|endurance|marathon|run/.test(t)) scores.endurance += 4;
- 
-  // Pick winner
-  const winner = Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
-  const archetype = DB[winner].keys
-    ? (DB[winner].keys.test(text) || scores[winner] > 0 ? DB[winner] : DB.general)
-    : DB[winner];
- 
-  // Build secondary sport tags based on runner-up
-  const sorted = Object.entries(scores).sort((a,b) => b[1]-a[1]);
-  const base = DB[sorted[0][0]];
- 
-  return {
-    archetypeIcon:  base.icon,
-    archetypeTitle: base.title,
-    archetypeDesc:  base.desc,
-    statPills:      base.pills,
-    timeline:       base.timeline,
-    metrics:        base.metrics,
-    sports:         base.sports
-  };
-}
- 
-async function runAnalysis() {
-  const text = document.getElementById('routineInput').value.trim();
-  if(!text || text.length < 10) return;
- 
-  document.getElementById('analyzeBtn').disabled = true;
- 
-  const loadEl = document.getElementById('loadingSection');
-  const resEl  = document.getElementById('resultsSection');
-  const inpEl  = document.getElementById('inputSection');
- 
-  inpEl.style.display = 'none';
-  resEl.classList.remove('visible'); resEl.style.display = 'none';
-  loadEl.style.display = 'block'; loadEl.classList.add('visible');
-  loadEl.scrollIntoView({behavior:'smooth', block:'center'});
- 
-  const setProgress = (p, label) => {
-    document.getElementById('progressFill').style.width = p + '%';
-    document.getElementById('progressPct').textContent = Math.round(p) + '%';
-    if(label) document.getElementById('loadingStatus').textContent = label;
-  };
- 
-  // Animate progress bar while waiting for backend
-  const steps = [
-    [10, 'Reading your exercises…'],
-    [30, 'Calculating volume & intensity…'],
-    [55, 'Matching physiological adaptations…'],
-    [80, 'Projecting your timeline…'],
-  ];
-  let i = 0;
-  setProgress(0, 'Reading your exercises…');
-  const ticker = setInterval(() => {
-    if(i < steps.length) { setProgress(steps[i][0], steps[i][1]); i++; }
-  }, 600);
- 
-  try {
-    // ── Call your local backend ──────────────────────
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: text })
-    });
- 
+async function runAnalysis(){
+  const text=document.getElementById('routineInput').value.trim();
+  if(!text||text.length<10)return;
+  document.getElementById('analyzeBtn').disabled=true;
+  const loadEl=document.getElementById('loadingSection'),resEl=document.getElementById('resultsSection'),inpEl=document.getElementById('inputSection');
+  inpEl.style.display='none';
+  resEl.classList.remove('visible');resEl.style.display='none';
+  loadEl.style.display='block';loadEl.classList.add('visible');
+  loadEl.scrollIntoView({behavior:'smooth',block:'center'});
+  const setP=(p,l)=>{document.getElementById('progressFill').style.width=p+'%';document.getElementById('progressPct').textContent=Math.round(p)+'%';if(l)document.getElementById('loadingStatus').textContent=l;};
+  const steps=[[10,'Reading your exercises…'],[30,'Calculating volume & intensity…'],[55,'Matching physiological adaptations…'],[80,'Projecting your timeline…']];
+  let si=0;setP(0,'Reading your exercises…');
+  const ticker=setInterval(()=>{if(si<steps.length){setP(steps[si][0],steps[si][1]);si++;}},600);
+  try{
+    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text})});
     clearInterval(ticker);
- 
-    if(!res.ok) throw new Error(`Server error ${res.status}`);
- 
-    const parsed = await res.json();
- 
-    setProgress(100, 'Done!');
-    await new Promise(r => setTimeout(r, 300));
- 
+    if(!res.ok)throw new Error(`Server error ${res.status}`);
+    const parsed=await res.json();
+    setP(100,'Done!');
+    await new Promise(r=>setTimeout(r,300));
     renderResults(parsed);
-    loadEl.classList.remove('visible'); loadEl.style.display = 'none';
-    resEl.style.display = 'block'; resEl.classList.add('visible');
-    resEl.scrollIntoView({behavior:'smooth', block:'start'});
- 
-  } catch(err) {
+    loadEl.classList.remove('visible');loadEl.style.display='none';
+    resEl.style.display='block';resEl.classList.add('visible');
+    resEl.scrollIntoView({behavior:'smooth',block:'start'});
+  }catch(err){
     clearInterval(ticker);
     console.error(err);
-    loadEl.classList.remove('visible'); loadEl.style.display = 'none';
-    inpEl.style.display = 'block';
+    loadEl.classList.remove('visible');loadEl.style.display='none';
+    inpEl.style.display='block';
     alert('Could not reach the server. Make sure you opened the site at http://localhost:3000 — not by double-clicking the HTML file.');
   }
- 
-  document.getElementById('analyzeBtn').disabled = false;
+  document.getElementById('analyzeBtn').disabled=false;
 }
  
-function renderResults(d) {
-  document.getElementById('archIcon').textContent  = d.archetypeIcon  || '💪';
-  document.getElementById('archTitle').textContent = d.archetypeTitle || 'Fitness Athlete';
-  document.getElementById('archDesc').textContent  = d.archetypeDesc  || '';
+function renderResults(d){
+  document.getElementById('archIcon').textContent=d.archetypeIcon||'💪';
+  document.getElementById('archTitle').textContent=d.archetypeTitle||'Fitness Athlete';
+  document.getElementById('archDesc').textContent=d.archetypeDesc||'';
+  const pillsEl=document.getElementById('statPills');pillsEl.innerHTML='';
+  (d.statPills||[]).forEach(p=>{const el=document.createElement('div');el.className='arch-pill';el.textContent=p;pillsEl.appendChild(el);});
  
-  const pillsEl = document.getElementById('statPills');
-  pillsEl.innerHTML = '';
-  (d.statPills||[]).forEach(p => {
-    const el = document.createElement('div');
-    el.className = 'stat-pill'; el.textContent = p;
-    pillsEl.appendChild(el);
-  });
+  // Goal match premium card
+  const goal=document.getElementById('goalInput').value.trim();
+  const pc=document.getElementById('premiumGoalCard');
+  if(goal){
+    pc.style.display='block';
+    const g=goal.toLowerCase(),title=(d.archetypeTitle||'').toLowerCase(),sports=(d.sports||[]).join(' ').toLowerCase();
+    let score=42;
+    if(g.split(' ').some(w=>w.length>3&&title.includes(w)))score+=28;
+    if(g.split(' ').some(w=>w.length>3&&sports.includes(w)))score+=20;
+    score=Math.min(98,Math.max(22,score));
+    const circ=2*Math.PI*45; // r=45
+    const offset=circ-(score/100)*circ;
+    const ring=document.getElementById('goalRingFill');
+    ring.style.strokeDasharray=circ;
+    ring.style.strokeDashoffset=offset;
+    document.getElementById('goalRingPct').textContent=score+'%';
+    document.getElementById('goalMatchTitle').textContent=score+'% match for "'+goal+'"';
+    document.getElementById('goalMatchDesc').textContent=score>=70?'Your routine aligns well with your goal. See recommendations below to optimise further.':score>=45?'Your routine partially supports your goal. Several adjustments could significantly improve alignment.':'Your current routine has limited alignment with your goal. Targeted changes are recommended.';
+    const tweaks=score>=70?[{t:'add',s:'Add sport-specific drills twice per week to sharpen goal alignment.'},{t:'rem',s:'Reduce excessive volume on non-primary movements to free recovery capacity.'},{t:'add',s:'Incorporate progressive overload tracking to ensure continued adaptation.'}]:score>=45?[{t:'add',s:'Add 2 sessions per week directly targeting your goal movement patterns.'},{t:'rem',s:'Remove exercises with low specificity to your stated goal.'},{t:'add',s:'Increase frequency on your weakest physical quality.'},{t:'rem',s:'Cut rest periods to improve conditioning relevant to your goal.'}]:[{t:'add',s:'Restructure your programme around the primary physical demands of your goal.'},{t:'rem',s:'Remove exercises that conflict with the adaptations your goal requires.'},{t:'add',s:'Prioritise goal-specific training at the start of each session when freshest.'},{t:'rem',s:'Reduce overall volume to allow better quality on goal-relevant work.'}];
+    document.getElementById('goalTweaks').innerHTML=tweaks.map(tw=>`<div class="tweak ${tw.t}"><span class="tweak-dot">${tw.t==='add'?'+':'−'}</span><span>${tw.s}</span></div>`).join('');
+  }else{pc.style.display='none';}
  
-  // Goal match section — compute a fake but plausible score from archetype vs goal text
-  const goal = document.getElementById('goalInput').value.trim();
-  const premCard = document.getElementById('premiumGoalCard');
-  if (goal) {
-    premCard.style.display = 'block';
-    // Score: compare goal keywords against archetype
-    const g = goal.toLowerCase();
-    const title = (d.archetypeTitle||'').toLowerCase();
-    const sports = (d.sports||[]).join(' ').toLowerCase();
-    let score = 42; // base
-    if (g.split(' ').some(w => w.length > 3 && title.includes(w))) score += 28;
-    if (g.split(' ').some(w => w.length > 3 && sports.includes(w))) score += 20;
-    score = Math.min(98, Math.max(22, score));
-    // Set ring
-    const circumference = 314;
-    const offset = circumference - (score / 100) * circumference;
-    document.getElementById('goalRingFill').style.strokeDashoffset = offset;
-    document.getElementById('goalRingPct').textContent = score + '%';
-    document.getElementById('goalMatchTitle').textContent = `${score}% match for "${goal}"`;
-    document.getElementById('goalMatchDesc').textContent = score >= 70
-      ? 'Your routine aligns well with your goal. See recommendations below to optimise further.'
-      : score >= 45
-      ? 'Your routine partially supports your goal. Several adjustments could significantly improve alignment.'
-      : 'Your current routine has limited alignment with your goal. Targeted changes are recommended.';
-    // Fake tweak suggestions
-    const tweaks = score >= 70
-      ? [{type:'add',text:'Add sport-specific drills twice per week to sharpen goal alignment.'},{type:'remove',text:'Reduce excessive volume on non-primary muscle groups to free recovery capacity.'},{type:'add',text:'Incorporate progressive overload tracking to ensure continued adaptation.'}]
-      : score >= 45
-      ? [{type:'add',text:'Add 2 sessions per week directly targeting your goal movement patterns.'},{type:'remove',text:'Remove or reduce exercises with low specificity to your stated goal.'},{type:'add',text:'Increase training frequency on your weakest physical quality.'},{type:'remove',text:'Cut rest periods to improve conditioning relevant to your goal.'}]
-      : [{type:'add',text:'Restructure your programme around the primary physical demands of your goal.'},{type:'remove',text:'Remove several exercises that conflict with the adaptations your goal requires.'},{type:'add',text:'Prioritise goal-specific training at the start of each session when freshest.'},{type:'remove',text:'Reduce training volume to allow better quality on goal-relevant work.'}];
-    const tweakEl = document.getElementById('goalTweaks');
-    tweakEl.innerHTML = tweaks.map(t => `
-      <div class="tweak-item tweak-${t.type}">
-        <span class="tweak-dot">${t.type === 'add' ? '+' : '−'}</span>
-        <span>${t.text}</span>
-      </div>`).join('');
-  } else {
-    premCard.style.display = 'none';
-  }
+  const tl=document.getElementById('timeline');tl.innerHTML='';
+  (d.timeline||[]).forEach((item,i)=>{const el=document.createElement('div');el.className='tl-item';el.style.animationDelay=i*.09+'s';el.innerHTML=`<div class="tl-dot">${item.emoji||'●'}</div><div class="tl-body"><div class="tl-per">${item.period}</div><div class="tl-txt">${item.description}</div></div>`;tl.appendChild(el);});
  
-  const tl = document.getElementById('timeline');
-  tl.innerHTML = '';
-  (d.timeline||[]).forEach((item,i) => {
-    const el = document.createElement('div');
-    el.className = 'tl-item'; el.style.animationDelay = `${i*.09}s`;
-    el.innerHTML = `<div class="tl-node">${item.emoji||'●'}</div><div class="tl-body"><div class="tl-period">${item.period}</div><div class="tl-text">${item.description}</div></div>`;
-    tl.appendChild(el);
-  });
+  const ml=document.getElementById('metricsList');ml.innerHTML='';
+  (d.metrics||[]).forEach((m,i)=>{const el=document.createElement('div');el.className='met-row';el.style.animationDelay=i*.07+'s';el.innerHTML=`<div class="met-icon">${m.icon||'📊'}</div><div class="met-body"><div class="met-name">${m.name}</div><div class="met-detail">${m.detail}</div></div><div class="met-tag">${m.tag}</div>`;ml.appendChild(el);});
  
-  const ml = document.getElementById('metricsList');
-  ml.innerHTML = '';
-  (d.metrics||[]).forEach((m,i) => {
-    const el = document.createElement('div');
-    el.className = 'metric-row'; el.style.animationDelay = `${i*.07}s`;
-    el.innerHTML = `<div class="metric-icon">${m.icon||'📊'}</div><div class="metric-body"><div class="metric-name">${m.name}</div><div class="metric-detail">${m.detail}</div></div><div class="metric-tag">${m.tag}</div>`;
-    ml.appendChild(el);
-  });
- 
-  const sg = document.getElementById('sportGrid');
-  sg.innerHTML = '';
-  (d.sports||[]).forEach(s => {
-    const el = document.createElement('div');
-    el.className = 'sport-chip'; el.textContent = s;
-    sg.appendChild(el);
-  });
+  const sg=document.getElementById('sportGrid');sg.innerHTML='';
+  (d.sports||[]).forEach(s=>{const el=document.createElement('div');el.className='sport-tag';el.textContent=s;sg.appendChild(el);});
 }
 </script>
 </body>
