@@ -339,6 +339,51 @@ footer{background:var(--bg-1);border-top:1px solid var(--border);padding:44px 52
 .foot-bot-links a{font-size:11.5px;color:var(--text-3);cursor:pointer;text-decoration:none;transition:color .15s;}
 .foot-bot-links a:hover{color:var(--text-2);}
  
+/* ── PREMIUM RING CARD ── */
+.prem-card{margin-bottom:14px;border-radius:20px;overflow:hidden;border:1px solid var(--blue-border);background:var(--bg-2);box-shadow:0 0 32px rgba(10,132,255,0.1);}
+.prem-blur-wrap{position:relative;min-height:210px;}
+.prem-inner{padding:24px 26px;filter:blur(5px) brightness(0.55);pointer-events:none;user-select:none;}
+.ring-row{display:flex;align-items:center;gap:22px;margin-bottom:18px;}
+.ring-svg{width:100px;height:100px;flex-shrink:0;}
+.ring-track{fill:none;stroke:#2a2a2a;stroke-width:9;}
+.ring-fill{fill:none;stroke:var(--blue);stroke-width:9;stroke-linecap:round;transition:stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1);}
+.ring-pct{font-family:'Sora',sans-serif;font-size:18px;font-weight:800;fill:#f0f0f0;text-anchor:middle;}
+.ring-lbl{font-size:9px;fill:rgba(240,240,240,0.4);text-anchor:middle;}
+.ring-info h4{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--text-1);margin-bottom:5px;}
+.ring-info p{font-size:12.5px;color:var(--text-2);line-height:1.6;}
+.tweaks{display:flex;flex-direction:column;gap:7px;}
+.tweak{display:flex;align-items:flex-start;gap:9px;padding:9px 11px;border-radius:9px;font-size:12.5px;}
+.tweak.add{background:rgba(48,209,88,0.08);color:rgba(240,240,240,0.8);}
+.tweak.rem{background:rgba(255,69,58,0.08);color:rgba(240,240,240,0.8);}
+.tweak-dot{width:18px;height:18px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;margin-top:1px;}
+.tweak.add .tweak-dot{background:rgba(48,209,88,0.18);color:#30D158;}
+.tweak.rem .tweak-dot{background:rgba(255,69,58,0.18);color:#FF453A;}
+.prem-lock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:28px 24px;text-align:center;background:rgba(8,8,8,0.6);}
+.lock-emoji{font-size:30px;}
+.lock-title{font-family:'Sora',sans-serif;font-size:17px;font-weight:800;color:var(--text-1);}
+.lock-desc{font-size:12.5px;color:var(--text-2);max-width:300px;line-height:1.6;}
+.lock-btn{background:var(--blue);color:white;border:none;padding:10px 22px;border-radius:9px;font-family:'Sora',sans-serif;font-size:13.5px;font-weight:700;cursor:pointer;margin-top:4px;box-shadow:0 0 18px var(--blue-glow);transition:all .15s;}
+.lock-btn:hover{background:var(--blue-bright);}
+ 
+/* ── USAGE LIMIT BANNER ── */
+.usage-banner{background:var(--bg-2);border:1px solid rgba(255,214,10,0.25);border-radius:14px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px;flex-wrap:wrap;}
+.usage-left{display:flex;align-items:center;gap:10px;}
+.usage-icon{font-size:20px;}
+.usage-text strong{font-family:'Sora',sans-serif;font-size:13.5px;font-weight:700;color:var(--text-1);display:block;}
+.usage-text span{font-size:12px;color:var(--text-3);}
+.usage-dots{display:flex;gap:5px;}
+.usage-dot{width:10px;height:10px;border-radius:50%;background:var(--bg-4);}
+.usage-dot.used{background:var(--gold);}
+.usage-upgrade{background:rgba(255,214,10,0.12);color:var(--gold);border:1px solid rgba(255,214,10,0.25);padding:7px 14px;border-radius:8px;font-family:'Sora',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.usage-upgrade:hover{background:rgba(255,214,10,0.2);}
+ 
+/* ── LIMIT WALL ── */
+.limit-wall{background:var(--bg-2);border:1px solid rgba(255,214,10,0.2);border-radius:18px;padding:40px 32px;text-align:center;margin:0 24px 40px;max-width:620px;margin-left:auto;margin-right:auto;}
+.limit-wall-icon{font-size:44px;margin-bottom:14px;}
+.limit-wall h2{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;color:var(--text-1);margin-bottom:8px;}
+.limit-wall p{font-size:14px;color:var(--text-2);line-height:1.65;margin-bottom:22px;}
+.limit-wall-reset{font-size:12px;color:var(--text-3);margin-top:12px;}
+ 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
   nav{padding:0 22px;}
@@ -518,7 +563,36 @@ footer{background:var(--bg-1);border-top:1px solid var(--border);padding:44px 52
   </div>
  
   <div class="survey-wrap" id="inputSection">
-    <div class="survey-card">
+ 
+    <!-- Usage counter -->
+    <div class="usage-banner" id="usageBanner">
+      <div class="usage-left">
+        <div class="usage-icon">⚡</div>
+        <div class="usage-text">
+          <strong id="usageText">3 free analyses remaining this week</strong>
+          <span>Upgrade to Premium for unlimited access</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="usage-dots" id="usageDots">
+          <div class="usage-dot" id="ud1"></div>
+          <div class="usage-dot" id="ud2"></div>
+          <div class="usage-dot" id="ud3"></div>
+        </div>
+        <button class="usage-upgrade" onclick="showPage('premium')">Upgrade →</button>
+      </div>
+    </div>
+ 
+    <!-- Limit wall (shown when 0 uses left) -->
+    <div class="limit-wall" id="limitWall" style="display:none;">
+      <div class="limit-wall-icon">🔒</div>
+      <h2>You've used your 3 free analyses this week</h2>
+      <p>Free users get 3 analyses per week. Upgrade to Premium for unlimited access, goal match scores, personalised recommendations, and more.</p>
+      <button class="btn" onclick="showPage('premium')">Unlock Premium →</button>
+      <div class="limit-wall-reset" id="limitResetText"></div>
+    </div>
+ 
+    <div class="survey-card" id="surveyCard">
       <div class="survey-top">
         <div class="survey-top-icon">💬</div>
         <div><h2>Describe Your Routine</h2><p>Exercises, sets, reps, frequency, split — anything helps</p></div>
@@ -543,10 +617,8 @@ footer{background:var(--bg-1);border-top:1px solid var(--border);padding:44px 52
         <p class="foot-note"><strong>More detail = more accuracy.</strong> Even a short description works.</p>
         <button class="analyze-btn" id="analyzeBtn" onclick="runAnalysis()" disabled>Analyze →</button>
       </div>
-    </div>
-  </div>
- 
-  <div id="loadingSection">
+    </div><!-- end survey-card -->
+  </div><!-- end survey-wrap -->
     <div class="load-ui">
       <div class="load-icon">🔬</div>
       <div class="load-title">Analyzing your routine…</div>
@@ -572,24 +644,30 @@ footer{background:var(--bg-1);border-top:1px solid var(--border);padding:44px 52
       <div class="prem-blur-wrap">
         <div class="prem-inner">
           <div class="ring-row">
-            <svg class="ring-svg" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="45" class="ring-track"/>
-              <circle cx="50" cy="50" r="45" class="ring-fill" id="goalRingFill"
-                transform="rotate(-90 50 50)"/>
-              <text x="50" y="46" class="ring-pct" id="goalRingPct">0%</text>
+            <svg class="ring-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="40" class="ring-track"/>
+              <circle cx="50" cy="50" r="40" class="ring-fill" id="goalRingFill"
+                transform="rotate(-90 50 50)"
+                stroke-dasharray="251.2"
+                stroke-dashoffset="251.2"/>
+              <text x="50" y="47" class="ring-pct" id="goalRingPct">0%</text>
               <text x="50" y="60" class="ring-lbl">Match</text>
             </svg>
             <div class="ring-info">
               <h4 id="goalMatchTitle">Goal Alignment Score</h4>
-              <p id="goalMatchDesc">—</p>
+              <p id="goalMatchDesc">Calculating how well your routine matches your goal…</p>
             </div>
           </div>
-          <div class="tweaks" id="goalTweaks"></div>
+          <div class="tweaks" id="goalTweaks">
+            <div class="tweak add"><span class="tweak-dot">+</span><span>Add sport-specific drills to sharpen alignment.</span></div>
+            <div class="tweak rem"><span class="tweak-dot">−</span><span>Remove low-specificity exercises from your routine.</span></div>
+            <div class="tweak add"><span class="tweak-dot">+</span><span>Increase frequency on your weakest physical quality.</span></div>
+          </div>
         </div>
         <div class="prem-lock">
           <div class="lock-emoji">🔒</div>
           <div class="lock-title">Premium Feature</div>
-          <div class="lock-desc">Unlock your Goal Match Score, efficiency ring, and personalised routine recommendations.</div>
+          <div class="lock-desc">Unlock your Goal Match Score, efficiency ring, and personalised add/remove recommendations.</div>
           <button class="lock-btn" onclick="showPage('premium')">Unlock with Premium →</button>
         </div>
       </div>
@@ -718,8 +796,6 @@ footer{background:var(--bg-1);border-top:1px solid var(--border);padding:44px 52
         <li class="pf off"><span class="pf-dot">✗</span><span>Unlimited analyses</span></li>
       </ul>
       <button class="price-btn price-btn-ghost" onclick="showPage('analyze')">Get Started Free</button>
-    </div>
-    <!-- PREMIUM -->
     <div class="price-card price-card-pro">
       <div class="price-pop">Most Popular</div>
       <div class="price-tier price-tier-pro">Premium</div>
@@ -735,7 +811,7 @@ footer{background:var(--bg-1);border-top:1px solid var(--border);padding:44px 52
         <li class="pf on"><span class="pf-dot pf-dot-blue">✓</span><span>Physical adaptation metrics</span></li>
         <li class="pf on"><span class="pf-dot pf-dot-blue">✓</span><span>Priority analysis speed</span></li>
       </ul>
-      <button class="price-btn price-btn-blue">Get Premium — $7.99/mo</button>
+      <button class="price-btn price-btn-blue" onclick="handlePayment('premium')">Get Premium — $7.99/mo</button>
     </div>
     <!-- ELITE -->
     <div class="price-card">
@@ -750,7 +826,7 @@ footer{background:var(--bg-1);border-top:1px solid var(--border);padding:44px 52
         <li class="pf on"><span class="pf-dot pf-dot-blue">✓</span><span>Coach-level training recommendations</span></li>
         <li class="pf on"><span class="pf-dot pf-dot-blue">✓</span><span>Priority email support</span></li>
       </ul>
-      <button class="price-btn price-btn-ghost">Get Elite — $19.99/mo</button>
+      <button class="price-btn price-btn-ghost" onclick="handlePayment('elite')">Get Elite — $19.99/mo</button>
     </div>
   </div>
   <div class="pricing-note">All plans include a 7-day free trial. Cancel anytime. No hidden fees.</div>
@@ -776,6 +852,7 @@ footer{background:var(--bg-1);border-top:1px solid var(--border);padding:44px 52
 </footer>
  
 <script>
+/* ── NAVIGATION ── */
 const pages = ['home','howitworks','analyze','about','contact','premium'];
 function showPage(name) {
   pages.forEach(p => {
@@ -785,10 +862,12 @@ function showPage(name) {
   });
   window.scrollTo({top:0,behavior:'smooth'});
   document.getElementById('mobileMenu').classList.remove('open');
+  if(name==='analyze') updateUsageUI();
 }
 function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
 window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>10);});
  
+/* ── CONTACT ── */
 function submitContact(){
   const name=document.getElementById('fName').value.trim();
   const email=document.getElementById('fEmail').value.trim();
@@ -798,14 +877,117 @@ function submitContact(){
   document.getElementById('formSuccess').classList.add('show');
 }
  
+/* ── PAYMENT ── */
+function handlePayment(plan) {
+  // Replace these URLs with your actual Stripe payment links when ready
+  const links = {
+    premium: 'https://buy.stripe.com/your_premium_link',
+    elite:   'https://buy.stripe.com/your_elite_link'
+  };
+  // For now show a friendly message since Stripe isn't set up yet
+  alert(`Payment coming soon! To set up Stripe checkout for the ${plan} plan, replace the URL in handlePayment() in server.js with your Stripe payment link.`);
+  // Uncomment this line once you have your Stripe links:
+  // window.open(links[plan], '_blank');
+}
+ 
+/* ── USAGE TRACKING (localStorage — resets weekly) ── */
+const FREE_LIMIT = 3;
+ 
+function getUsageData() {
+  try {
+    const raw = localStorage.getItem('fg_usage');
+    if (!raw) return { count: 0, weekStart: getWeekStart() };
+    const data = JSON.parse(raw);
+    // Reset if it's a new week
+    if (data.weekStart !== getWeekStart()) return { count: 0, weekStart: getWeekStart() };
+    return data;
+  } catch(e) { return { count: 0, weekStart: getWeekStart() }; }
+}
+ 
+function getWeekStart() {
+  const d = new Date();
+  const day = d.getDay(); // 0=Sun
+  const diff = d.getDate() - day;
+  const monday = new Date(d.setDate(diff));
+  return monday.toISOString().split('T')[0];
+}
+ 
+function saveUsage(count) {
+  localStorage.setItem('fg_usage', JSON.stringify({ count, weekStart: getWeekStart() }));
+}
+ 
+function getRemainingUses() {
+  return Math.max(0, FREE_LIMIT - getUsageData().count);
+}
+ 
+function incrementUsage() {
+  const data = getUsageData();
+  saveUsage(data.count + 1);
+}
+ 
+function updateUsageUI() {
+  const remaining = getRemainingUses();
+  const banner = document.getElementById('usageBanner');
+  const wall = document.getElementById('limitWall');
+  const card = document.getElementById('surveyCard');
+  const btn = document.getElementById('analyzeBtn');
+ 
+  // Update dots
+  for (let i = 1; i <= 3; i++) {
+    const dot = document.getElementById('ud'+i);
+    if (dot) dot.classList.toggle('used', i > remaining);
+  }
+ 
+  // Update text
+  const textEl = document.getElementById('usageText');
+  if (textEl) {
+    if (remaining === 0) textEl.textContent = 'No free analyses left this week';
+    else if (remaining === 1) textEl.textContent = '1 free analysis remaining this week';
+    else textEl.textContent = `${remaining} free analyses remaining this week`;
+  }
+ 
+  // Show/hide limit wall
+  if (remaining === 0) {
+    wall.style.display = 'block';
+    card.style.display = 'none';
+    if (btn) btn.disabled = true;
+    // Show reset time
+    const resetEl = document.getElementById('limitResetText');
+    if (resetEl) {
+      const nextMonday = new Date();
+      const day = nextMonday.getDay();
+      const daysUntilMonday = day === 0 ? 1 : 8 - day;
+      nextMonday.setDate(nextMonday.getDate() + daysUntilMonday);
+      resetEl.textContent = `Your 3 free uses reset on Monday ${nextMonday.toLocaleDateString('en-GB',{day:'numeric',month:'long'})}.`;
+    }
+  } else {
+    wall.style.display = 'none';
+    card.style.display = 'block';
+  }
+}
+ 
+// Init on page load
+updateUsageUI();
+ 
+/* ── ANALYZER ── */
 const examples = {
   plyometrics:"I train 4 days a week focused on explosiveness. Sessions include box jumps 4x8, depth jumps 3x6, broad jumps 3x8, and sprint drills — 10m, 20m, 40m — twice per week. I also do banded hip thrusts 3x10 and single-leg Romanian deadlifts 3x10 for strength support. Goal is to improve standing vertical jump and first-step acceleration for basketball.",
   bodybuilding:"PPL split 6 days a week. Push: bench press 4x8, incline dumbbell press 3x10, lateral raises 4x15, overhead press 3x10, tricep pushdowns 4x12. Pull: barbell rows 4x8, lat pulldowns 3x10, cable rows 3x12, face pulls 3x15, bicep curls 4x12. Legs: squats 4x8, Romanian deadlifts 3x10, leg press 4x12, leg curls 3x12, calf raises 5x15. Rest Sunday. Goal is muscle mass.",
   powerlifting:"4 days a week on linear progression. Monday: squat 5x5, bench 5x5. Wednesday: deadlift 3x5, overhead press 3x5. Friday: squat lighter, bench variation. Saturday: deadlift accessories and rows. Goal is to maximize total on squat, bench, and deadlift.",
   general:"Gym 3 times a week. 20 minutes treadmill at moderate pace, chest press machine 3x12, lat pulldown 3x12, leg press 3x15, planks and crunches. No structured program, trying to lose weight and stay healthy."
 };
-function onInput(ta){document.getElementById('analyzeBtn').disabled=ta.value.trim().length<10;}
-function fillExample(type){const ta=document.getElementById('routineInput');ta.value=examples[type];onInput(ta);ta.focus();}
+ 
+function onInput(ta) {
+  const remaining = getRemainingUses();
+  document.getElementById('analyzeBtn').disabled = ta.value.trim().length < 10 || remaining === 0;
+}
+ 
+function fillExample(type){
+  const ta=document.getElementById('routineInput');
+  ta.value=examples[type];
+  onInput(ta);
+  ta.focus();
+}
  
 function resetForm(){
   document.getElementById('routineInput').value='';
@@ -815,26 +997,38 @@ function resetForm(){
   l.classList.remove('visible');l.style.display='none';
   r.classList.remove('visible');r.style.display='none';
   i.style.display='block';
+  updateUsageUI();
   window.scrollTo({top:0,behavior:'smooth'});
 }
  
 async function runAnalysis(){
   const text=document.getElementById('routineInput').value.trim();
-  if(!text||text.length<10)return;
+  if(!text||text.length<10) return;
+  if(getRemainingUses()===0) { showPage('premium'); return; }
+ 
+  incrementUsage();
+  updateUsageUI();
+ 
   document.getElementById('analyzeBtn').disabled=true;
   const loadEl=document.getElementById('loadingSection'),resEl=document.getElementById('resultsSection'),inpEl=document.getElementById('inputSection');
   inpEl.style.display='none';
   resEl.classList.remove('visible');resEl.style.display='none';
   loadEl.style.display='block';loadEl.classList.add('visible');
   loadEl.scrollIntoView({behavior:'smooth',block:'center'});
-  const setP=(p,l)=>{document.getElementById('progressFill').style.width=p+'%';document.getElementById('progressPct').textContent=Math.round(p)+'%';if(l)document.getElementById('loadingStatus').textContent=l;};
+ 
+  const setP=(p,l)=>{
+    document.getElementById('progressFill').style.width=p+'%';
+    document.getElementById('progressPct').textContent=Math.round(p)+'%';
+    if(l) document.getElementById('loadingStatus').textContent=l;
+  };
   const steps=[[10,'Reading your exercises…'],[30,'Calculating volume & intensity…'],[55,'Matching physiological adaptations…'],[80,'Projecting your timeline…']];
-  let si=0;setP(0,'Reading your exercises…');
-  const ticker=setInterval(()=>{if(si<steps.length){setP(steps[si][0],steps[si][1]);si++;}},600);
+  let si=0; setP(0,'Reading your exercises…');
+  const ticker=setInterval(()=>{ if(si<steps.length){setP(steps[si][0],steps[si][1]);si++;} },600);
+ 
   try{
     const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text})});
     clearInterval(ticker);
-    if(!res.ok)throw new Error(`Server error ${res.status}`);
+    if(!res.ok) throw new Error(`Server error ${res.status}`);
     const parsed=await res.json();
     setP(100,'Done!');
     await new Promise(r=>setTimeout(r,300));
@@ -842,7 +1036,7 @@ async function runAnalysis(){
     loadEl.classList.remove('visible');loadEl.style.display='none';
     resEl.style.display='block';resEl.classList.add('visible');
     resEl.scrollIntoView({behavior:'smooth',block:'start'});
-  }catch(err){
+  } catch(err){
     clearInterval(ticker);
     console.error(err);
     loadEl.classList.remove('visible');loadEl.style.display='none';
@@ -852,43 +1046,77 @@ async function runAnalysis(){
   document.getElementById('analyzeBtn').disabled=false;
 }
  
+/* ── RENDER RESULTS ── */
 function renderResults(d){
   document.getElementById('archIcon').textContent=d.archetypeIcon||'💪';
   document.getElementById('archTitle').textContent=d.archetypeTitle||'Fitness Athlete';
   document.getElementById('archDesc').textContent=d.archetypeDesc||'';
-  const pillsEl=document.getElementById('statPills');pillsEl.innerHTML='';
-  (d.statPills||[]).forEach(p=>{const el=document.createElement('div');el.className='arch-pill';el.textContent=p;pillsEl.appendChild(el);});
  
-  // Goal match premium card
+  const pillsEl=document.getElementById('statPills'); pillsEl.innerHTML='';
+  (d.statPills||[]).forEach(p=>{
+    const el=document.createElement('div'); el.className='arch-pill'; el.textContent=p; pillsEl.appendChild(el);
+  });
+ 
+  // ── GOAL MATCH RING ──
   const goal=document.getElementById('goalInput').value.trim();
   const pc=document.getElementById('premiumGoalCard');
   if(goal){
     pc.style.display='block';
-    const g=goal.toLowerCase(),title=(d.archetypeTitle||'').toLowerCase(),sports=(d.sports||[]).join(' ').toLowerCase();
+    const g=goal.toLowerCase();
+    const title=(d.archetypeTitle||'').toLowerCase();
+    const sports=(d.sports||[]).join(' ').toLowerCase();
     let score=42;
-    if(g.split(' ').some(w=>w.length>3&&title.includes(w)))score+=28;
-    if(g.split(' ').some(w=>w.length>3&&sports.includes(w)))score+=20;
+    if(g.split(' ').some(w=>w.length>3&&title.includes(w))) score+=28;
+    if(g.split(' ').some(w=>w.length>3&&sports.includes(w))) score+=20;
     score=Math.min(98,Math.max(22,score));
-    const circ=2*Math.PI*45; // r=45
+ 
+    // r=40, circumference = 2 * PI * 40 = 251.327
+    const r=40, circ=2*Math.PI*r;
     const offset=circ-(score/100)*circ;
     const ring=document.getElementById('goalRingFill');
-    ring.style.strokeDasharray=circ;
-    ring.style.strokeDashoffset=offset;
+    ring.setAttribute('stroke-dasharray', circ.toFixed(2));
+    ring.setAttribute('stroke-dashoffset', offset.toFixed(2));
     document.getElementById('goalRingPct').textContent=score+'%';
     document.getElementById('goalMatchTitle').textContent=score+'% match for "'+goal+'"';
-    document.getElementById('goalMatchDesc').textContent=score>=70?'Your routine aligns well with your goal. See recommendations below to optimise further.':score>=45?'Your routine partially supports your goal. Several adjustments could significantly improve alignment.':'Your current routine has limited alignment with your goal. Targeted changes are recommended.';
-    const tweaks=score>=70?[{t:'add',s:'Add sport-specific drills twice per week to sharpen goal alignment.'},{t:'rem',s:'Reduce excessive volume on non-primary movements to free recovery capacity.'},{t:'add',s:'Incorporate progressive overload tracking to ensure continued adaptation.'}]:score>=45?[{t:'add',s:'Add 2 sessions per week directly targeting your goal movement patterns.'},{t:'rem',s:'Remove exercises with low specificity to your stated goal.'},{t:'add',s:'Increase frequency on your weakest physical quality.'},{t:'rem',s:'Cut rest periods to improve conditioning relevant to your goal.'}]:[{t:'add',s:'Restructure your programme around the primary physical demands of your goal.'},{t:'rem',s:'Remove exercises that conflict with the adaptations your goal requires.'},{t:'add',s:'Prioritise goal-specific training at the start of each session when freshest.'},{t:'rem',s:'Reduce overall volume to allow better quality on goal-relevant work.'}];
-    document.getElementById('goalTweaks').innerHTML=tweaks.map(tw=>`<div class="tweak ${tw.t}"><span class="tweak-dot">${tw.t==='add'?'+':'−'}</span><span>${tw.s}</span></div>`).join('');
-  }else{pc.style.display='none';}
+    document.getElementById('goalMatchDesc').textContent=
+      score>=70 ? 'Your routine aligns well with your goal.' :
+      score>=45 ? 'Your routine partially supports your goal. Adjustments recommended.' :
+                  'Limited alignment detected. Significant changes recommended.';
  
-  const tl=document.getElementById('timeline');tl.innerHTML='';
-  (d.timeline||[]).forEach((item,i)=>{const el=document.createElement('div');el.className='tl-item';el.style.animationDelay=i*.09+'s';el.innerHTML=`<div class="tl-dot">${item.emoji||'●'}</div><div class="tl-body"><div class="tl-per">${item.period}</div><div class="tl-txt">${item.description}</div></div>`;tl.appendChild(el);});
+    const tweaks=score>=70
+      ?[{t:'add',s:'Add sport-specific drills twice per week.'},{t:'rem',s:'Reduce volume on non-primary movements.'},{t:'add',s:'Track progressive overload consistently.'}]
+      :score>=45
+      ?[{t:'add',s:'Add 2 weekly sessions targeting goal movement patterns.'},{t:'rem',s:'Remove exercises with low specificity to your goal.'},{t:'add',s:'Increase frequency on your weakest physical quality.'},{t:'rem',s:'Shorten rest periods to improve goal-specific conditioning.'}]
+      :[{t:'add',s:'Rebuild your programme around your goal\'s primary demands.'},{t:'rem',s:'Remove exercises conflicting with your goal\'s adaptations.'},{t:'add',s:'Prioritise goal-specific work at the start of every session.'},{t:'rem',s:'Reduce overall volume to focus quality on what matters.'}];
  
-  const ml=document.getElementById('metricsList');ml.innerHTML='';
-  (d.metrics||[]).forEach((m,i)=>{const el=document.createElement('div');el.className='met-row';el.style.animationDelay=i*.07+'s';el.innerHTML=`<div class="met-icon">${m.icon||'📊'}</div><div class="met-body"><div class="met-name">${m.name}</div><div class="met-detail">${m.detail}</div></div><div class="met-tag">${m.tag}</div>`;ml.appendChild(el);});
+    document.getElementById('goalTweaks').innerHTML=tweaks.map(tw=>
+      `<div class="tweak ${tw.t}"><span class="tweak-dot">${tw.t==='add'?'+':'−'}</span><span>${tw.s}</span></div>`
+    ).join('');
+  } else {
+    pc.style.display='none';
+  }
  
-  const sg=document.getElementById('sportGrid');sg.innerHTML='';
-  (d.sports||[]).forEach(s=>{const el=document.createElement('div');el.className='sport-tag';el.textContent=s;sg.appendChild(el);});
+  // Timeline
+  const tl=document.getElementById('timeline'); tl.innerHTML='';
+  (d.timeline||[]).forEach((item,i)=>{
+    const el=document.createElement('div'); el.className='tl-item'; el.style.animationDelay=i*.09+'s';
+    el.innerHTML=`<div class="tl-dot">${item.emoji||'●'}</div><div class="tl-body"><div class="tl-per">${item.period}</div><div class="tl-txt">${item.description}</div></div>`;
+    tl.appendChild(el);
+  });
+ 
+  // Metrics
+  const ml=document.getElementById('metricsList'); ml.innerHTML='';
+  (d.metrics||[]).forEach((m,i)=>{
+    const el=document.createElement('div'); el.className='met-row'; el.style.animationDelay=i*.07+'s';
+    el.innerHTML=`<div class="met-icon">${m.icon||'📊'}</div><div class="met-body"><div class="met-name">${m.name}</div><div class="met-detail">${m.detail}</div></div><div class="met-tag">${m.tag}</div>`;
+    ml.appendChild(el);
+  });
+ 
+  // Sports
+  const sg=document.getElementById('sportGrid'); sg.innerHTML='';
+  (d.sports||[]).forEach(s=>{
+    const el=document.createElement('div'); el.className='sport-tag'; el.textContent=s; sg.appendChild(el);
+  });
 }
 </script>
 </body>
