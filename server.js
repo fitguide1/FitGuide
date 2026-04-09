@@ -2,9 +2,12 @@
 const express = require('express');
 const cors    = require('cors');
 const path    = require('path');
+const Stripe = require("stripe");
 
 const app  = express();
 const PORT = 3000;
+
+const stripe = new Stripe(process.env.price_1TK7dcEdYyHE5Z2pC9Tp1Sbv);
 
 // ── Middleware ──────────────────────────────────────
 app.use(cors());
@@ -17,6 +20,30 @@ app.get('/', (req, res) => {
 });
 
 // ── POST /api/chat ──────────────────────────────────
+// ── POST /create-checkout-session ───────────────────
+app.post('/create-checkout-session', async (req, res) => {
+  try {
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      mode: 'subscription',
+      line_items: [
+        {
+          price: 'price_XXXXXXXX', // 🔥 REPLACE WITH YOUR STRIPE PRICE ID
+          quantity: 1,
+        },
+      ],
+      success_url: 'http://localhost:3000/success',
+      cancel_url: 'http://localhost:3000/cancel',
+    });
+
+    res.json({ url: session.url });
+
+  } catch (err) {
+    console.error('Stripe error:', err);
+    res.status(500).json({ error: 'Stripe error' });
+  }
+});
+
 app.post('/api/chat', async (req, res) => {
   const { message } = req.body;
   console.log('>> /api/chat hit. Message length:', message?.length);
