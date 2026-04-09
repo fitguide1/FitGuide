@@ -896,18 +896,27 @@ function submitContact(){
 }
 
 /* ── PAYMENT ── */
-function handlePayment(plan) {
-  // Replace these URLs with your actual Stripe payment links when ready
-  const links = {
-    premium: 'https://buy.stripe.com/your_premium_link',
-    elite:   'https://buy.stripe.com/your_elite_link'
-  };
-  // For now show a friendly message since Stripe isn't set up yet
-  alert(`Payment coming soon! To set up Stripe checkout for the ${plan} plan, replace the URL in handlePayment() in server.js with your Stripe payment link.`);
-  // Uncomment this line once you have your Stripe links:
-  // window.open(links[plan], '_blank');
-}
+async function handlePayment(plan) {
+  try {
+    const res = await fetch("http://localhost:3000/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ plan }) // send which plan they chose
+    });
 
+    const data = await res.json();
+
+    // Redirect to Stripe checkout
+    window.location.href = data.url;
+
+  } catch (err) {
+    console.error(err);
+    alert("Payment failed. Try again.");
+  }
+}
+  
 /* ── USAGE TRACKING (localStorage — resets weekly) ── */
 const FREE_LIMIT = 3;
 
