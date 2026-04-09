@@ -928,9 +928,11 @@ function incrementUsage() {
 function updateUsageUI() {
   const remaining = getRemainingUses();
   const banner = document.getElementById('usageBanner');
-  const wall = document.getElementById('limitWall');
-  const card = document.getElementById('surveyCard');
-  const btn = document.getElementById('analyzeBtn');
+  const wall   = document.getElementById('limitWall');
+  const card   = document.getElementById('surveyCard');
+  const btn    = document.getElementById('analyzeBtn');
+  // Elements only exist when analyze page is visible — bail out silently if not
+  if (!banner || !wall || !card) return;
  
   // Update dots
   for (let i = 1; i <= 3; i++) {
@@ -941,24 +943,22 @@ function updateUsageUI() {
   // Update text
   const textEl = document.getElementById('usageText');
   if (textEl) {
-    if (remaining === 0) textEl.textContent = 'No free analyses left this week';
+    if (remaining === 0)      textEl.textContent = 'No free analyses left this week';
     else if (remaining === 1) textEl.textContent = '1 free analysis remaining this week';
-    else textEl.textContent = `${remaining} free analyses remaining this week`;
+    else                      textEl.textContent = `${remaining} free analyses remaining this week`;
   }
  
-  // Show/hide limit wall
   if (remaining === 0) {
     wall.style.display = 'block';
     card.style.display = 'none';
     if (btn) btn.disabled = true;
-    // Show reset time
     const resetEl = document.getElementById('limitResetText');
     if (resetEl) {
       const nextMonday = new Date();
       const day = nextMonday.getDay();
-      const daysUntilMonday = day === 0 ? 1 : 8 - day;
-      nextMonday.setDate(nextMonday.getDate() + daysUntilMonday);
-      resetEl.textContent = `Your 3 free uses reset on Monday ${nextMonday.toLocaleDateString('en-GB',{day:'numeric',month:'long'})}.`;
+      const daysUntil = day === 0 ? 1 : 8 - day;
+      nextMonday.setDate(nextMonday.getDate() + daysUntil);
+      resetEl.textContent = `Resets Monday ${nextMonday.toLocaleDateString('en-GB',{day:'numeric',month:'long'})}.`;
     }
   } else {
     wall.style.display = 'none';
@@ -966,8 +966,7 @@ function updateUsageUI() {
   }
 }
  
-// Init on page load
-updateUsageUI();
+// Don't call on page load — only called when navigating to analyze page
  
 /* ── ANALYZER ── */
 const examples = {
@@ -993,10 +992,14 @@ function resetForm(){
   document.getElementById('routineInput').value='';
   document.getElementById('goalInput').value='';
   document.getElementById('analyzeBtn').disabled=true;
-  const l=document.getElementById('loadingSection'),r=document.getElementById('resultsSection'),i=document.getElementById('inputSection');
-  l.classList.remove('visible');l.style.display='none';
-  r.classList.remove('visible');r.style.display='none';
-  i.style.display='block';
+  const l=document.getElementById('loadingSection');
+  const r=document.getElementById('resultsSection');
+  const card=document.getElementById('surveyCard');
+  const banner=document.getElementById('usageBanner');
+  l.classList.remove('visible'); l.style.display='none';
+  r.classList.remove('visible'); r.style.display='none';
+  card.style.display='block';
+  if(banner) banner.style.display='flex';
   updateUsageUI();
   window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -1010,10 +1013,17 @@ async function runAnalysis(){
   updateUsageUI();
  
   document.getElementById('analyzeBtn').disabled=true;
-  const loadEl=document.getElementById('loadingSection'),resEl=document.getElementById('resultsSection'),inpEl=document.getElementById('inputSection');
-  inpEl.style.display='none';
-  resEl.classList.remove('visible');resEl.style.display='none';
-  loadEl.style.display='block';loadEl.classList.add('visible');
+ 
+  const loadEl = document.getElementById('loadingSection');
+  const resEl  = document.getElementById('resultsSection');
+  const cardEl = document.getElementById('surveyCard');   // hide just the card
+  const bannerEl = document.getElementById('usageBanner');
+ 
+  // Hide card & banner, show loader
+  cardEl.style.display = 'none';
+  if (bannerEl) bannerEl.style.display = 'none';
+  resEl.classList.remove('visible'); resEl.style.display='none';
+  loadEl.style.display='block'; loadEl.classList.add('visible');
   loadEl.scrollIntoView({behavior:'smooth',block:'center'});
  
   const setP=(p,l)=>{
@@ -1039,8 +1049,9 @@ async function runAnalysis(){
   } catch(err){
     clearInterval(ticker);
     console.error(err);
-    loadEl.classList.remove('visible');loadEl.style.display='none';
-    inpEl.style.display='block';
+    loadEl.classList.remove('visible'); loadEl.style.display='none';
+    cardEl.style.display = 'block';
+    if (bannerEl) bannerEl.style.display = 'flex';
     alert('Could not reach the server. Make sure you opened the site at http://localhost:3000 — not by double-clicking the HTML file.');
   }
   document.getElementById('analyzeBtn').disabled=false;
