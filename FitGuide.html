@@ -187,11 +187,6 @@ nav.scrolled{background:rgba(8,8,8,0.95);}
 .prem-blur-wrap{position:relative;}
 .prem-inner{padding:24px 26px;filter:blur(6px) brightness(0.7);pointer-events:none;user-select:none;}
 .ring-row{display:flex;align-items:center;gap:22px;margin-bottom:18px;}
-.ring-svg{width:100px;height:100px;}
-.ring-track{fill:none;stroke:var(--bg-4);stroke-width:9;}
-.ring-fill{fill:none;stroke:var(--blue);stroke-width:9;stroke-linecap:round;stroke-dasharray:283;stroke-dashoffset:283;transition:stroke-dashoffset 1s ease;}
-.ring-pct{font-family:'Sora',sans-serif;font-size:19px;font-weight:800;fill:var(--text-1);text-anchor:middle;dominant-baseline:central;}
-.ring-lbl{font-size:9px;fill:var(--text-3);text-anchor:middle;dominant-baseline:central;}
 .ring-info h4{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--text-1);margin-bottom:5px;}
 .ring-info p{font-size:12.5px;color:var(--text-2);line-height:1.6;}
 .tweaks{display:flex;flex-direction:column;gap:7px;}
@@ -292,8 +287,8 @@ nav.scrolled{background:rgba(8,8,8,0.95);}
    PREMIUM / PRICING
 ══════════════════════════════════════ */
 .pricing-hero{padding:72px 24px 48px;text-align:center;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(10,132,255,0.1) 0%,transparent 70%);}
-.pricing-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1060px;margin:0 auto;padding:0 24px 56px;align-items:start;}
-.price-card{background:var(--bg-2);border:1px solid var(--border);border-radius:20px;padding:28px 24px;display:flex;flex-direction:column;position:relative;transition:border-color .2s;}
+.pricing-wrap{display:flex;flex-direction:row;gap:16px;max-width:1060px;margin:0 auto;padding:0 24px 56px;align-items:start;}
+.price-card{background:var(--bg-2);border:1px solid var(--border);border-radius:20px;padding:28px 24px;display:flex;flex-direction:column;position:relative;transition:border-color .2s;flex:1;min-width:0;}
 .price-card:hover{border-color:var(--border-med);}
 .price-card-pro{border-color:var(--blue-border);box-shadow:0 0 40px rgba(10,132,255,0.14);}
 .price-pop{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--blue);color:white;font-family:'Sora',sans-serif;font-size:10.5px;font-weight:700;padding:3px 12px;border-radius:100px;white-space:nowrap;}
@@ -354,15 +349,15 @@ footer{background:var(--bg-1);border-top:1px solid var(--border);padding:44px 52
 .foot-logo-icon svg{display:block;}
 .form-ok-icon svg{display:block;margin:0 auto 12px;}
 /* ── PREMIUM RING CARD ── */
-.prem-card{margin-bottom:14px;border-radius:20px;overflow:hidden;border:1px solid var(--blue-border);background:var(--bg-2);box-shadow:0 0 32px rgba(10,132,255,0.1);}
-.prem-blur-wrap{position:relative;min-height:210px;}
-.prem-inner{padding:24px 26px;filter:blur(5px) brightness(0.55);pointer-events:none;user-select:none;}
+.prem-card{margin-bottom:14px;border-radius:20px;border:1px solid var(--blue-border);background:var(--bg-2);box-shadow:0 0 32px rgba(10,132,255,0.1);}
+.prem-blur-wrap{position:relative;}
+.prem-inner{padding:24px 26px;filter:blur(4px) brightness(0.5);pointer-events:none;user-select:none;min-height:200px;}
 .ring-row{display:flex;align-items:center;gap:22px;margin-bottom:18px;}
-.ring-svg{width:100px;height:100px;flex-shrink:0;}
-.ring-track{fill:none;stroke:#2a2a2a;stroke-width:9;}
+.ring-svg{width:100px;height:100px;flex-shrink:0;overflow:visible;}
+.ring-track{fill:none;stroke:#333;stroke-width:9;}
 .ring-fill{fill:none;stroke:var(--blue);stroke-width:9;stroke-linecap:round;transition:stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1);}
 .ring-pct{font-family:'Sora',sans-serif;font-size:18px;font-weight:800;fill:#f0f0f0;text-anchor:middle;}
-.ring-lbl{font-size:9px;fill:rgba(240,240,240,0.4);text-anchor:middle;}
+.ring-lbl{font-size:9px;fill:rgba(240,240,240,0.5);text-anchor:middle;}
 .ring-info h4{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--text-1);margin-bottom:5px;}
 .ring-info p{font-size:12.5px;color:var(--text-2);line-height:1.6;}
 .tweaks{display:flex;flex-direction:column;gap:7px;}
@@ -372,34 +367,44 @@ footer{background:var(--bg-1);border-top:1px solid var(--border);padding:44px 52
 .tweak-dot{width:18px;height:18px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;margin-top:1px;}
 .tweak.add .tweak-dot{background:rgba(48,209,88,0.18);color:#30D158;}
 .tweak.rem .tweak-dot{background:rgba(255,69,58,0.18);color:#FF453A;}
-.prem-lock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:28px 24px;text-align:center;background:rgba(8,8,8,0.6);}
-.lock-emoji{font-size:30px;}
+.prem-lock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:28px 24px;text-align:center;background:rgba(8,8,8,0.72);border-radius:20px;}
+.lock-emoji svg{stroke:rgba(240,240,240,0.7);}
 .lock-title{font-family:'Sora',sans-serif;font-size:17px;font-weight:800;color:var(--text-1);}
 .lock-desc{font-size:12.5px;color:var(--text-2);max-width:300px;line-height:1.6;}
 .lock-btn{background:var(--blue);color:white;border:none;padding:10px 22px;border-radius:9px;font-family:'Sora',sans-serif;font-size:13.5px;font-weight:700;cursor:pointer;margin-top:4px;box-shadow:0 0 18px var(--blue-glow);transition:all .15s;}
 .lock-btn:hover{background:var(--blue-bright);}
 
-/* ── USAGE LIMIT BANNER ── */
-.usage-banner{background:var(--bg-2);border:1px solid rgba(255,214,10,0.25);border-radius:14px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px;flex-wrap:wrap;}
-.usage-left{display:flex;align-items:center;gap:10px;}
-.usage-icon{font-size:20px;}
-.usage-text strong{font-family:'Sora',sans-serif;font-size:13.5px;font-weight:700;color:var(--text-1);display:block;}
-.usage-text span{font-size:12px;color:var(--text-3);}
-.usage-dots{display:flex;gap:5px;}
-.usage-dot{width:10px;height:10px;border-radius:50%;background:var(--bg-4);}
-.usage-dot.used{background:var(--gold);}
-.usage-upgrade{background:rgba(255,214,10,0.12);color:var(--gold);border:1px solid rgba(255,214,10,0.25);padding:7px 14px;border-radius:8px;font-family:'Sora',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap;}
-.usage-upgrade:hover{background:rgba(255,214,10,0.2);}
+/* ── PRICING — force horizontal, no grid collapse ── */
 
-/* ── LIMIT WALL ── */
-.limit-wall{background:var(--bg-2);border:1px solid rgba(255,214,10,0.2);border-radius:18px;padding:40px 32px;text-align:center;margin:0 24px 40px;max-width:620px;margin-left:auto;margin-right:auto;}
-.limit-wall-icon{font-size:44px;margin-bottom:14px;}
-.limit-wall h2{font-family:'Sora',sans-serif;font-size:22px;font-weight:800;color:var(--text-1);margin-bottom:8px;}
-.limit-wall p{font-size:14px;color:var(--text-2);line-height:1.65;margin-bottom:22px;}
-.limit-wall-reset{font-size:12px;color:var(--text-3);margin-top:12px;}
+
+/* ── AD MODAL ── */
+.ad-overlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.82);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:24px;}
+.ad-overlay.open{display:flex;animation:fadeUp .25s ease both;}
+.ad-box{background:var(--bg-2);border:1px solid var(--border-med);border-radius:22px;width:100%;max-width:480px;overflow:hidden;position:relative;}
+.ad-top{padding:18px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.ad-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-3);}
+.ad-timer{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--blue);}
+.ad-content{padding:28px 28px 24px;text-align:center;}
+.ad-sponsor-badge{display:inline-block;background:var(--blue-subtle);border:1px solid var(--blue-border);color:var(--blue);font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;letter-spacing:.5px;margin-bottom:16px;}
+.ad-visual{width:100%;height:160px;background:linear-gradient(135deg,var(--bg-3) 0%,var(--bg-4) 100%);border-radius:14px;margin-bottom:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);position:relative;overflow:hidden;}
+.ad-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(10,132,255,0.08) 0%,transparent 70%);}
+.ad-visual-inner{position:relative;z-index:1;text-align:center;}
+.ad-visual-icon{font-size:48px;display:block;margin-bottom:8px;}
+.ad-visual-text{font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:var(--text-1);}
+.ad-visual-sub{font-size:12px;color:var(--text-3);margin-top:3px;}
+.ad-headline{font-family:'Sora',sans-serif;font-size:17px;font-weight:700;color:var(--text-1);margin-bottom:6px;}
+.ad-body{font-size:13px;color:var(--text-2);line-height:1.6;margin-bottom:20px;}
+.ad-cta{display:inline-block;background:var(--blue);color:white;padding:11px 24px;border-radius:10px;font-family:'Sora',sans-serif;font-size:13.5px;font-weight:700;text-decoration:none;cursor:pointer;border:none;box-shadow:0 0 18px var(--blue-glow);transition:all .15s;}
+.ad-cta:hover{background:var(--blue-bright);}
+.ad-skip{display:block;margin-top:14px;font-size:12px;color:var(--text-3);cursor:pointer;transition:color .15s;background:none;border:none;width:100%;}
+.ad-skip:hover{color:var(--text-2);}
+.ad-skip:disabled{opacity:.4;cursor:not-allowed;}
+.ad-progress{height:2px;background:var(--bg-3);}
+.ad-progress-fill{height:100%;background:var(--blue);width:0%;transition:width .1s linear;}
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
+  .pricing-wrap{flex-direction:row!important;}
   nav{padding:0 22px;}
   .nav-links,.nav-cta{display:none;}
   .nav-burger{display:flex;}
@@ -412,7 +417,8 @@ footer{background:var(--bg-1);border-top:1px solid var(--border);padding:44px 52
   .foot-top{flex-direction:column;gap:24px;}
 }
 @media(max-width:700px){
-  .pricing-wrap{grid-template-columns:1fr;max-width:400px;}
+  .pricing-wrap{flex-direction:column;max-width:400px;margin:0 auto;}
+  .price-card{flex:none;width:100%;}
 }
 @media(max-width:600px){
   .feat-grid{grid-template-columns:1fr;}
@@ -580,35 +586,7 @@ footer{background:var(--bg-1);border-top:1px solid var(--border);padding:44px 52
 
   <div class="survey-wrap" id="inputSection">
 
-    <!-- Usage counter -->
-    <div class="usage-banner" id="usageBanner">
-      <div class="usage-left">
-        <div class="usage-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg></div>
-        <div class="usage-text">
-          <strong id="usageText">3 free analyses remaining this week</strong>
-          <span>Upgrade to Premium for unlimited access</span>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px;">
-        <div class="usage-dots" id="usageDots">
-          <div class="usage-dot" id="ud1"></div>
-          <div class="usage-dot" id="ud2"></div>
-          <div class="usage-dot" id="ud3"></div>
-        </div>
-        <button class="usage-upgrade" onclick="showPage('premium')">Upgrade →</button>
-      </div>
-    </div>
-
-    <!-- Limit wall (shown when 0 uses left) -->
-    <div class="limit-wall" id="limitWall" style="display:none;">
-      <div class="limit-wall-icon">🔒</div>
-      <h2>You've used your 3 free analyses this week</h2>
-      <p>Free users get 3 analyses per week. Upgrade to Premium for unlimited access, goal match scores, personalised recommendations, and more.</p>
-      <button class="btn" onclick="showPage('premium')">Unlock Premium →</button>
-      <div class="limit-wall-reset" id="limitResetText"></div>
-    </div>
-
-    <div class="survey-card" id="surveyCard">
+    <div class="survey-card">
       <div class="survey-top">
         <div class="survey-top-icon">💬</div>
         <div><h2>Describe Your Routine</h2><p>Exercises, sets, reps, frequency, split — anything helps</p></div>
@@ -667,9 +645,11 @@ footer{background:var(--bg-1);border-top:1px solid var(--border);padding:44px 52
               <circle cx="50" cy="50" r="40" class="ring-fill" id="goalRingFill"
                 transform="rotate(-90 50 50)"
                 stroke-dasharray="251.2"
-                stroke-dashoffset="251.2"/>
-              <text x="50" y="47" class="ring-pct" id="goalRingPct">0%</text>
-              <text x="50" y="60" class="ring-lbl">Match</text>
+                stroke-dashoffset="72"/>
+              <text x="50" y="50" id="goalRingPct" text-anchor="middle" dominant-baseline="central"
+                font-family="Sora,sans-serif" font-size="18" font-weight="800" fill="#f0f0f0">72%</text>
+              <text x="50" y="65" text-anchor="middle" dominant-baseline="central"
+                font-size="9" fill="rgba(240,240,240,0.5)">Match</text>
             </svg>
             <div class="ring-info">
               <h4 id="goalMatchTitle">Goal Alignment Score</h4>
@@ -869,6 +849,54 @@ footer{background:var(--bg-1);border-top:1px solid var(--border);padding:44px 52
   </div>
 </footer>
 
+
+
+        <div><label style="font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:5px;">Password</label><input id="loginPassword" type="password" placeholder="••••••••" style="width:100%;background:var(--bg-3);border:1px solid var(--border);border-radius:9px;padding:10px 13px;font-size:14px;color:var(--text-1);font-family:DM Sans,sans-serif;outline:none;" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--border)'"/></div>
+        <div id="loginError" style="color:#FF453A;font-size:12.5px;display:none;"></div>
+        <button onclick="doLogin()" style="background:var(--blue);color:white;border:none;padding:12px;border-radius:10px;font-family:Sora,sans-serif;font-size:14px;font-weight:700;cursor:pointer;margin-top:4px;box-shadow:0 0 18px var(--blue-glow);">Sign In</button>
+        <p style="text-align:center;font-size:12.5px;color:var(--text-3);">Don't have an account? <a onclick="showAuthRegister()" style="color:var(--blue);cursor:pointer;font-weight:600;">Create one</a></p>
+      </div>
+    </div>
+    <div id="authRegister" style="display:none;">
+      <h2 style="font-family:Sora,sans-serif;font-size:22px;font-weight:800;color:var(--text-1);margin-bottom:6px;">Create account</h2>
+      <p style="font-size:13px;color:var(--text-3);margin-bottom:24px;">Join FitGuide — it's free</p>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div><label style="font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:5px;">Your Name</label><input id="regName" type="text" placeholder="Alex Johnson" style="width:100%;background:var(--bg-3);border:1px solid var(--border);border-radius:9px;padding:10px 13px;font-size:14px;color:var(--text-1);font-family:DM Sans,sans-serif;outline:none;" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--border)'"/></div>
+        <div><label style="font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:5px;">Email</label><input id="regEmail" type="email" placeholder="you@example.com" style="width:100%;background:var(--bg-3);border:1px solid var(--border);border-radius:9px;padding:10px 13px;font-size:14px;color:var(--text-1);font-family:DM Sans,sans-serif;outline:none;" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--border)'"/></div>
+        <div><label style="font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:5px;">Password</label><input id="regPassword" type="password" placeholder="At least 6 characters" style="width:100%;background:var(--bg-3);border:1px solid var(--border);border-radius:9px;padding:10px 13px;font-size:14px;color:var(--text-1);font-family:DM Sans,sans-serif;outline:none;" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--border)'"/></div>
+        <div id="regError" style="color:#FF453A;font-size:12.5px;display:none;"></div>
+        <button onclick="doRegister()" style="background:var(--blue);color:white;border:none;padding:12px;border-radius:10px;font-family:Sora,sans-serif;font-size:14px;font-weight:700;cursor:pointer;margin-top:4px;box-shadow:0 0 18px var(--blue-glow);">Create Account</button>
+        <p style="text-align:center;font-size:12.5px;color:var(--text-3);">Already have an account? <a onclick="showAuthLogin()" style="color:var(--blue);cursor:pointer;font-weight:600;">Sign in</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── AD MODAL ── -->
+<div class="ad-overlay" id="adOverlay">
+  <div class="ad-box">
+    <div class="ad-top">
+      <span class="ad-label">Advertisement</span>
+      <span class="ad-timer" id="adTimer">Skip in 5s</span>
+    </div>
+    <div class="ad-progress"><div class="ad-progress-fill" id="adProgressFill"></div></div>
+    <div class="ad-content">
+      <div class="ad-sponsor-badge">SPONSORED</div>
+      <div class="ad-visual">
+        <div class="ad-visual-inner">
+          <span class="ad-visual-icon" id="adIcon">🏋️</span>
+          <div class="ad-visual-text" id="adTitle">MyProtein</div>
+          <div class="ad-visual-sub" id="adSub">Premium Sports Nutrition</div>
+        </div>
+      </div>
+      <div class="ad-headline" id="adHeadline">Fuel your training with science-backed nutrition</div>
+      <div class="ad-body" id="adBody">Get 35% off your first order of protein, creatine, and pre-workout. Trusted by over 10 million athletes worldwide.</div>
+      <a class="ad-cta" id="adCta" href="#" target="_blank" rel="noopener">Shop Now →</a>
+      <button class="ad-skip" id="adSkip" onclick="closeAd()" disabled>Wait — analyzing your routine…</button>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ── NAVIGATION ── */
 const pages = ['home','howitworks','analyze','about','contact','premium'];
@@ -880,179 +908,134 @@ function showPage(name) {
   });
   window.scrollTo({top:0,behavior:'smooth'});
   document.getElementById('mobileMenu').classList.remove('open');
-  if(name==='analyze') updateUsageUI();
 }
-function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
-window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>10);});
+function toggleMenu(){ document.getElementById('mobileMenu').classList.toggle('open'); }
+window.addEventListener('scroll',()=>{ document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>10); });
 
 /* ── CONTACT ── */
 function submitContact(){
   const name=document.getElementById('fName').value.trim();
   const email=document.getElementById('fEmail').value.trim();
   const msg=document.getElementById('fMessage').value.trim();
-  if(!name||!email||!msg){alert('Please fill in your name, email, and message.');return;}
+  if(!name||!email||!msg){ alert('Please fill in your name, email, and message.'); return; }
   document.getElementById('contactFormContent').style.display='none';
   document.getElementById('formSuccess').classList.add('show');
 }
 
 /* ── PAYMENT ── */
-async function handlePayment(plan) {
-  try {
-    const res = await fetch("http://localhost:3000/create-checkout-session", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ plan }) // send which plan they chose
-    });
-
-    const data = await res.json();
-
-    // Redirect to Stripe checkout
-    window.location.href = data.url;
-
-  } catch (err) {
-    console.error(err);
-    alert("Payment failed. Try again.");
-  }
-}
-  
-/* ── USAGE TRACKING (localStorage — resets weekly) ── */
-const FREE_LIMIT = 3;
-
-function getUsageData() {
-  try {
-    const raw = localStorage.getItem('fg_usage');
-    if (!raw) return { count: 0, weekStart: getWeekStart() };
-    const data = JSON.parse(raw);
-    // Reset if it's a new week
-    if (data.weekStart !== getWeekStart()) return { count: 0, weekStart: getWeekStart() };
-    return data;
-  } catch(e) { return { count: 0, weekStart: getWeekStart() }; }
+function handlePayment(plan) {
+  alert('Payments coming soon! Set up Stripe and add your price links to enable this.');
 }
 
-function getWeekStart() {
-  const d = new Date();
-  const day = d.getDay(); // 0=Sun
-  const diff = d.getDate() - day;
-  const monday = new Date(d.setDate(diff));
-  return monday.toISOString().split('T')[0];
+/* ── AD SYSTEM ── */
+const ADS = [
+  { icon:'🏋️', brand:'MyProtein', sub:'Premium Sports Nutrition', headline:'Fuel your training with science-backed nutrition', body:'Get 35% off your first order of protein, creatine, and pre-workout. Trusted by over 10 million athletes worldwide.', cta:'Shop Now →', url:'https://www.myprotein.com' },
+  { icon:'📱', brand:'Whoop', sub:'Recovery & Performance Tracker', headline:'Know when to push and when to recover', body:'WHOOP tracks your sleep, recovery, and strain 24/7 so you can train smarter. Join 1 million+ athletes optimising their performance.', cta:'Get WHOOP →', url:'https://www.whoop.com' },
+  { icon:'🥤', brand:'Huel', sub:'Complete Nutrition', headline:'Complete nutrition designed for active people', body:'Huel provides all 27 essential vitamins and minerals in a convenient, high-protein meal. Fuel your body right, every time.', cta:'Try Huel →', url:'https://www.huel.com' },
+  { icon:'💊', brand:'Informed Sport', sub:'Certified Supplements', headline:'Train harder with certified supplements', body:'All Informed Sport certified products are batch-tested to ensure they are free from banned substances. Train with confidence.', cta:'Learn More →', url:'https://www.informed.sport' },
+  { icon:'👟', brand:'Nike Training', sub:'Performance Gear', headline:'Gear built for the athlete you\'re becoming', body:'Nike Training Club — free expert-led workouts, personalised plans, and the gear to match. Elevate every session.', cta:'Explore Nike →', url:'https://www.nike.com' },
+];
+
+let adTimer       = null;
+let adResolve     = null;
+let currentAdIdx  = 0;
+const AD_DURATION = 5; // seconds before skip enabled
+
+function showAd() {
+  return new Promise(resolve => {
+    adResolve = resolve;
+    const ad = ADS[currentAdIdx % ADS.length];
+    currentAdIdx++;
+
+    // Populate ad content
+    document.getElementById('adIcon').textContent     = ad.icon;
+    document.getElementById('adTitle').textContent    = ad.brand;
+    document.getElementById('adSub').textContent      = ad.sub;
+    document.getElementById('adHeadline').textContent = ad.headline;
+    document.getElementById('adBody').textContent     = ad.body;
+    document.getElementById('adCta').textContent      = ad.cta;
+    document.getElementById('adCta').href             = ad.url;
+
+    // Reset skip button and timer
+    const skipBtn = document.getElementById('adSkip');
+    const timerEl = document.getElementById('adTimer');
+    const fillEl  = document.getElementById('adProgressFill');
+    skipBtn.disabled    = true;
+    skipBtn.textContent = `Wait — analyzing your routine…`;
+    timerEl.textContent = `Skip in ${AD_DURATION}s`;
+    fillEl.style.width  = '0%';
+    fillEl.style.transition = 'none';
+
+    document.getElementById('adOverlay').classList.add('open');
+
+    // Countdown
+    let remaining = AD_DURATION;
+    // Trigger progress bar animation
+    setTimeout(()=>{ fillEl.style.transition=`width ${AD_DURATION}s linear`; fillEl.style.width='100%'; }, 50);
+
+    adTimer = setInterval(() => {
+      remaining--;
+      if (remaining <= 0) {
+        clearInterval(adTimer);
+        skipBtn.disabled    = false;
+        skipBtn.textContent = 'Skip Ad & See Results →';
+        timerEl.textContent = 'Ready';
+        timerEl.style.color = 'var(--green)';
+      } else {
+        timerEl.textContent = `Skip in ${remaining}s`;
+        skipBtn.textContent = `Analyzing… (${remaining}s)`;
+      }
+    }, 1000);
+  });
 }
 
-function saveUsage(count) {
-  localStorage.setItem('fg_usage', JSON.stringify({ count, weekStart: getWeekStart() }));
+function closeAd() {
+  clearInterval(adTimer);
+  document.getElementById('adOverlay').classList.remove('open');
+  document.getElementById('adTimer').style.color = 'var(--blue)';
+  if (adResolve) { adResolve(); adResolve = null; }
 }
 
-function getRemainingUses() {
-  return Math.max(0, FREE_LIMIT - getUsageData().count);
-}
-
-function incrementUsage() {
-  const data = getUsageData();
-  saveUsage(data.count + 1);
-}
-
-function updateUsageUI() {
-  const remaining = getRemainingUses();
-  const banner = document.getElementById('usageBanner');
-  const wall   = document.getElementById('limitWall');
-  const card   = document.getElementById('surveyCard');
-  const btn    = document.getElementById('analyzeBtn');
-  // Elements only exist when analyze page is visible — bail out silently if not
-  if (!banner || !wall || !card) return;
-
-  // Update dots
-  for (let i = 1; i <= 3; i++) {
-    const dot = document.getElementById('ud'+i);
-    if (dot) dot.classList.toggle('used', i > remaining);
-  }
-
-  // Update text
-  const textEl = document.getElementById('usageText');
-  if (textEl) {
-    if (remaining === 0)      textEl.textContent = 'No free analyses left this week';
-    else if (remaining === 1) textEl.textContent = '1 free analysis remaining this week';
-    else                      textEl.textContent = `${remaining} free analyses remaining this week`;
-  }
-
-  if (remaining === 0) {
-    wall.style.display = 'block';
-    card.style.display = 'none';
-    if (btn) btn.disabled = true;
-    const resetEl = document.getElementById('limitResetText');
-    if (resetEl) {
-      const nextMonday = new Date();
-      const day = nextMonday.getDay();
-      const daysUntil = day === 0 ? 1 : 8 - day;
-      nextMonday.setDate(nextMonday.getDate() + daysUntil);
-      resetEl.textContent = `Resets Monday ${nextMonday.toLocaleDateString('en-GB',{day:'numeric',month:'long'})}.`;
-    }
-  } else {
-    wall.style.display = 'none';
-    card.style.display = 'block';
-  }
-}
-
-// Don't call on page load — only called when navigating to analyze page
-
-/* ── ANALYZER ── */
+/* ── EXAMPLES ── */
 const examples = {
   plyometrics:"I train 4 days a week focused on explosiveness. Sessions include box jumps 4x8, depth jumps 3x6, broad jumps 3x8, and sprint drills — 10m, 20m, 40m — twice per week. I also do banded hip thrusts 3x10 and single-leg Romanian deadlifts 3x10 for strength support. Goal is to improve standing vertical jump and first-step acceleration for basketball.",
   bodybuilding:"PPL split 6 days a week. Push: bench press 4x8, incline dumbbell press 3x10, lateral raises 4x15, overhead press 3x10, tricep pushdowns 4x12. Pull: barbell rows 4x8, lat pulldowns 3x10, cable rows 3x12, face pulls 3x15, bicep curls 4x12. Legs: squats 4x8, Romanian deadlifts 3x10, leg press 4x12, leg curls 3x12, calf raises 5x15. Rest Sunday. Goal is muscle mass.",
   powerlifting:"4 days a week on linear progression. Monday: squat 5x5, bench 5x5. Wednesday: deadlift 3x5, overhead press 3x5. Friday: squat lighter, bench variation. Saturday: deadlift accessories and rows. Goal is to maximize total on squat, bench, and deadlift.",
   general:"Gym 3 times a week. 20 minutes treadmill at moderate pace, chest press machine 3x12, lat pulldown 3x12, leg press 3x15, planks and crunches. No structured program, trying to lose weight and stay healthy."
 };
-
-function onInput(ta) {
-  const remaining = getRemainingUses();
-  document.getElementById('analyzeBtn').disabled = ta.value.trim().length < 10 || remaining === 0;
-}
-
-function fillExample(type){
-  const ta=document.getElementById('routineInput');
-  ta.value=examples[type];
-  onInput(ta);
-  ta.focus();
-}
-
+function onInput(ta){ document.getElementById('analyzeBtn').disabled = ta.value.trim().length < 10; }
+function fillExample(type){ const ta=document.getElementById('routineInput'); ta.value=examples[type]; onInput(ta); ta.focus(); }
 function resetForm(){
   document.getElementById('routineInput').value='';
   document.getElementById('goalInput').value='';
   document.getElementById('analyzeBtn').disabled=true;
-  const l=document.getElementById('loadingSection');
-  const r=document.getElementById('resultsSection');
-  const card=document.getElementById('surveyCard');
-  const banner=document.getElementById('usageBanner');
+  const l=document.getElementById('loadingSection'), r=document.getElementById('resultsSection');
+  const card=document.querySelector('.survey-card'), banner=document.getElementById('usageBanner');
   l.classList.remove('visible'); l.style.display='none';
   r.classList.remove('visible'); r.style.display='none';
-  card.style.display='block';
-  if(banner) banner.style.display='flex';
-  updateUsageUI();
+  if(card)   card.style.display='block';
+  if(banner) banner.style.display='none';
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+/* ── ANALYZE ── */
 async function runAnalysis(){
-  const text=document.getElementById('routineInput').value.trim();
-  if(!text||text.length<10) return;
-  if(getRemainingUses()===0) { showPage('premium'); return; }
+  const text = document.getElementById('routineInput').value.trim();
+  if(!text || text.length < 10) return;
 
-  incrementUsage();
-  updateUsageUI();
+  document.getElementById('analyzeBtn').disabled = true;
 
-  document.getElementById('analyzeBtn').disabled=true;
+  const loadEl  = document.getElementById('loadingSection');
+  const resEl   = document.getElementById('resultsSection');
+  const cardEl  = document.querySelector('.survey-card');
 
-  const loadEl = document.getElementById('loadingSection');
-  const resEl  = document.getElementById('resultsSection');
-  const cardEl = document.getElementById('surveyCard');   // hide just the card
-  const bannerEl = document.getElementById('usageBanner');
-
-  // Hide card & banner, show loader
-  cardEl.style.display = 'none';
-  if (bannerEl) bannerEl.style.display = 'none';
+  // Hide form, show loader
+  if(cardEl) cardEl.style.display='none';
   resEl.classList.remove('visible'); resEl.style.display='none';
   loadEl.style.display='block'; loadEl.classList.add('visible');
-  loadEl.scrollIntoView({behavior:'smooth',block:'center'});
+  loadEl.scrollIntoView({behavior:'smooth', block:'center'});
 
+  // Progress bar animation
   const setP=(p,l)=>{
     document.getElementById('progressFill').style.width=p+'%';
     document.getElementById('progressPct').textContent=Math.round(p)+'%';
@@ -1062,77 +1045,80 @@ async function runAnalysis(){
   let si=0; setP(0,'Reading your exercises…');
   const ticker=setInterval(()=>{ if(si<steps.length){setP(steps[si][0],steps[si][1]);si++;} },600);
 
-  try{
-    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text})});
+  // Kick off API call AND show ad simultaneously
+  const apiCall = fetch('/api/chat',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({message:text})
+  });
+
+  // Show the ad — it resolves when user skips (min 5s)
+  await showAd();
+
+  // Now wait for the API if it's not done yet
+  let parsed;
+  try {
+    const res = await apiCall;
     clearInterval(ticker);
-    if(!res.ok) throw new Error(`Server error ${res.status}`);
-    const parsed=await res.json();
+    if(!res.ok) throw new Error('Server error '+res.status);
+    parsed = await res.json();
     setP(100,'Done!');
-    await new Promise(r=>setTimeout(r,300));
-    renderResults(parsed);
-    loadEl.classList.remove('visible');loadEl.style.display='none';
-    resEl.style.display='block';resEl.classList.add('visible');
-    resEl.scrollIntoView({behavior:'smooth',block:'start'});
-  } catch(err){
+    await new Promise(r=>setTimeout(r,200));
+  } catch(err) {
     clearInterval(ticker);
     console.error(err);
     loadEl.classList.remove('visible'); loadEl.style.display='none';
-    cardEl.style.display = 'block';
-    if (bannerEl) bannerEl.style.display = 'flex';
-    alert('Could not reach the server. Make sure you opened the site at http://localhost:3000 — not by double-clicking the HTML file.');
+    if(cardEl) cardEl.style.display='block';
+    alert('Could not reach the server. Make sure you opened the site at http://localhost:3000');
+    document.getElementById('analyzeBtn').disabled=false;
+    return;
   }
+
+  renderResults(parsed);
+  loadEl.classList.remove('visible'); loadEl.style.display='none';
+  resEl.style.display='block'; resEl.classList.add('visible');
+  resEl.scrollIntoView({behavior:'smooth', block:'start'});
   document.getElementById('analyzeBtn').disabled=false;
 }
 
-/* ── RENDER RESULTS ── */
+/* ── RENDER ── */
 function renderResults(d){
-  document.getElementById('archIcon').textContent=d.archetypeIcon||'💪';
-  document.getElementById('archTitle').textContent=d.archetypeTitle||'Fitness Athlete';
-  document.getElementById('archDesc').textContent=d.archetypeDesc||'';
+  document.getElementById('archIcon').textContent  = d.archetypeIcon  || '💪';
+  document.getElementById('archTitle').textContent = d.archetypeTitle || 'Fitness Athlete';
+  document.getElementById('archDesc').textContent  = d.archetypeDesc  || '';
 
   const pillsEl=document.getElementById('statPills'); pillsEl.innerHTML='';
-  (d.statPills||[]).forEach(p=>{
-    const el=document.createElement('div'); el.className='arch-pill'; el.textContent=p; pillsEl.appendChild(el);
-  });
+  (d.statPills||[]).forEach(p=>{ const el=document.createElement('div'); el.className='arch-pill'; el.textContent=p; pillsEl.appendChild(el); });
 
-  // ── GOAL MATCH RING ──
+  // Goal ring
   const goal=document.getElementById('goalInput').value.trim();
   const pc=document.getElementById('premiumGoalCard');
   if(goal){
     pc.style.display='block';
-    const g=goal.toLowerCase();
-    const title=(d.archetypeTitle||'').toLowerCase();
-    const sports=(d.sports||[]).join(' ').toLowerCase();
+    const g=goal.toLowerCase(), title=(d.archetypeTitle||'').toLowerCase(), sports=(d.sports||[]).join(' ').toLowerCase();
     let score=42;
     if(g.split(' ').some(w=>w.length>3&&title.includes(w))) score+=28;
     if(g.split(' ').some(w=>w.length>3&&sports.includes(w))) score+=20;
     score=Math.min(98,Math.max(22,score));
-
-    // r=40, circumference = 2 * PI * 40 = 251.327
-    const r=40, circ=2*Math.PI*r;
-    const offset=circ-(score/100)*circ;
+    const circ=2*Math.PI*40, offset=circ-(score/100)*circ;
     const ring=document.getElementById('goalRingFill');
-    ring.setAttribute('stroke-dasharray', circ.toFixed(2));
-    ring.setAttribute('stroke-dashoffset', offset.toFixed(2));
-    document.getElementById('goalRingPct').textContent=score+'%';
-    document.getElementById('goalMatchTitle').textContent=score+'% match for "'+goal+'"';
-    document.getElementById('goalMatchDesc').textContent=
-      score>=70 ? 'Your routine aligns well with your goal.' :
-      score>=45 ? 'Your routine partially supports your goal. Adjustments recommended.' :
-                  'Limited alignment detected. Significant changes recommended.';
-
+    ring.setAttribute('stroke-dasharray', circ.toFixed(1));
+    ring.setAttribute('stroke-dashoffset', offset.toFixed(1));
+    document.getElementById('goalRingPct').textContent    = score+'%';
+    document.getElementById('goalMatchTitle').textContent = score+'% match for "'+goal+'"';
+    document.getElementById('goalMatchDesc').textContent  =
+      score>=70?'Strong alignment — your routine is well-matched to this goal.':
+      score>=45?'Partial alignment — some adjustments would improve your goal fit.':
+               'Low alignment — your routine may need restructuring around this goal.';
     const tweaks=score>=70
-      ?[{t:'add',s:'Add sport-specific drills twice per week.'},{t:'rem',s:'Reduce volume on non-primary movements.'},{t:'add',s:'Track progressive overload consistently.'}]
+      ?[{t:'add',s:'Add sport-specific drills twice per week.'},{t:'rem',s:'Reduce volume on low-priority movements.'},{t:'add',s:'Track progressive overload to sustain adaptation.'}]
       :score>=45
-      ?[{t:'add',s:'Add 2 weekly sessions targeting goal movement patterns.'},{t:'rem',s:'Remove exercises with low specificity to your goal.'},{t:'add',s:'Increase frequency on your weakest physical quality.'},{t:'rem',s:'Shorten rest periods to improve goal-specific conditioning.'}]
-      :[{t:'add',s:'Rebuild your programme around your goal\'s primary demands.'},{t:'rem',s:'Remove exercises conflicting with your goal\'s adaptations.'},{t:'add',s:'Prioritise goal-specific work at the start of every session.'},{t:'rem',s:'Reduce overall volume to focus quality on what matters.'}];
-
+      ?[{t:'add',s:'Add 2 weekly sessions targeting your goal patterns.'},{t:'rem',s:'Remove exercises with low specificity to your goal.'},{t:'add',s:'Increase frequency on your weakest quality.'},{t:'rem',s:'Shorten rest periods to improve goal-specific conditioning.'}]
+      :[{t:'add',s:'Rebuild programme around your goal\'s primary demands.'},{t:'rem',s:'Remove conflicting exercises from your routine.'},{t:'add',s:'Prioritise goal-specific work at the start of each session.'},{t:'rem',s:'Reduce overall volume; focus quality on what matters.'}];
     document.getElementById('goalTweaks').innerHTML=tweaks.map(tw=>
       `<div class="tweak ${tw.t}"><span class="tweak-dot">${tw.t==='add'?'+':'−'}</span><span>${tw.s}</span></div>`
     ).join('');
-  } else {
-    pc.style.display='none';
-  }
+  } else { pc.style.display='none'; }
 
   // Timeline
   const tl=document.getElementById('timeline'); tl.innerHTML='';
@@ -1152,9 +1138,7 @@ function renderResults(d){
 
   // Sports
   const sg=document.getElementById('sportGrid'); sg.innerHTML='';
-  (d.sports||[]).forEach(s=>{
-    const el=document.createElement('div'); el.className='sport-tag'; el.textContent=s; sg.appendChild(el);
-  });
+  (d.sports||[]).forEach(s=>{ const el=document.createElement('div'); el.className='sport-tag'; el.textContent=s; sg.appendChild(el); });
 }
 </script>
 </body>
